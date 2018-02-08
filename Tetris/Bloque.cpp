@@ -21,7 +21,7 @@ Bloque::Bloque() {
     this->shape.setSize(sf::Vector2f(1,1));
     this->shape.scale(sf::Vector2f(20,20));
     this->shape.setFillColor(sf::Color::Red);
-    this->shape.setPosition(210,0);
+    //this->shape.setPosition(10,0);
     
 }
 
@@ -57,7 +57,7 @@ void Bloque::Mover(char d) {
             this->shape.move(-20,0);
             this->coordenadas = this->shape.getPosition();
             
-            if(this->shape.getPosition().x<210){
+            if(this->shape.getPosition().x<10){
                 //std::cout << shape.getPosition().x << std::endl;
                 this->shape.move(20,0);
             }
@@ -66,7 +66,7 @@ void Bloque::Mover(char d) {
             this->shape.move(20,0);
             this->coordenadas = this->shape.getPosition();
             
-            if(this->shape.getPosition().x+20>410){
+            if(this->shape.getPosition().x+20>210){
                 //std::cout << shape.getPosition().x << std::endl;
                 this->shape.move(-20,0);
             }
@@ -75,6 +75,18 @@ void Bloque::Mover(char d) {
             break;
     }
 }
+
+//SETTER
+void Bloque::setPosicion(sf::Vector2f pos) {
+    this->shape.setPosition(pos.x,pos.y);
+}
+
+//GETTER
+
+sf::Vector2f Bloque::getPosicion() {
+    return this->coordenadas;
+}
+
 
 
 

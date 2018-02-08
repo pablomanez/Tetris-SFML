@@ -13,6 +13,8 @@
 
 #ifndef PIEZA_H
 #define PIEZA_H
+ 
+#include "Bloque.h"
 
 class Pieza {
 public:
@@ -20,7 +22,9 @@ public:
     Pieza(const Pieza& orig);
     virtual ~Pieza();
 private:
-
+    
+    //Bloque ** bloques;
+    //Bloque bloques[];
 };
 
 #endif /* PIEZA_H */

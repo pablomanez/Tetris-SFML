@@ -20,6 +20,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 
 #include "Bloque.h"
+#include "Pieza.h"
 
 using namespace std;
 
@@ -75,15 +76,18 @@ int main(int argc, char** argv) {
     tablero.setPoint(1,sf::Vector2f(0,480));
     tablero.setPoint(2,sf::Vector2f(640,480));
     tablero.setPoint(3,sf::Vector2f(640,0));
-    tablero.setPoint(4,sf::Vector2f(410,0));
-    tablero.setPoint(5,sf::Vector2f(410,400));
-    tablero.setPoint(6,sf::Vector2f(210,400));
-    tablero.setPoint(7,sf::Vector2f(210,0));
+    tablero.setPoint(4,sf::Vector2f(211,0));
+    tablero.setPoint(5,sf::Vector2f(211,400));
+    tablero.setPoint(6,sf::Vector2f(10,400));
+    tablero.setPoint(7,sf::Vector2f(10,0));
     tablero.setPoint(8,sf::Vector2f(0,0));
     
     
     Bloque * bloque = new Bloque();
+    bloque->setPosicion(sf::Vector2f(10,0));
+    //bloque->~Bloque(); //FUNCIONA
     
+    Pieza * pieza1 = new Pieza(1);
     
     
     

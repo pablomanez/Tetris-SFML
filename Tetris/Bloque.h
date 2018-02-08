@@ -26,6 +26,12 @@ public:
     
     void Dibujar(sf::RenderWindow& window);
     void Mover(char d);
+    
+    //SETTER
+    void setPosicion(sf::Vector2f pos);
+    
+    //GETTER
+    sf::Vector2f getPosicion();
     virtual ~Bloque();
 private:
     sf::Vector2f coordenadas;
