@@ -24,13 +24,15 @@ Pieza::Pieza(int n) {
     x *= 20;
     x += 10;
     */
+    this->tipo = n;
+    this->fase_rotacion = 1;
     
     if(n==1){
         /*
          * T MORADA
          * 
-         * [][][]
-         *   []
+         * [0][1][2]
+         *    [3]
          */
         int x = 70;
         
@@ -43,16 +45,13 @@ Pieza::Pieza(int n) {
         this->bloques[3].setPosicion(sf::Vector2f(x+20,20));
         this->bloques[3].setColor(sf::Color::Magenta);
         
-        
-        
-        
     }
     else if(n==2){
         /*
          * S VERDE
          * 
-         *   [][]
-         * [][]
+         *    [1][2]
+         * [0][3]
          */
         int x = 70;
         
@@ -70,8 +69,8 @@ Pieza::Pieza(int n) {
         /*
          * Z ROJA
          * 
-         * [][]
-         *   [][]
+         * [0][1]
+         *    [3][2]
          */
         int x = 90;
         
@@ -88,7 +87,7 @@ Pieza::Pieza(int n) {
         /*
          * PALO AZUL CLARO
          * 
-         * [][][][]
+         * [0][1][2][3]
          */
         int x = 70;
         
@@ -105,8 +104,8 @@ Pieza::Pieza(int n) {
         /*
          * L AZUL
          * 
-         * [][][]
-         *     []
+         * [0][1][2]
+         *       [3]
          */
         int x = 90;
         
@@ -123,8 +122,8 @@ Pieza::Pieza(int n) {
         /*
          * L NARANJA
          * 
-         * [][][]
-         * []
+         * [0][1][2]
+         * [3]
          */
         int x = 70;
         sf::Color naranja(255,165,0);
@@ -142,8 +141,8 @@ Pieza::Pieza(int n) {
         /*
          * CUADRO AMARILLO
          * 
-         * [][]
-         * [][]
+         * [0][1]
+         * [2][3]
          */
         int x = 90;
         
@@ -187,23 +186,123 @@ void Pieza::Mover(char d) {
         case 'l':
             for(int i=0 ; i<4 ; i++){
                 this->bloques[i].Mover(d);
+                if(bloques[i].getPosicion().x<10){
+                    //this->bloques = b_aux
+                    
+                    col = true;
+                }
+                
             }
             break;
         case 'u':
             for(int i=0 ; i<4 ; i++){
                 this->bloques[i].Mover(d);
+                if(bloques[i].getPosicion().y<0){
+                    //this->bloques = b_aux
+                    
+                    col = true;
+                }
             }
             break;
         case 'd':
             for(int i=0 ; i<4 ; i++){
                 this->bloques[i].Mover(d);
+                if(bloques[i].getPosicion().y+20>400){
+                    //this->bloques = b_aux
+                    
+                    col = true;
+                }
             }
             break;
         default:
             break;
     }
+    if(col){
+        //std::cout << "Choca" << std::endl;
+        switch(d){
+            case 'l':
+                for(int i=0 ; i<4; i++){
+                    this->bloques[i].Mover('r');
+                }
+                break;
+            case 'r':
+                for(int i=0 ; i<4 ; i++){
+                    this->bloques[i].Mover('l');
+                }
+                break;
+            case 'd':
+                for(int i=0 ; i<4 ; i++){
+                    this->bloques[i].Mover('u');
+                }
+                break;
+            case 'u':
+                for(int i=0 ; i<4 ; i++){
+                    this->bloques[i].Mover('d');
+                }
+                break;
+            default:
+                break;
+        }
+
+    }
 }
 
+void Pieza::Rotar(char d) {
+    if(d == 'r'){
+        //ROTAR HACIA LA DERECHA
+        switch(this->tipo){
+            case 1:
+                
+                if(this->fase_rotacion == 1){
+                    int x = this->bloques[2].getPosicion().x;
+                    int y = this->bloques[2].getPosicion().y;
+                    
+                    this->bloques[2].setPosicion(sf::Vector2f(x-20,y-20));
+                    
+                    this->fase_rotacion++;
+                    
+                }
+                else if(this->fase_rotacion == 2){
+                    int x = this->bloques[3].getPosicion().x;
+                    int y = this->bloques[3].getPosicion().y;
+                    
+                    this->bloques[3].setPosicion(sf::Vector2f(x+20,y-20));
+                    
+                    this->fase_rotacion++;
+                    
+                }
+                else if(this->fase_rotacion == 3){
+                    int x = this->bloques[0].getPosicion().x;
+                    int y = this->bloques[0].getPosicion().y;
+                    
+                    this->bloques[0].setPosicion(sf::Vector2f(x+20,y+20));
+                    
+                    this->fase_rotacion++;
+                    
+                }
+                else if(this->fase_rotacion == 4){
+                    int x = this->bloques[2].getPosicion().x;
+                    int y = this->bloques[2].getPosicion().y;
+                    
+                    this->bloques[2].setPosicion(sf::Vector2f(x-40,y));
+                    
+                    this->fase_rotacion--;
+                    
+                }
+                
+                
+                break;
+            default:
+                break;
+        }
+        
+    }
+    else if(d == 'l'){
+        //ROTAR HACIA LA IZQUIERDA
+        
+        
+    }
+}
 
 
 Pieza::~Pieza() {

@@ -20,7 +20,7 @@ Bloque::Bloque() {
     
     this->shape.setSize(sf::Vector2f(1,1));
     this->shape.scale(sf::Vector2f(20,20));
-    //this->shape.setFillColor(sf::Color::Red);
+    this->shape.setFillColor(sf::Color::Black);
     //this->shape.setPosition(10,0);
     
 }

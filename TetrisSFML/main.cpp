@@ -21,6 +21,7 @@
 
 #include "Bloque.h"
 #include "Pieza.h"
+#include "Tablero.h"
 
 using namespace std;
 
@@ -69,38 +70,23 @@ int main(int argc, char** argv) {
      * 
      */
     
-    sf::ConvexShape tablero(9);
-    tablero.setFillColor(sf::Color::Black);
-    tablero.setOutlineThickness(1);
-    tablero.setOutlineColor(sf::Color::White);
-    tablero.setPoint(0,sf::Vector2f(0,0));
-    tablero.setPoint(1,sf::Vector2f(0,480));
-    tablero.setPoint(2,sf::Vector2f(640,480));
-    tablero.setPoint(3,sf::Vector2f(640,0));
-    tablero.setPoint(4,sf::Vector2f(211,0));
-    tablero.setPoint(5,sf::Vector2f(211,400));
-    tablero.setPoint(6,sf::Vector2f(10,400));
-    tablero.setPoint(7,sf::Vector2f(10,0));
-    tablero.setPoint(8,sf::Vector2f(0,0));
+    Tablero tablero;
     
-    /*
-    Bloque * bloque = new Bloque();
-    bloque->setPosicion(sf::Vector2f(10,0));
-    bloque->setColor(sf::Color::Magenta);
-    //bloque->~Bloque(); //FUNCIONA
-    */
+    Pieza * pieza1 = new Pieza(5);
     
-    
-    //Pieza * pieza1 = new Pieza(5);
-        
-    sf::Clock clock;
+    //RELOJ
+    sf::Clock reloj;
     
     ////////////////
     //INPUT TECLAS//
     ////////////////
     while(window.isOpen()){
-        
-        cout << clock.getElapsedTime().asSeconds() << endl;
+        /*
+        if(reloj.getElapsedTime().asSeconds() > 0.8){
+            pieza1->Mover('d');
+            reloj.restart();
+        }
+        */
         
         sf::Event event;
         
@@ -111,20 +97,24 @@ int main(int argc, char** argv) {
                         window.close();
                     }
                     if(event.key.code == sf::Keyboard::Key::Right){
-                        //bloque->Mover('r');
-                        //pieza1->Mover('r');
+                        pieza1->Mover('r');
                     }
                     if(event.key.code == sf::Keyboard::Key::Left){
-                        //bloque->Mover('l');
-                        //pieza1->Mover('l');
+                        pieza1->Mover('l');
                     }
                     if(event.key.code == sf::Keyboard::Key::Down){
-                        //bloque->Mover('d');
-                        //pieza1->Mover('d');
+                        pieza1->Mover('d');
                     }
                     if(event.key.code == sf::Keyboard::Key::Up){
-                        //bloque->Mover('u');
-                        //pieza1->Mover('u');
+                        pieza1->Mover('u');
+                    }
+                    if(event.key.code == sf::Keyboard::Key::Z){
+                        pieza1->Rotar('l');
+                        cout << "Roto a la izquierda" << endl;
+                    }
+                    if(event.key.code == sf::Keyboard::Key::X){
+                        pieza1->Rotar('r');
+                        cout << "Roto a la derecha" << endl;
                     }
                     break;
                     
@@ -139,17 +129,16 @@ int main(int argc, char** argv) {
         //////////////////////
         //ACTUALIZAR OBJETOS//
         //////////////////////
-
+        
 
         //////////////////
         //RENDER OBJETOS//
         //////////////////
         window.clear(sf::Color::Black);
-        window.draw(tablero);
+        tablero.Dibujar(window);
         
-        //pieza1->Dibujar(window);
         //bloque->Dibujar(window);
-        //pieza1->Dibujar(window);
+        pieza1->Dibujar(window);
         
         window.display();        
     }

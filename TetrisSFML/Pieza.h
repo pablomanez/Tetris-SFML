@@ -23,12 +23,15 @@ public:
     
     void Dibujar(sf::RenderWindow& window);
     void Mover(char d);
+    void Rotar(char d);
     
     virtual ~Pieza();
 private:
     
     //Bloque ** bloques;
     Bloque * bloques;
+    int tipo;
+    int fase_rotacion;
 };
 
 #endif /* PIEZA_H */

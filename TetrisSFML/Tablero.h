@@ -14,16 +14,21 @@
 #ifndef TABLERO_H
 #define TABLERO_H
 
+#include <SFML/Graphics.hpp>
+
 #include "Bloque.h"
 
 class Tablero {
 public:
     Tablero();
     Tablero(const Tablero& orig);
+    
+    void Dibujar(sf::RenderWindow& window);
+    
     virtual ~Tablero();
 private:
-    Bloque * bloques; 
-
+    Bloque ** bloques; 
+    sf::ConvexShape shape;
 };
 
 #endif /* TABLERO_H */

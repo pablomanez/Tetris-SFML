@@ -13,6 +13,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Bloque.h"
 #include "Tablero.h"
 
 Tablero::Tablero() {
@@ -31,7 +32,20 @@ Tablero::Tablero() {
     tablero.setPoint(7,sf::Vector2f(10,0));
     tablero.setPoint(8,sf::Vector2f(0,0));
     
+    this->shape = tablero;
+    
+    this->bloques = new Bloque*[10]();
+    
+    for(int i=0 ; i<10 ; i++){
+        this->bloques[i] = new Bloque[20]();
+    }
+    
 }
+
+void Tablero::Dibujar(sf::RenderWindow& window) {
+    window.draw(this->shape);
+}
+
 
 Tablero::Tablero(const Tablero& orig) {
 }
