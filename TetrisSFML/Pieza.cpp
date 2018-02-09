@@ -175,10 +175,10 @@ void Pieza::Mover(char d) {
     
     switch(d){
         case 'r':
-            for(int i=0 ; i<4 && !col ; i++){
+            for(int i=0 ; i<4; i++){
                 this->bloques[i].Mover(d);
                 if(bloques[i].getPosicion().x+20>210){
-                    this->bloques = b_aux;
+                    //this->bloques = b_aux
                     
                     col = true;
                 }

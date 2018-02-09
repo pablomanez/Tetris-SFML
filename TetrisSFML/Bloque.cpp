@@ -37,39 +37,43 @@ void Bloque::Mover(char d) {
         case 'u':
             this->shape.move(0,-20);
             this->coordenadas = this->shape.getPosition();
-            
+            /*
             if(this->shape.getPosition().y<0){
                 //std::cout << shape.getPosition().x << std::endl;
                 this->shape.move(0,20);
             }            
+            */
             break;
         case 'd':
             this->shape.move(0,20);
             this->coordenadas = this->shape.getPosition();
-            
+            /*
             if(this->shape.getPosition().y+20>400){
                 //std::cout << shape.getPosition().x << std::endl;
                 this->shape.move(0,-20);
             }
+            */
             
             break;
         case 'l':
             this->shape.move(-20,0);
             this->coordenadas = this->shape.getPosition();
-            
+            /*
             if(this->shape.getPosition().x<10){
                 //std::cout << shape.getPosition().x << std::endl;
                 this->shape.move(20,0);
             }
+            */
             break;
         case 'r':
             this->shape.move(20,0);
             this->coordenadas = this->shape.getPosition();
-            
+            /*
             if(this->shape.getPosition().x+20>210){
                 //std::cout << shape.getPosition().x << std::endl;
                 this->shape.move(-20,0);
             }
+            */
             break;
         default:
             break;

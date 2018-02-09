@@ -83,14 +83,15 @@ int main(int argc, char** argv) {
     tablero.setPoint(7,sf::Vector2f(10,0));
     tablero.setPoint(8,sf::Vector2f(0,0));
     
-    
+    /*
     Bloque * bloque = new Bloque();
     bloque->setPosicion(sf::Vector2f(10,0));
     bloque->setColor(sf::Color::Magenta);
     //bloque->~Bloque(); //FUNCIONA
+    */
     
     
-    Pieza * pieza1 = new Pieza(7);
+    //Pieza * pieza1 = new Pieza(5);
         
     sf::Clock clock;
     
@@ -99,7 +100,7 @@ int main(int argc, char** argv) {
     ////////////////
     while(window.isOpen()){
         
-        //cout << clock.getElapsedTime().asSeconds() << endl;
+        cout << clock.getElapsedTime().asSeconds() << endl;
         
         sf::Event event;
         
@@ -111,19 +112,19 @@ int main(int argc, char** argv) {
                     }
                     if(event.key.code == sf::Keyboard::Key::Right){
                         //bloque->Mover('r');
-                        pieza1->Mover('r');
+                        //pieza1->Mover('r');
                     }
                     if(event.key.code == sf::Keyboard::Key::Left){
                         //bloque->Mover('l');
-                        pieza1->Mover('l');
+                        //pieza1->Mover('l');
                     }
                     if(event.key.code == sf::Keyboard::Key::Down){
                         //bloque->Mover('d');
-                        pieza1->Mover('d');
+                        //pieza1->Mover('d');
                     }
                     if(event.key.code == sf::Keyboard::Key::Up){
                         //bloque->Mover('u');
-                        pieza1->Mover('u');
+                        //pieza1->Mover('u');
                     }
                     break;
                     
@@ -147,8 +148,8 @@ int main(int argc, char** argv) {
         window.draw(tablero);
         
         //pieza1->Dibujar(window);
-        bloque->Dibujar(window);
-        pieza1->Dibujar(window);
+        //bloque->Dibujar(window);
+        //pieza1->Dibujar(window);
         
         window.display();        
     }
