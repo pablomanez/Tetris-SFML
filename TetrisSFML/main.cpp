@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
     
     Tablero tablero;
     
-    Pieza * pieza1 = new Pieza(5);
+    Pieza * pieza1 = new Pieza(4);
     
     //RELOJ
     sf::Clock reloj;

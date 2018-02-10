@@ -102,7 +102,7 @@ Pieza::Pieza(int n) {
     }
     else if(n==5){
         /*
-         * L AZUL
+         * J AZUL
          * 
          * [0][1][2]
          *       [3]
@@ -248,60 +248,213 @@ void Pieza::Mover(char d) {
 }
 
 void Pieza::Rotar(char d) {
-    if(d == 'r'){
-        //ROTAR HACIA LA DERECHA
-        switch(this->tipo){
-            case 1:
-                
-                if(this->fase_rotacion == 1){
-                    int x = this->bloques[2].getPosicion().x;
-                    int y = this->bloques[2].getPosicion().y;
-                    
-                    this->bloques[2].setPosicion(sf::Vector2f(x-20,y-20));
-                    
-                    this->fase_rotacion++;
-                    
-                }
-                else if(this->fase_rotacion == 2){
-                    int x = this->bloques[3].getPosicion().x;
-                    int y = this->bloques[3].getPosicion().y;
-                    
-                    this->bloques[3].setPosicion(sf::Vector2f(x+20,y-20));
+    int m = 20;
+    
+    switch(this->tipo){
+        case 1:
+
+            if(this->fase_rotacion == 1){
+                if(d=='r'){
+                    this->bloques[2].Mover(sf::Vector2f(-m,+m));
+                    this->bloques[3].Mover(sf::Vector2f(-m,-m));
+                    this->bloques[0].Mover(sf::Vector2f(+m,-m));
                     
                     this->fase_rotacion++;
-                    
                 }
-                else if(this->fase_rotacion == 3){
-                    int x = this->bloques[0].getPosicion().x;
-                    int y = this->bloques[0].getPosicion().y;
+                else{
+                    this->bloques[2].Mover(sf::Vector2f(-m,-m));
+                    this->bloques[3].Mover(sf::Vector2f(+m,-m));
+                    this->bloques[0].Mover(sf::Vector2f(+m,+m));
                     
-                    this->bloques[0].setPosicion(sf::Vector2f(x+20,y+20));
+                    this->fase_rotacion = 4;
+                }
+
+            }
+            else if(this->fase_rotacion == 2){
+                if(d=='r'){
+                    this->bloques[2].Mover(sf::Vector2f(-m,-m));
+                    this->bloques[3].Mover(sf::Vector2f(+m,-m));
+                    this->bloques[0].Mover(sf::Vector2f(+m,+m));
                     
                     this->fase_rotacion++;
-                    
                 }
-                else if(this->fase_rotacion == 4){
-                    int x = this->bloques[2].getPosicion().x;
-                    int y = this->bloques[2].getPosicion().y;
-                    
-                    this->bloques[2].setPosicion(sf::Vector2f(x-40,y));
+                else{
+                    this->bloques[2].Mover(sf::Vector2f(+m,-m));
+                    this->bloques[3].Mover(sf::Vector2f(+m,+m));
+                    this->bloques[0].Mover(sf::Vector2f(-m,+m));
                     
                     this->fase_rotacion--;
-                    
                 }
-                
-                
-                break;
-            default:
-                break;
-        }
-        
+
+            }
+            else if(this->fase_rotacion == 3){
+                if(d=='r'){
+                    this->bloques[2].Mover(sf::Vector2f(+m,-m));
+                    this->bloques[3].Mover(sf::Vector2f(+m,+m));
+                    this->bloques[0].Mover(sf::Vector2f(-m,+m));
+                    
+                    this->fase_rotacion++;
+                }
+                else{
+                    this->bloques[2].Mover(sf::Vector2f(+m,+m));
+                    this->bloques[3].Mover(sf::Vector2f(-m,+m));
+                    this->bloques[0].Mover(sf::Vector2f(-m,-m));
+                    
+                    this->fase_rotacion--;
+                }
+
+            }
+            else if(this->fase_rotacion == 4){
+                if(d=='r'){
+                    this->bloques[2].Mover(sf::Vector2f(+m,+m));
+                    this->bloques[3].Mover(sf::Vector2f(-m,+m));
+                    this->bloques[0].Mover(sf::Vector2f(-m,-m));
+
+                    this->fase_rotacion = 1;
+                }
+                else{
+                    this->bloques[2].Mover(sf::Vector2f(-m,+m));
+                    this->bloques[3].Mover(sf::Vector2f(-m,-m));
+                    this->bloques[0].Mover(sf::Vector2f(+m,-m));
+                    
+                    this->fase_rotacion--;
+                }
+
+            }
+            break;
+            
+        case 2:
+            if(this->fase_rotacion == 1){
+                if(d=='r' || d=='l'){
+                    this->bloques[2].Mover(sf::Vector2f(-m,-m));
+                    this->bloques[3].Mover(sf::Vector2f(+m,-m));
+                    this->bloques[0].Mover(sf::Vector2f((+m)*2,0));
+                    
+                    this->fase_rotacion++;
+                }
+
+            }
+            else if(this->fase_rotacion == 2){
+                if(d=='r' || d=='l'){
+                    this->bloques[2].Mover(sf::Vector2f(+m,+m));
+                    this->bloques[3].Mover(sf::Vector2f(-m,+m));
+                    this->bloques[0].Mover(sf::Vector2f((-m)*2,0));
+                    
+                    this->fase_rotacion = 1;
+                }
+
+            }
+
+            break;
+        case 3:
+            if(this->fase_rotacion == 1){
+                if(d=='r' || d=='l'){
+                    this->bloques[2].Mover(sf::Vector2f(0,(-m)*2));
+                    this->bloques[3].Mover(sf::Vector2f(+m,-m));
+                    this->bloques[0].Mover(sf::Vector2f(+m,+m));
+                    
+                    this->fase_rotacion++;
+                }
+
+            }
+            else if(this->fase_rotacion == 2){
+                if(d=='r' || d=='l'){
+                    this->bloques[2].Mover(sf::Vector2f(0,(+m)*2));
+                    this->bloques[3].Mover(sf::Vector2f(-m,+m));
+                    this->bloques[0].Mover(sf::Vector2f(-m,-m));
+                    
+                    this->fase_rotacion = 1;
+                }
+
+            }
+
+            break;
+        case 4:
+            if(this->fase_rotacion == 1){
+                if(d=='r' || d=='l'){
+                    this->bloques[0].Mover(sf::Vector2f((+m)*2,-m));
+                    this->bloques[1].Mover(sf::Vector2f(+m,+m));
+                    this->bloques[3].Mover(sf::Vector2f(-m,(+m)*2));
+                    
+                    this->fase_rotacion++;
+                }
+
+            }
+            else if(this->fase_rotacion == 2){
+                if(d=='r' || d=='l'){
+                    this->bloques[0].Mover(sf::Vector2f((-m)*2,+m));
+                    this->bloques[1].Mover(sf::Vector2f(-m,-m));
+                    this->bloques[3].Mover(sf::Vector2f(+m,(-m)*2));
+                    
+                    this->fase_rotacion = 1;
+                }
+
+            }
+
+            break;
+        case 5:
+
+            if(this->fase_rotacion == 1){
+                if(d=='r'){
+                    this->bloques[2].Mover(sf::Vector2f(-m,+m));
+                    this->bloques[3].Mover(sf::Vector2f(-m,-m));
+                    this->bloques[0].Mover(sf::Vector2f(+m,-m));
+                    
+                    this->fase_rotacion++;
+                }
+                else{
+                    this->bloques[2].Mover(sf::Vector2f(-m,-m));
+                    this->bloques[3].Mover(sf::Vector2f(+m,-m));
+                    this->bloques[0].Mover(sf::Vector2f(+m,+m));
+                    
+                    this->fase_rotacion = 4;
+                }
+
+            }
+            else if(this->fase_rotacion == 2){
+                if(d=='r'){
+                    
+                    
+                    this->fase_rotacion++;
+                }
+                else{
+                    
+                    
+                    this->fase_rotacion--;
+                }
+
+            }
+            else if(this->fase_rotacion == 3){
+                if(d=='r'){
+                    
+                    
+                    this->fase_rotacion++;
+                }
+                else{
+                    
+                    
+                    this->fase_rotacion--;
+                }
+
+            }
+            else if(this->fase_rotacion == 4){
+                if(d=='r'){
+                    
+
+                    this->fase_rotacion = 1;
+                }
+                else{
+                    
+                    
+                    this->fase_rotacion--;
+                }
+
+            }
+            break;
+        default:
+            break;
     }
-    else if(d == 'l'){
-        //ROTAR HACIA LA IZQUIERDA
-        
-        
-    }
+    
 }
 
 

@@ -80,6 +80,10 @@ void Bloque::Mover(char d) {
     }
 }
 
+void Bloque::Mover(sf::Vector2f d){
+    this->shape.move(d);
+}
+
 //SETTER
 void Bloque::setPosicion(sf::Vector2f pos) {
     this->shape.setPosition(pos.x,pos.y);

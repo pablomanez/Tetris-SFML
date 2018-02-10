@@ -26,6 +26,7 @@ public:
     
     void Dibujar(sf::RenderWindow& window);
     void Mover(char d);
+    void Mover(sf::Vector2f d);
     
     //SETTER
     void setPosicion(sf::Vector2f pos);
