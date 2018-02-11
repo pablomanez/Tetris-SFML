@@ -33,6 +33,8 @@ public:
     void setColor(sf::Color color);
     //GETTER
     sf::Vector2f getPosicion();
+    sf::Color getColor();
+    
     virtual ~Bloque();
 private:
     sf::Vector2f coordenadas;

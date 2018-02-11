@@ -26,6 +26,9 @@ public:
     void Rotar(char d);
     void Rotacion(char d);
     
+    //GETTER
+    Bloque * getBloques();
+    
     virtual ~Pieza();
 private:
     

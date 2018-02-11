@@ -577,6 +577,12 @@ void Pieza::Rotacion(char d) {
     
 }
 
+//GETTER
+
+Bloque * Pieza::getBloques() {
+    return this->bloques;
+}
+
 
 Pieza::~Pieza() {
 }

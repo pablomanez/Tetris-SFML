@@ -16,6 +16,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Pieza.h"
 #include "Bloque.h"
 
 class Tablero {
@@ -24,6 +25,7 @@ public:
     Tablero(const Tablero& orig);
     
     void Dibujar(sf::RenderWindow& window);
+    bool Colision(Pieza& pieza);
     
     virtual ~Tablero();
 private:

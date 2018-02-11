@@ -51,7 +51,6 @@ int GenerarPiezas::Generar() {
             break;
         }
     }
-    this->Debug();
     
     //EL NUMERO QUE DEVUELVO
     int dev = this->piezas[p].z;
@@ -61,33 +60,29 @@ int GenerarPiezas::Generar() {
     this->piezas[p].y = -1;
     
     //REORDENO EL ARRAY
+    sf::Vector3f aux[7] = this->piezas;
+    sf::Vector3f cero = aux[p];
+    
     if(p!=0){
-        sf::Vector3f aux = this->piezas[p];
 
         for(int i=p ; i>0 ; i--){
-            sf::Vector3f pa;
-            pa.x = this->piezas[p-1].x;
-            pa.y = this->piezas[p-1].y;
-            pa.z = this->piezas[p-1].z;
+            aux[i] = aux[i-1];
             
-            
-            this->piezas[p] = pa;
-            
-            std::cout << "---------------ITERACION " << i << "---------------" << std::endl;
-            this->Debug();
         }
 
-        this->piezas[0] = aux;
-    }
-    this->Debug();
-    
-    
-    /*
-    if(this->piezas[1].x == -1){
-            //SI ENTRA AQUI, SIGNIFICA QUE ES EL NUMERO DE LA ITERACION ANTERIOR
-            this->piezas[1].x = 0;
-            this->piezas[1].y = this->b;
+        aux[0] = cero;
+        //this->piezas = aux;
+        for(int j=0 ; j<7 ; j++){
+            this->piezas[j] = aux[j];
         }
+        
+    }
+    
+    if(this->piezas[1].x == -1){
+        //SI ENTRA AQUI, SIGNIFICA QUE ES EL NUMERO DE LA ITERACION ANTERIOR
+        this->piezas[1].x = 0;
+        this->piezas[1].y = this->b;
+    }
     
     //CALCULO PRIMERO LA CANTIDAD QUE HAY QUE SUMAR A LOS DEMAS NUMEROS
     float can = 0.000000;
@@ -95,12 +90,19 @@ int GenerarPiezas::Generar() {
     for(int i=1 ; i<7 ; i++){
         can += (piezas[i].y-piezas[i].x);
     }
+    can = 100-can;
+    
+    //std::cout << "Can: " << can << std::endl;
     
     //RECALCULO LA PROBABILIDAD DEL ARRAY PIEZAS
     double b2 = 100.000000/6.000000;
     
     for(int i=1 ; i<7 ; i++){
-        if(i!=6){
+        if(i==1){
+            this->piezas[i].x = 0;
+            this->piezas[i].y += (can/6.000000);
+        }
+        else if(i!=6){
             this->piezas[i].x = this->piezas[i-1].y;
             this->piezas[i].y += (can/6.000000);
         }
@@ -109,9 +111,7 @@ int GenerarPiezas::Generar() {
             this->piezas[i].y = 100.000000;
         }
     }
-    */
-    
-    
+    //this->Debug();
     
     return dev;
 }

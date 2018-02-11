@@ -19,6 +19,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <queue>
 
 #include "Bloque.h"
 #include "Pieza.h"
@@ -72,13 +73,23 @@ int main(int argc, char** argv) {
      * 
      */
     
+    //CONTIENE EL MAPA Y LOS 10x20 BLOQUES INICIALIZADOS A NULL
     Tablero tablero;
+    bool colision = false;
     
-    Pieza * pieza1 = new Pieza(3);
-    
+    //PARA GENERAR LAS PIEZAS
+    Pieza * pieza1 = NULL;
     GenerarPiezas gen;
+    std::queue<int> cola;
+    for(int i=0 ; i<5 ; i++){
+        if(i==0){
+            pieza1 = new Pieza(gen.Generar());
+        }
+        else{
+            cola.push(gen.Generar());
+        }
+    }
     
-    cout << gen.Generar() << endl;
     
     //RELOJ
     sf::Clock reloj;
@@ -87,18 +98,21 @@ int main(int argc, char** argv) {
     //INPUT TECLAS//
     ////////////////
     while(window.isOpen()){
-        
-        /*
-        if(reloj.getElapsedTime().asSeconds() > 2){
-            cout << gen.Generar() << endl;
+        if(colision){
+            colision = false;
             
-            pieza1->Mover('d');
+            pieza1 = NULL;
+            pieza1 = new Pieza(cola.front());
+            cola.pop();
+            cola.push(gen.Generar());
+        }
+        
+        if(reloj.getElapsedTime().asSeconds() > 1){
+            //cout << gen.Generar() << endl;
+            
+            //pieza1->Mover('d');
             reloj.restart();
         }
-        */
-        
-        
-        
         
         sf::Event event;
         
@@ -141,7 +155,9 @@ int main(int argc, char** argv) {
         //////////////////////
         //ACTUALIZAR OBJETOS//
         //////////////////////
-        
+        if(!colision){
+            colision = tablero.Colision(*pieza1);
+        }
 
         //////////////////
         //RENDER OBJETOS//

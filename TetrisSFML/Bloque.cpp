@@ -95,12 +95,13 @@ void Bloque::setColor(sf::Color color) {
 
 
 //GETTER
-
 sf::Vector2f Bloque::getPosicion() {
     return this->shape.getPosition();
 }
 
-
+sf::Color Bloque::getColor(){
+    return this->shape.getFillColor();
+}
 
 
 Bloque::~Bloque() {
