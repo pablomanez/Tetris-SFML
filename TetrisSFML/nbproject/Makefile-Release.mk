@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Bloque.o \
+	${OBJECTDIR}/GenerarPiezas.o \
 	${OBJECTDIR}/Pieza.o \
 	${OBJECTDIR}/Tablero.o \
 	${OBJECTDIR}/main.o
@@ -69,6 +70,11 @@ ${OBJECTDIR}/Bloque.o: Bloque.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Bloque.o Bloque.cpp
+
+${OBJECTDIR}/GenerarPiezas.o: GenerarPiezas.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GenerarPiezas.o GenerarPiezas.cpp
 
 ${OBJECTDIR}/Pieza.o: Pieza.cpp
 	${MKDIR} -p ${OBJECTDIR}

@@ -13,6 +13,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <random>
 #include <array>
 #include <valarray>
 #include <SFML/Graphics.hpp>
@@ -22,6 +23,7 @@
 #include "Bloque.h"
 #include "Pieza.h"
 #include "Tablero.h"
+#include "GenerarPiezas.h"
 
 using namespace std;
 
@@ -72,7 +74,11 @@ int main(int argc, char** argv) {
     
     Tablero tablero;
     
-    Pieza * pieza1 = new Pieza(4);
+    Pieza * pieza1 = new Pieza(3);
+    
+    GenerarPiezas gen;
+    
+    cout << gen.Generar() << endl;
     
     //RELOJ
     sf::Clock reloj;
@@ -81,12 +87,18 @@ int main(int argc, char** argv) {
     //INPUT TECLAS//
     ////////////////
     while(window.isOpen()){
+        
         /*
-        if(reloj.getElapsedTime().asSeconds() > 0.8){
+        if(reloj.getElapsedTime().asSeconds() > 2){
+            cout << gen.Generar() << endl;
+            
             pieza1->Mover('d');
             reloj.restart();
         }
         */
+        
+        
+        
         
         sf::Event event;
         

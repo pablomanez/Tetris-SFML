@@ -5,6 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>Bloque.h</itemPath>
+      <itemPath>GenerarPiezas.h</itemPath>
       <itemPath>Pieza.h</itemPath>
       <itemPath>Tablero.h</itemPath>
     </logicalFolder>
@@ -16,6 +17,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>Bloque.cpp</itemPath>
+      <itemPath>GenerarPiezas.cpp</itemPath>
       <itemPath>Pieza.cpp</itemPath>
       <itemPath>Tablero.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -61,6 +63,10 @@
       </item>
       <item path="Bloque.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="GenerarPiezas.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GenerarPiezas.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Pieza.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Pieza.h" ex="false" tool="3" flavor2="0">
@@ -95,6 +101,10 @@
       <item path="Bloque.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Bloque.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GenerarPiezas.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GenerarPiezas.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Pieza.cpp" ex="false" tool="1" flavor2="0">
       </item>
