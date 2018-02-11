@@ -97,7 +97,7 @@ void Bloque::setColor(sf::Color color) {
 //GETTER
 
 sf::Vector2f Bloque::getPosicion() {
-    return this->coordenadas;
+    return this->shape.getPosition();
 }
 
 

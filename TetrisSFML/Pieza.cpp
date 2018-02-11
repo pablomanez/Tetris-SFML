@@ -396,29 +396,33 @@ void Pieza::Rotar(char d) {
 
             if(this->fase_rotacion == 1){
                 if(d=='r'){
-                    this->bloques[2].Mover(sf::Vector2f(-m,+m));
-                    this->bloques[3].Mover(sf::Vector2f(-m,-m));
                     this->bloques[0].Mover(sf::Vector2f(+m,-m));
+                    this->bloques[2].Mover(sf::Vector2f(-m,+m));
+                    this->bloques[3].Mover(sf::Vector2f((-m)*2,0));
                     
                     this->fase_rotacion++;
                 }
                 else{
-                    this->bloques[2].Mover(sf::Vector2f(-m,-m));
-                    this->bloques[3].Mover(sf::Vector2f(+m,-m));
                     this->bloques[0].Mover(sf::Vector2f(+m,+m));
-                    
+                    this->bloques[2].Mover(sf::Vector2f(-m,-m));
+                    this->bloques[3].Mover(sf::Vector2f(0,(-m)*2));
+
                     this->fase_rotacion = 4;
                 }
 
             }
             else if(this->fase_rotacion == 2){
                 if(d=='r'){
-                    
+                    this->bloques[0].Mover(sf::Vector2f(+m,+m));
+                    this->bloques[2].Mover(sf::Vector2f(-m,-m));
+                    this->bloques[3].Mover(sf::Vector2f(0,(-m)*2));
                     
                     this->fase_rotacion++;
                 }
                 else{
-                    
+                    this->bloques[0].Mover(sf::Vector2f(-m,+m));
+                    this->bloques[2].Mover(sf::Vector2f(+m,-m));
+                    this->bloques[3].Mover(sf::Vector2f((+m)*2,0));
                     
                     this->fase_rotacion--;
                 }
@@ -426,12 +430,88 @@ void Pieza::Rotar(char d) {
             }
             else if(this->fase_rotacion == 3){
                 if(d=='r'){
-                    
+                    this->bloques[0].Mover(sf::Vector2f(-m,+m));
+                    this->bloques[2].Mover(sf::Vector2f(+m,-m));
+                    this->bloques[3].Mover(sf::Vector2f((+m)*2,0));
                     
                     this->fase_rotacion++;
                 }
                 else{
+                    this->bloques[0].Mover(sf::Vector2f(-m,-m));
+                    this->bloques[2].Mover(sf::Vector2f(+m,+m));
+                    this->bloques[3].Mover(sf::Vector2f(0,(+m)*2));
                     
+                    this->fase_rotacion--;
+                }
+                //std::cout << "Ha rotado desde la fase 3" << std::endl;
+
+            }
+            else if(this->fase_rotacion == 4){
+                if(d=='r'){
+                    this->bloques[0].Mover(sf::Vector2f(-m,-m));
+                    this->bloques[2].Mover(sf::Vector2f(+m,+m));
+                    this->bloques[3].Mover(sf::Vector2f(0,(+m)*2));
+
+                    this->fase_rotacion = 1;
+                }
+                else{
+                    this->bloques[0].Mover(sf::Vector2f(+m,-m));
+                    this->bloques[2].Mover(sf::Vector2f(-m,+m));
+                    this->bloques[3].Mover(sf::Vector2f((-m)*2,0));
+                    
+                    this->fase_rotacion--;
+                }
+
+            }
+            break;
+        case 6:
+
+            if(this->fase_rotacion == 1){
+                if(d=='r'){
+                    this->bloques[0].Mover(sf::Vector2f(+m,-m));
+                    this->bloques[2].Mover(sf::Vector2f(-m,+m));
+                    this->bloques[3].Mover(sf::Vector2f(0,(-m)*2));
+                    
+                    this->fase_rotacion++;
+                }
+                else{
+                    this->bloques[0].Mover(sf::Vector2f(+m,+m));
+                    this->bloques[2].Mover(sf::Vector2f(-m,-m));
+                    this->bloques[3].Mover(sf::Vector2f((+m)*2,0));
+
+                    this->fase_rotacion = 4;
+                }
+
+            }
+            else if(this->fase_rotacion == 2){
+                if(d=='r'){
+                    this->bloques[0].Mover(sf::Vector2f(+m,+m));
+                    this->bloques[2].Mover(sf::Vector2f(-m,-m));
+                    this->bloques[3].Mover(sf::Vector2f((+m)*2,0));
+                    
+                    this->fase_rotacion++;
+                }
+                else{
+                    this->bloques[0].Mover(sf::Vector2f(-m,+m));
+                    this->bloques[2].Mover(sf::Vector2f(+m,-m));
+                    this->bloques[3].Mover(sf::Vector2f(0,(+m)*2));
+                    
+                    this->fase_rotacion--;
+                }
+
+            }
+            else if(this->fase_rotacion == 3){
+                if(d=='r'){
+                    this->bloques[0].Mover(sf::Vector2f(-m,+m));
+                    this->bloques[2].Mover(sf::Vector2f(+m,-m));
+                    this->bloques[3].Mover(sf::Vector2f(0,(+m)*2));
+                    
+                    this->fase_rotacion++;
+                }
+                else{
+                    this->bloques[0].Mover(sf::Vector2f(-m,-m));
+                    this->bloques[2].Mover(sf::Vector2f(+m,+m));
+                    this->bloques[3].Mover(sf::Vector2f((-m)*2,0));
                     
                     this->fase_rotacion--;
                 }
@@ -439,12 +519,16 @@ void Pieza::Rotar(char d) {
             }
             else if(this->fase_rotacion == 4){
                 if(d=='r'){
-                    
+                    this->bloques[0].Mover(sf::Vector2f(-m,-m));
+                    this->bloques[2].Mover(sf::Vector2f(+m,+m));
+                    this->bloques[3].Mover(sf::Vector2f((-m)*2,0));
 
                     this->fase_rotacion = 1;
                 }
                 else{
-                    
+                    this->bloques[0].Mover(sf::Vector2f(+m,-m));
+                    this->bloques[2].Mover(sf::Vector2f(-m,+m));
+                    this->bloques[3].Mover(sf::Vector2f(0,(-m)*2));
                     
                     this->fase_rotacion--;
                 }
@@ -454,6 +538,42 @@ void Pieza::Rotar(char d) {
         default:
             break;
     }
+    
+}
+
+void Pieza::Rotacion(char d) {
+    
+    this->Rotar(d);
+    //CONTROLA LA SUPERPOSICION
+    bool sup = false;
+    
+    for(int i=0 ; i<4 ; i++){
+        //std::cout << i << ": x=" << bloques[i].getPosicion().x << ", y=" << bloques[i].getPosicion().y << std::endl;
+        
+        if(this->bloques[i].getPosicion().x+20>210){
+            //std::cout << "Choca por la derecha" << std::endl;
+            sup = true;
+        }
+        else if(this->bloques[i].getPosicion().x<10){
+            sup = true;
+        }
+        else if(this->bloques[i].getPosicion().y+20>400){
+            sup = true;
+        }
+        else if(this->bloques[i].getPosicion().y<0){
+            sup = true;
+        }
+    }
+    
+    if(sup){
+        if(d == 'r'){
+            this->Rotar('l');
+        }
+        else{
+            this->Rotar('r');
+        }
+    }
+    
     
 }
 

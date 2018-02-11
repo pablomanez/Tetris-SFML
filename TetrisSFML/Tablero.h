@@ -27,7 +27,7 @@ public:
     
     virtual ~Tablero();
 private:
-    Bloque ** bloques; 
+    Bloque *** bloques; 
     sf::ConvexShape shape;
 };
 

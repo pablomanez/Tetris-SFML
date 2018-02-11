@@ -24,6 +24,7 @@ public:
     void Dibujar(sf::RenderWindow& window);
     void Mover(char d);
     void Rotar(char d);
+    void Rotacion(char d);
     
     virtual ~Pieza();
 private:

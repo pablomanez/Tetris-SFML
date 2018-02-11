@@ -109,11 +109,11 @@ int main(int argc, char** argv) {
                         pieza1->Mover('u');
                     }
                     if(event.key.code == sf::Keyboard::Key::Z){
-                        pieza1->Rotar('l');
+                        pieza1->Rotacion('l');
                         cout << "Roto a la izquierda" << endl;
                     }
                     if(event.key.code == sf::Keyboard::Key::X){
-                        pieza1->Rotar('r');
+                        pieza1->Rotacion('r');
                         cout << "Roto a la derecha" << endl;
                     }
                     break;

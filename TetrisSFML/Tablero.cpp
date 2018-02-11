@@ -34,10 +34,18 @@ Tablero::Tablero() {
     
     this->shape = tablero;
     
-    this->bloques = new Bloque*[10]();
+    this->bloques = new Bloque**[10]();
     
     for(int i=0 ; i<10 ; i++){
-        this->bloques[i] = new Bloque[20]();
+        this->bloques[i] = new Bloque*[20]();
+    }
+    
+    for(int i=0; i<10 ; i++){
+        for(int j=0; j<20 ; j++){
+            
+            (this->bloques[i])[j] = NULL;
+            
+        }
     }
     
 }
