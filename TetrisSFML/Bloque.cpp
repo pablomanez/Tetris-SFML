@@ -84,6 +84,16 @@ void Bloque::Mover(sf::Vector2f d){
     this->shape.move(d);
 }
 
+bool Bloque::Colisiona(Bloque b1) {
+    if(this->shape.getGlobalBounds().intersects(b1.shape.getGlobalBounds())){
+        return true;
+    }
+    else{
+        false;
+    }
+}
+
+
 //SETTER
 void Bloque::setPosicion(sf::Vector2f pos) {
     this->shape.setPosition(pos.x,pos.y);

@@ -93,24 +93,38 @@ int main(int argc, char** argv) {
     
     //RELOJ
     sf::Clock reloj;
+    sf::Clock c_colision;
     
     ////////////////
     //INPUT TECLAS//
     ////////////////
     while(window.isOpen()){
         if(colision){
-            colision = false;
+            //EN CASO QUE HAYA COLISIONADO CON UNA PIEZA O EL FONDO
             
-            pieza1 = NULL;
-            pieza1 = new Pieza(cola.front());
-            cola.pop();
-            cola.push(gen.Generar());
+            if(!tablero.Colision(*pieza1)){
+                colision = false;
+            }
+            else if(c_colision.getElapsedTime().asSeconds() >0.5){
+                colision = false;
+                
+                tablero.CopiarPiezas(*pieza1);
+                
+                pieza1 = NULL;
+                pieza1 = new Pieza(cola.front());
+                cola.pop();
+                cola.push(gen.Generar());
+                
+                reloj.restart();
+            }
         }
         
-        if(reloj.getElapsedTime().asSeconds() > 1){
-            //cout << gen.Generar() << endl;
+        if(reloj.getElapsedTime().asSeconds() > 0.3){
+            //MOVER LA PIEZA HACIA ABAJO
             
-            //pieza1->Mover('d');
+            if(!tablero.Colision(*pieza1)){
+                pieza1->Mover('d');
+            }
             reloj.restart();
         }
         
@@ -124,22 +138,40 @@ int main(int argc, char** argv) {
                     }
                     if(event.key.code == sf::Keyboard::Key::Right){
                         pieza1->Mover('r');
+                        
+                        if(tablero.Colision2(*pieza1)){
+                            pieza1->Mover('l');
+                        }
+                        
                     }
                     if(event.key.code == sf::Keyboard::Key::Left){
                         pieza1->Mover('l');
+                        
+                        if(tablero.Colision2(*pieza1)){
+                            pieza1->Mover('r');
+                        }
+                        
                     }
                     if(event.key.code == sf::Keyboard::Key::Down){
-                        pieza1->Mover('d');
+                        if(!tablero.Colision(*pieza1)){
+                            pieza1->Mover('d');
+                        }
                     }
                     if(event.key.code == sf::Keyboard::Key::Up){
-                        pieza1->Mover('u');
+                        //pieza1->Mover('u');
                     }
                     if(event.key.code == sf::Keyboard::Key::Z){
                         pieza1->Rotacion('l');
+                        if(tablero.Colision2(*pieza1)){
+                            pieza1->Rotacion('r');
+                        }
                         cout << "Roto a la izquierda" << endl;
                     }
                     if(event.key.code == sf::Keyboard::Key::X){
                         pieza1->Rotacion('r');
+                        if(tablero.Colision2(*pieza1)){
+                            pieza1->Rotacion('l');
+                        }
                         cout << "Roto a la derecha" << endl;
                     }
                     break;
@@ -157,6 +189,7 @@ int main(int argc, char** argv) {
         //////////////////////
         if(!colision){
             colision = tablero.Colision(*pieza1);
+            c_colision.restart();
         }
 
         //////////////////

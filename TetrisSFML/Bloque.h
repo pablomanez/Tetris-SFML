@@ -27,10 +27,12 @@ public:
     void Dibujar(sf::RenderWindow& window);
     void Mover(char d);
     void Mover(sf::Vector2f d);
+    bool Colisiona(Bloque b1);
     
     //SETTER
     void setPosicion(sf::Vector2f pos);
     void setColor(sf::Color color);
+    
     //GETTER
     sf::Vector2f getPosicion();
     sf::Color getColor();

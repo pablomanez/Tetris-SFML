@@ -26,6 +26,8 @@ public:
     
     void Dibujar(sf::RenderWindow& window);
     bool Colision(Pieza& pieza);
+    bool Colision2(Pieza& pieza);
+    void CopiarPiezas(Pieza& pieza);
     
     virtual ~Tablero();
 private:
