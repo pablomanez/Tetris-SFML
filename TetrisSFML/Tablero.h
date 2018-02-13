@@ -28,6 +28,7 @@ public:
     bool Colision(Pieza& pieza);
     bool Colision2(Pieza& pieza);
     void CopiarPiezas(Pieza& pieza);
+    int Linea();
     
     virtual ~Tablero();
 private:

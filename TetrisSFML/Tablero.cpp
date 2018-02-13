@@ -135,6 +135,61 @@ void Tablero::CopiarPiezas(Pieza& pieza) {
     }
 }
 
+int Tablero::Linea() {
+    int n_lineas = 0;
+    for(int n=0 ; n<20 ; n++){
+
+        int linea = 0;
+
+        int y = -1;
+
+        for(int i=19 ; i>=0 ; i--){
+            for(int j=0 ; j<10 ; j++){
+                if((this->bloques[j])[i] != NULL){
+                    linea++;
+
+                    y = i;
+                }
+
+            }
+            if(linea == 10){
+                //std::cout << "LINEA!" << std::endl;
+                n_lineas++;
+
+                for(int l=y ; l>0 ; l--){
+                    for(int m=0 ; m<10 ; m++){
+                        if((this->bloques[m])[l] != NULL){
+                            if((this->bloques[m])[l-1] == NULL){
+                                (this->bloques[m])[l] = NULL;
+                            }
+                            else{
+                                int c_x = (this->bloques[m])[l]->getPosicion().x;
+                                int c_y = (this->bloques[m])[l]->getPosicion().y;
+                                (this->bloques[m])[l] = new Bloque();
+
+                                (this->bloques[m])[l]->setColor((this->bloques[m])[l-1]->getColor());
+
+                                (this->bloques[m])[l]->setPosicion(sf::Vector2f(c_x,c_y));
+                            }
+                        }
+                    }
+                }
+
+                linea = 0;
+                y = -1;
+
+            }
+            else{
+                linea = 0;
+                y = -1;
+            }
+
+        }
+    }
+    
+    return n_lineas;
+    
+}
 
 
 Tablero::Tablero(const Tablero& orig) {
