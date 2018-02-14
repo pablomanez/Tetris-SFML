@@ -103,6 +103,12 @@ void Bloque::setColor(sf::Color color) {
     this->shape.setFillColor(color);
 }
 
+void Bloque::setBorde(sf::Color color) {
+    this->shape.setOutlineThickness(-0.1);
+    this->shape.setOutlineColor(color);
+}
+
+
 
 //GETTER
 sf::Vector2f Bloque::getPosicion() {

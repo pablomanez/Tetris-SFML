@@ -25,9 +25,12 @@ public:
     void Mover(char d);
     void Rotar(char d);
     void Rotacion(char d);
+    void ColocarFuera();
+    void ColocarPiezasSiguientes(int y);
     
     //GETTER
     Bloque * getBloques();
+    int getTipo();
     
     virtual ~Pieza();
 private:

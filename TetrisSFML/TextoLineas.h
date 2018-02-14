@@ -26,14 +26,12 @@ public:
     void Dibujar(sf::RenderWindow& window);
     
     //GETTER 
-    sf::Text getTexto();
     int getLineas();
     
     virtual ~TextoLineas();
 private:
     int n_lineas;
-    std::string s_lineas;
-    sf::Text texto;
+    //sf::Text texto;
 };
 
 #endif /* TEXTOLINEAS_H */

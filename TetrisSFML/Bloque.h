@@ -32,6 +32,7 @@ public:
     //SETTER
     void setPosicion(sf::Vector2f pos);
     void setColor(sf::Color color);
+    void setBorde(sf::Color color);
     
     //GETTER
     sf::Vector2f getPosicion();

@@ -577,11 +577,31 @@ void Pieza::Rotacion(char d) {
     
 }
 
+void Pieza::ColocarFuera() {
+    //TODO: SI AL FINAL IMPLEMENTO LO DE GUARDAR LA PIEZA
+    this->bloques[0].Mover(sf::Vector2f(150,0));
+    this->bloques[1].Mover(sf::Vector2f(150,0));
+    this->bloques[2].Mover(sf::Vector2f(150,0));
+    this->bloques[3].Mover(sf::Vector2f(150,0));
+}
+
+void Pieza::ColocarPiezasSiguientes(int y) {
+    for(int i=0 ; i<4 ; i++){
+        this->bloques[i].Mover(sf::Vector2f(150,y));
+    }
+}
+
+
 //GETTER
 
 Bloque * Pieza::getBloques() {
     return this->bloques;
 }
+
+int Pieza::getTipo() {
+    return this->tipo;
+}
+
 
 
 Pieza::~Pieza() {
