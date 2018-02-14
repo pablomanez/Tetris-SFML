@@ -36,14 +36,17 @@ Pieza::Pieza(int n) {
          */
         int x = 70;
         
+        //sf::Color morado(65,26,75);
+        sf::Color morado(128,0,128);
+        
         this->bloques[0].setPosicion(sf::Vector2f(x,0));
-        this->bloques[0].setColor(sf::Color::Magenta);
+        this->bloques[0].setColor(morado);
         this->bloques[1].setPosicion(sf::Vector2f(x+20,0));
-        this->bloques[1].setColor(sf::Color::Magenta);
+        this->bloques[1].setColor(morado);
         this->bloques[2].setPosicion(sf::Vector2f(x+40,0));
-        this->bloques[2].setColor(sf::Color::Magenta);
+        this->bloques[2].setColor(morado);
         this->bloques[3].setPosicion(sf::Vector2f(x+20,20));
-        this->bloques[3].setColor(sf::Color::Magenta);
+        this->bloques[3].setColor(morado);
         
     }
     else if(n==2){
@@ -55,14 +58,16 @@ Pieza::Pieza(int n) {
          */
         int x = 70;
         
+        sf::Color verde(1,135,5);
+        
         this->bloques[0].setPosicion(sf::Vector2f(x,20));
-        this->bloques[0].setColor(sf::Color::Green);
+        this->bloques[0].setColor(verde);
         this->bloques[1].setPosicion(sf::Vector2f(x+20,0));
-        this->bloques[1].setColor(sf::Color::Green);
+        this->bloques[1].setColor(verde);
         this->bloques[2].setPosicion(sf::Vector2f(x+40,0));
-        this->bloques[2].setColor(sf::Color::Green);
+        this->bloques[2].setColor(verde);
         this->bloques[3].setPosicion(sf::Vector2f(x+20,20));
-        this->bloques[3].setColor(sf::Color::Green);
+        this->bloques[3].setColor(verde);
         
     }
     else if(n==3){
@@ -74,14 +79,16 @@ Pieza::Pieza(int n) {
          */
         int x = 90;
         
+        sf::Color rojo(214,0,0);
+        
         this->bloques[0].setPosicion(sf::Vector2f(x,0));
-        this->bloques[0].setColor(sf::Color::Red);
+        this->bloques[0].setColor(rojo);
         this->bloques[1].setPosicion(sf::Vector2f(x+20,0));
-        this->bloques[1].setColor(sf::Color::Red);
+        this->bloques[1].setColor(rojo);
         this->bloques[2].setPosicion(sf::Vector2f(x+40,20));
-        this->bloques[2].setColor(sf::Color::Red);
+        this->bloques[2].setColor(rojo);
         this->bloques[3].setPosicion(sf::Vector2f(x+20,20));
-        this->bloques[3].setColor(sf::Color::Red);
+        this->bloques[3].setColor(rojo);
     }
     else if(n==4){
         /*
@@ -91,14 +98,16 @@ Pieza::Pieza(int n) {
          */
         int x = 70;
         
+        sf::Color azul_claro(25,170,207);
+        
         this->bloques[0].setPosicion(sf::Vector2f(x,0));
-        this->bloques[0].setColor(sf::Color::Blue.Cyan);
+        this->bloques[0].setColor(azul_claro);
         this->bloques[1].setPosicion(sf::Vector2f(x+20,0));
-        this->bloques[1].setColor(sf::Color::Blue.Cyan);
+        this->bloques[1].setColor(azul_claro);
         this->bloques[2].setPosicion(sf::Vector2f(x+40,0));
-        this->bloques[2].setColor(sf::Color::Blue.Cyan);
+        this->bloques[2].setColor(azul_claro);
         this->bloques[3].setPosicion(sf::Vector2f(x+60,0));
-        this->bloques[3].setColor(sf::Color::Blue.Cyan);
+        this->bloques[3].setColor(azul_claro);
     }
     else if(n==5){
         /*
@@ -109,14 +118,16 @@ Pieza::Pieza(int n) {
          */
         int x = 90;
         
+        sf::Color azul(0,88,166);
+        
         this->bloques[0].setPosicion(sf::Vector2f(x,0));
-        this->bloques[0].setColor(sf::Color::Blue);
+        this->bloques[0].setColor(azul);
         this->bloques[1].setPosicion(sf::Vector2f(x+20,0));
-        this->bloques[1].setColor(sf::Color::Blue);
+        this->bloques[1].setColor(azul);
         this->bloques[2].setPosicion(sf::Vector2f(x+40,0));
-        this->bloques[2].setColor(sf::Color::Blue);
+        this->bloques[2].setColor(azul);
         this->bloques[3].setPosicion(sf::Vector2f(x+40,20));
-        this->bloques[3].setColor(sf::Color::Blue);
+        this->bloques[3].setColor(azul);
     }
     else if(n==6){
         /*
@@ -126,7 +137,8 @@ Pieza::Pieza(int n) {
          * [3]
          */
         int x = 70;
-        sf::Color naranja(255,165,0);
+        
+        sf::Color naranja(232,140,2);
         
         this->bloques[0].setPosicion(sf::Vector2f(x,0));
         this->bloques[0].setColor(naranja);
@@ -146,14 +158,16 @@ Pieza::Pieza(int n) {
          */
         int x = 90;
         
+        sf::Color amarillo(240,232,0);
+        
         this->bloques[0].setPosicion(sf::Vector2f(x,0));
-        this->bloques[0].setColor(sf::Color::Yellow);
+        this->bloques[0].setColor(amarillo);
         this->bloques[1].setPosicion(sf::Vector2f(x+20,0));
-        this->bloques[1].setColor(sf::Color::Yellow);
+        this->bloques[1].setColor(amarillo);
         this->bloques[2].setPosicion(sf::Vector2f(x,20));
-        this->bloques[2].setColor(sf::Color::Yellow);
+        this->bloques[2].setColor(amarillo);
         this->bloques[3].setPosicion(sf::Vector2f(x+20,20));
-        this->bloques[3].setColor(sf::Color::Yellow);
+        this->bloques[3].setColor(amarillo);
     }
     
 }

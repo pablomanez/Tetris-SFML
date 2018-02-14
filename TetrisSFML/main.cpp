@@ -38,6 +38,17 @@ int main(int argc, char** argv) {
     window.setMouseCursorVisible(false);
     window.setFramerateLimit(30);
     
+    auto wsize = window.getSize();
+    
+    sf::View view1(sf::Vector2f(320,240), sf::Vector2f(wsize.x,wsize.y));
+    //sf::View view1(sf::FloatRect(100,100,100,100));
+    view1.setViewport(sf::FloatRect(0,0,1,1));
+    
+    sf::View view2(sf::Vector2f(320,240), sf::Vector2f(wsize.x,wsize.y));
+    view2.setViewport(sf::FloatRect(0.5f,0,0.5f,1));
+    
+    window.setView(view1);
+    //window.setView(view2);
             
     ////////////////////
     //CREO LOS BLOQUES//
@@ -276,8 +287,9 @@ int main(int argc, char** argv) {
                 pieza1 = NULL;
                 pieza1 = new Pieza(cola.front());
                 
-                if(tablero.Colision(*pieza1)){
+                if(tablero.Colision2(*pieza1)){
                     //FIN DEL JUEGO
+                    cout << "Dedicate al parchis" << endl;
                     window.close();
                 }
                 
