@@ -30,10 +30,14 @@ public:
     void CopiarPiezas(Pieza& pieza);
     int Linea();
     
+    //GETTER
+    int getPuntuacionTotal();
+    
     virtual ~Tablero();
 private:
     Bloque *** bloques; 
     sf::ConvexShape shape;
+    int puntuacion_total;
 };
 
 #endif /* TABLERO_H */

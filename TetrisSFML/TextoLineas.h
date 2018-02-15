@@ -23,7 +23,7 @@ public:
     TextoLineas(const TextoLineas& orig);
     
     void Actualizar(Tablero& tablero);
-    void Dibujar(sf::RenderWindow& window);
+    void Dibujar(sf::RenderWindow& window, int puntos);
     
     //GETTER 
     int getLineas();

@@ -38,25 +38,61 @@ void TextoLineas::Actualizar(Tablero& tablero) {
     
 }
 
-void TextoLineas::Dibujar(sf::RenderWindow& window) {
+void TextoLineas::Dibujar(sf::RenderWindow& window, int puntos) {
     sf::Font font;
     font.loadFromFile("../assets/fuentes/PressStart2P.ttf");
     
     sf::Text texto;
+    sf::Text texto2;
+    sf::Text texto3;
+    sf::Text texto4;
     
+    //NUMERO DE LINEAS
     texto.setFont(font);
-    texto.setCharacterSize(10);
+    texto.setCharacterSize(20);
     texto.setFillColor(sf::Color::White);
     texto.setPosition(sf::Vector2f(9,410));
     
-    std::string aux = "Lineas: ";
+    std::string aux = "LINES: ";
     
     std::string s_lineas = aux.operator +=(std::to_string(this->n_lineas));
     texto.setString(s_lineas);
     
-    //std::cout << "Funca" << std::endl;
+    //HOLD    
+    texto2.setFont(font);
+    texto2.setCharacterSize(20);
+    texto2.setFillColor(sf::Color::White);
+    texto2.setPosition(sf::Vector2f(220,300));
     
+    std::string aux2 = "HODL:";
+    texto2.setString(aux2);
+    
+    //NEXT
+    texto3.setFont(font);
+    texto3.setCharacterSize(20);
+    texto3.setFillColor(sf::Color::White);
+    texto3.setPosition(sf::Vector2f(220,0));
+    
+    std::string aux3 = "NEXT:";
+    texto3.setString(aux3);
+    
+    //PUNTUACION
+    texto4.setFont(font);
+    texto4.setCharacterSize(15);
+    texto4.setFillColor(sf::Color::White);
+    texto4.setPosition(sf::Vector2f(9,440));
+    
+    std::string aux4 = "SCORE: ";
+    
+    std::string s_lineas2 = aux4.operator +=(std::to_string(puntos));
+    texto4.setString(s_lineas2);
+    
+    //DIBUJAR
+    window.draw(texto4);
+    window.draw(texto3);
+    window.draw(texto2);
     window.draw(texto);
+    
 }
 
 //GETTER

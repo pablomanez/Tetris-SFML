@@ -50,6 +50,8 @@ Tablero::Tablero() {
         }
     }
     
+    this->puntuacion_total = 0;
+    
 }
 
 void Tablero::Dibujar(sf::RenderWindow& window) {
@@ -148,7 +150,7 @@ int Tablero::Linea() {
             for(int j=0 ; j<10 ; j++){
                 if((this->bloques[j])[i] != NULL){
                     linea++;
-
+                    
                     y = i;
                 }
 
@@ -156,16 +158,27 @@ int Tablero::Linea() {
             if(linea == 10){
                 //std::cout << "LINEA!" << std::endl;
                 n_lineas++;
+                
+                for(int j=0 ; j<10 ; j++){
+                    if((this->bloques[j])[y] != NULL){
+                        std::cout << (this->bloques[j])[i]->getPuntuacion() << std::endl;
+                        this->puntuacion_total += (this->bloques[j])[i]->getPuntuacion();
+                    }
+                }
+                
 
                 for(int l=y ; l>0 ; l--){
                     
                     for(int m=0 ; m<10 ; m++){
                         if((this->bloques[m])[l-1] == NULL){
+                            
                             (this->bloques[m])[l] = NULL;
                             
                         }
                         else{
                             if((this->bloques[m])[l] != NULL){
+                                //this->puntuacion_total += (this->bloques[m])[l]->getPuntuacion();
+                                
                                 c_x = (this->bloques[m])[l]->getPosicion().x;
                                 c_y = (this->bloques[m])[l]->getPosicion().y;
 
@@ -200,6 +213,12 @@ int Tablero::Linea() {
     
     return n_lineas;
     
+}
+
+//GETTER
+
+int Tablero::getPuntuacionTotal() {
+    return this->puntuacion_total;
 }
 
 

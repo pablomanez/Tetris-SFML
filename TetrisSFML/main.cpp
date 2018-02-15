@@ -38,53 +38,6 @@ int main(int argc, char** argv) {
     window.setMouseCursorVisible(false);
     window.setFramerateLimit(30);
     
-    auto wsize = window.getSize();
-    
-    sf::View view1(sf::Vector2f(320,240), sf::Vector2f(wsize.x,wsize.y));
-    //sf::View view1(sf::FloatRect(100,100,100,100));
-    view1.setViewport(sf::FloatRect(0,0,1,1));
-    
-    sf::View view2(sf::Vector2f(320,240), sf::Vector2f(wsize.x,wsize.y));
-    view2.setViewport(sf::FloatRect(0.5f,0,0.5f,1));
-    
-    window.setView(view1);
-    //window.setView(view2);
-            
-    ////////////////////
-    //CREO LOS BLOQUES//
-    ////////////////////
-    //Existe un tablero de 10x20 bloques 
-    //Cada pieza está hecha por n bloques
-    //Bloque = [], dimensiones = 1x1, coordenadas propias
-    //Cada bloque se escalara por 20
-    /* [0,0]         [10,0]
-     * |                  |
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * [][][][][][][][][][]
-     * |                  |
-     * [0,20]       [10,20]
-     * 
-     */
-    
     //CONTIENE EL MAPA Y LOS 10x20 BLOQUES INICIALIZADOS A NULL
     Tablero tablero;
     bool colision = false;
@@ -93,7 +46,8 @@ int main(int argc, char** argv) {
     TextoLineas lineas;
     
     //EN CASO QUE IMPLEMENTE GUARDAR LA PIEZA ACTUAL
-    //Pieza * pieza_auxiliar = NULL;
+    Pieza * pieza_auxiliar = NULL;
+    bool guardar_pieza = false;
         
     //PARA GENERAR LAS PIEZAS
     Pieza * pieza1 = NULL;
@@ -228,6 +182,10 @@ int main(int argc, char** argv) {
                     if(event.key.code == sf::Keyboard::Key::Up){
                         //pieza1->Mover('u');
                     }
+                    if(event.key.code == sf::Keyboard::Key::C){
+                        cout << "Guardo pieza" << endl;
+                        guardar_pieza = true;
+                    }
                     if(event.key.code == sf::Keyboard::Key::Z){
                         pieza1->Rotacion('l');
                         if(tablero.Colision2(*pieza1)){
@@ -271,6 +229,55 @@ int main(int argc, char** argv) {
 
         //STRING QUE MARCA LAS LINEAS HECHAS QUE LLEVA EL JUGADOR
         lineas.Actualizar(tablero);
+        
+        //EN CASO QUE QUIERA GUARDAR UNA PIEZA
+        if(guardar_pieza){
+            if(!pieza_auxiliar){
+                //SI NO HAY NINGUNA PIEZA GUARDADA
+                
+                pieza_auxiliar = new Pieza(pieza1->getTipo());
+
+                delete pieza1;
+                pieza1 = NULL;
+                pieza1 = new Pieza(cola.front());
+
+                int pieza_cola = gen.Generar();
+                cola.pop();
+                cola.push(pieza_cola);
+
+                //RECARGA LAS PIEZAS QUE VIENEN A CONTINUACION
+                for(int i=0 ; i<4 ; i++){
+                    if(i!=3){
+                        piezas_sig[i] = NULL;
+                        piezas_sig[i] = new Pieza(piezas_sig[i+1]->getTipo());
+                        piezas_sig[i]->ColocarPiezasSiguientes((i)*60);
+                    }
+                    else{
+                        piezas_sig[i] = NULL;
+                        piezas_sig[i] = new Pieza(pieza_cola);
+                        piezas_sig[i]->ColocarPiezasSiguientes((i)*60);
+                    }
+                }
+
+            }
+            else{
+                int tipo_aux = pieza_auxiliar->getTipo();
+                
+                delete pieza_auxiliar;
+                pieza_auxiliar = NULL;
+                pieza_auxiliar = new Pieza(pieza1->getTipo());
+                
+                delete pieza1;
+                pieza1 = NULL;
+                pieza1 = new Pieza(tipo_aux);
+                
+            }
+            
+            pieza_auxiliar->ColocarFuera();
+            
+            guardar_pieza = false;
+            reloj.restart();
+        }
         
         //EN CASO QUE HAYA COLISIONADO CON UNA PIEZA O EL FONDO
         if(colision){
@@ -321,21 +328,19 @@ int main(int argc, char** argv) {
         window.clear(sf::Color::Black);
         tablero.Dibujar(window);
         
-        lineas.Dibujar(window);
+        lineas.Dibujar(window,tablero.getPuntuacionTotal());
         pieza1->Dibujar(window);
         
         for(int i=0 ; i<4 ; i++){
-            
             piezas_sig[i]->Dibujar(window);
+            
         }
         
-        /*
-        //EN EL CASO QUE SE HAYA GUARDADO ALGUNA PIEZA
-        if(pieza_auxiliar != NULL){
+        if(pieza_auxiliar){
             pieza_auxiliar->Dibujar(window);
             
         }
-        */
+        
         
         window.display();        
     }

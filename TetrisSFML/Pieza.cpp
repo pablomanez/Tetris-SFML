@@ -36,7 +36,6 @@ Pieza::Pieza(int n) {
          */
         int x = 70;
         
-        //sf::Color morado(65,26,75);
         sf::Color morado(128,0,128);
         
         this->bloques[0].setPosicion(sf::Vector2f(x,0));
@@ -168,6 +167,10 @@ Pieza::Pieza(int n) {
         this->bloques[2].setColor(amarillo);
         this->bloques[3].setPosicion(sf::Vector2f(x+20,20));
         this->bloques[3].setColor(amarillo);
+    }
+    
+    for(int i=0 ; i<4 ; i++){
+        this->bloques[i].setPuntuacion();
     }
     
 }
@@ -591,17 +594,19 @@ void Pieza::Rotacion(char d) {
     
 }
 
+//COLOCA LA PIEZA GUARDADA FUERA
 void Pieza::ColocarFuera() {
-    //TODO: SI AL FINAL IMPLEMENTO LO DE GUARDAR LA PIEZA
-    this->bloques[0].Mover(sf::Vector2f(150,0));
-    this->bloques[1].Mover(sf::Vector2f(150,0));
-    this->bloques[2].Mover(sf::Vector2f(150,0));
-    this->bloques[3].Mover(sf::Vector2f(150,0));
+    int y = 340;
+    this->bloques[0].Mover(sf::Vector2f(150,y));
+    this->bloques[1].Mover(sf::Vector2f(150,y));
+    this->bloques[2].Mover(sf::Vector2f(150,y));
+    this->bloques[3].Mover(sf::Vector2f(150,y));
 }
 
+//COLOCA EN FILA VERTICAL TODAS LAS PIEZAS SIGUIENTES
 void Pieza::ColocarPiezasSiguientes(int y) {
     for(int i=0 ; i<4 ; i++){
-        this->bloques[i].Mover(sf::Vector2f(150,y));
+        this->bloques[i].Mover(sf::Vector2f(150,y+40));
     }
 }
 

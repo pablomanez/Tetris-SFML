@@ -23,6 +23,8 @@ Bloque::Bloque() {
     this->shape.setFillColor(sf::Color::Black);
     //this->shape.setPosition(10,0);
     
+    this->puntuacion = 0;
+    
 }
 
 Bloque::Bloque(const Bloque& orig) {
@@ -108,6 +110,44 @@ void Bloque::setBorde(sf::Color color) {
     this->shape.setOutlineColor(color);
 }
 
+void Bloque::setPuntuacion() {
+    
+    sf::Color morado(128,0,128);
+    sf::Color verde(1,135,5);
+    sf::Color rojo(214,0,0);
+    sf::Color azul_claro(25,170,207);
+    sf::Color azul(0,88,166);
+    sf::Color naranja(232,140,2);
+    sf::Color amarillo(240,232,0);
+    
+    this->puntuacion = 10;
+    
+    /*
+    if(this->shape.getFillColor() == morado){
+        this->puntuacion = 50;
+    }
+    else if(this->shape.getFillColor() == verde){
+        this->puntuacion = 30;
+    }
+    else if(this->shape.getFillColor() == rojo){
+        this->puntuacion = 30;
+    }
+    else if(this->shape.getFillColor() == azul_claro){
+        this->puntuacion = 10;
+    }
+    else if(this->shape.getFillColor() == azul){
+        this->puntuacion = 20;
+    }
+    else if(this->shape.getFillColor() == naranja){
+        this->puntuacion = 20;
+    }
+    else if(this->shape.getFillColor() == amarillo){
+        this->puntuacion = 40;
+    }
+    */
+        
+}
+
 
 
 //GETTER
@@ -117,6 +157,10 @@ sf::Vector2f Bloque::getPosicion() {
 
 sf::Color Bloque::getColor(){
     return this->shape.getFillColor();
+}
+
+int Bloque::getPuntuacion() {
+    return this->puntuacion;
 }
 
 

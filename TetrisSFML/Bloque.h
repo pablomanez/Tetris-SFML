@@ -33,15 +33,18 @@ public:
     void setPosicion(sf::Vector2f pos);
     void setColor(sf::Color color);
     void setBorde(sf::Color color);
+    void setPuntuacion();
     
     //GETTER
     sf::Vector2f getPosicion();
     sf::Color getColor();
+    int getPuntuacion();
     
     virtual ~Bloque();
 private:
     sf::Vector2f coordenadas;
     sf::RectangleShape shape;
+    int puntuacion;
 
 };
 
