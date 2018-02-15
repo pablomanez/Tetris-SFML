@@ -120,9 +120,7 @@ void Bloque::setPuntuacion() {
     sf::Color naranja(232,140,2);
     sf::Color amarillo(240,232,0);
     
-    this->puntuacion = 10;
     
-    /*
     if(this->shape.getFillColor() == morado){
         this->puntuacion = 50;
     }
@@ -144,7 +142,7 @@ void Bloque::setPuntuacion() {
     else if(this->shape.getFillColor() == amarillo){
         this->puntuacion = 40;
     }
-    */
+    
         
 }
 

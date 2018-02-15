@@ -169,10 +169,6 @@ Pieza::Pieza(int n) {
         this->bloques[3].setColor(amarillo);
     }
     
-    for(int i=0 ; i<4 ; i++){
-        this->bloques[i].setPuntuacion();
-    }
-    
 }
 
 Pieza::Pieza(const Pieza& orig) {

@@ -133,6 +133,8 @@ void Tablero::CopiarPiezas(Pieza& pieza) {
         (this->bloques[x])[y] = new Bloque();
         (this->bloques[x])[y]->setColor(bloques[i].getColor());
         (this->bloques[x])[y]->setPosicion(bloques[i].getPosicion());
+        (this->bloques[x])[y]->setPuntuacion();
+        
 
     }
 }
