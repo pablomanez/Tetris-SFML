@@ -1,3 +1,3 @@
 # Tetris-SFML
 
-Classic tetris made in c++, using SFML library.
+Classic Tetris game, made in c++ using SFML library.
