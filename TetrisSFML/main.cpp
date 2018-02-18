@@ -32,11 +32,21 @@ using namespace std;
 /*
  * 
  */
+
 int main(int argc, char** argv) {
-    
+    //VENTANA
     sf::RenderWindow window(sf::VideoMode(640,480), "Tetris", sf::Style::Default);
     window.setMouseCursorVisible(false);
     window.setFramerateLimit(30);
+    
+    //VISTA DEL JUGADOR 1
+    sf::View view1(sf::FloatRect(0,0,640,480));
+    view1.setViewport(sf::FloatRect(0, 0, 1, 1));
+    
+    window.setView(view1);
+    
+    //VISTA DEL JUGADOR 2
+    
     
     //CONTIENE EL MAPA Y LOS 10x20 BLOQUES INICIALIZADOS A NULL
     Tablero tablero;
@@ -51,10 +61,11 @@ int main(int argc, char** argv) {
         
     //PARA GENERAR LAS PIEZAS
     Pieza * pieza1 = NULL;
-    Pieza ** piezas_sig = new Pieza*[4]();
+    int n_p = 100;
+    Pieza ** piezas_sig = new Pieza*[n_p]();
     GenerarPiezas gen;
     std::queue<int> cola;
-    for(int i=0 ; i<5 ; i++){
+    for(int i=0 ; i<(n_p+1) ; i++){
         if(i==0){
             pieza1 = new Pieza(gen.Generar());
         }
@@ -74,8 +85,7 @@ int main(int argc, char** argv) {
     sf::Clock reloj;
     sf::Clock c_colision;
     
-    //MANDO
-    sf::Joystick mando;
+    //CONTROLES
     bool m_d = false;
     
     
@@ -96,66 +106,6 @@ int main(int argc, char** argv) {
         
         if(window.pollEvent(event)){
             switch(event.type){
-                case sf::Event::EventType::JoystickButtonPressed:
-                    if(mando.isButtonPressed(0,1)){
-                        //cout << "A" << endl;
-                        /*
-                        if(pieza_auxiliar == NULL){
-                            pieza_auxiliar = new Pieza(pieza1->getTipo());
-                        }
-                        else{
-                            pieza1
-                        }
-                        pieza_auxiliar->ColocarFuera();
-                        */
-                    }
-                    if(mando.isButtonPressed(0,2)){
-                        //cout << "B" << endl;
-                        pieza1->Rotacion('r');
-                        if(tablero.Colision2(*pieza1)){
-                            pieza1->Rotacion('l');
-                        }
-                    }
-                    if(mando.isButtonPressed(0,3)){
-                        //cout << "Y" << endl;
-                        pieza1->Rotacion('l');
-                        if(tablero.Colision2(*pieza1)){
-                            pieza1->Rotacion('r');
-                        }
-                    }                    
-                    else{
-                        //cout << event.joystickButton.button << endl;
-                    }
-                    break;
-                case sf::Event::EventType::JoystickMoved:
-                    if(event.joystickMove.position == 100 && event.joystickMove.axis == 0){
-                        //cout << "derecha" << endl;
-                        pieza1->Mover('r');
-                        
-                        if(tablero.Colision2(*pieza1)){
-                            pieza1->Mover('l');
-                        }
-                    }
-                    if(event.joystickMove.position == -100 && event.joystickMove.axis == 0){
-                        //cout << "izquierda" << endl;
-                        pieza1->Mover('l');
-                        
-                        if(tablero.Colision2(*pieza1)){
-                            pieza1->Mover('r');
-                        }
-                    }
-                    if(event.joystickMove.position == 100 && event.joystickMove.axis == 1){
-                        //cout << "abajo" << endl;
-                        m_d = true;
-                    }
-                    if(!(event.joystickMove.position == 100 && event.joystickMove.axis == 1)){
-                        //cout << "abajo" << endl;
-                        m_d = false;
-                    }
-                    else{
-                        //cout << event.joystickMove.axis << endl;
-                    }
-                    break;
                 case sf::Event::EventType::KeyPressed:
                     if(event.key.code == sf::Keyboard::Key::Q || event.key.code == sf::Keyboard::Key::Escape){
                         window.close();
@@ -179,26 +129,15 @@ int main(int argc, char** argv) {
                     if(event.key.code == sf::Keyboard::Key::Down){
                         m_d = true;
                     }
-                    if(event.key.code == sf::Keyboard::Key::Up){
-                        //pieza1->Mover('u');
-                    }
                     if(event.key.code == sf::Keyboard::Key::C){
-                        cout << "Guardo pieza" << endl;
+                        //cout << "Guardo pieza" << endl;
                         guardar_pieza = true;
-                    }
-                    if(event.key.code == sf::Keyboard::Key::Z){
-                        pieza1->Rotacion('l');
-                        if(tablero.Colision2(*pieza1)){
-                            pieza1->Rotacion('r');
-                        }
-                        //cout << "Roto a la izquierda" << endl;
                     }
                     if(event.key.code == sf::Keyboard::Key::X){
                         pieza1->Rotacion('r');
                         if(tablero.Colision2(*pieza1)){
                             pieza1->Rotacion('l');
                         }
-                        //cout << "Roto a la derecha" << endl;
                     }
                     break;
                     
@@ -246,8 +185,8 @@ int main(int argc, char** argv) {
                 cola.push(pieza_cola);
 
                 //RECARGA LAS PIEZAS QUE VIENEN A CONTINUACION
-                for(int i=0 ; i<4 ; i++){
-                    if(i!=3){
+                for(int i=0 ; i<n_p ; i++){
+                    if(i!=(n_p-1)){
                         piezas_sig[i] = NULL;
                         piezas_sig[i] = new Pieza(piezas_sig[i+1]->getTipo());
                         piezas_sig[i]->ColocarPiezasSiguientes((i)*60);
@@ -305,8 +244,8 @@ int main(int argc, char** argv) {
                 cola.push(pieza_cola);
                      
                 //RECARGA LAS PIEZAS QUE VIENEN A CONTINUACION
-                for(int i=0 ; i<4 ; i++){
-                    if(i!=3){
+                for(int i=0 ; i<n_p ; i++){
+                    if(i!=(n_p-1)){
                         piezas_sig[i] = NULL;
                         piezas_sig[i] = new Pieza(piezas_sig[i+1]->getTipo());
                         piezas_sig[i]->ColocarPiezasSiguientes((i)*60);

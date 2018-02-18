@@ -30,3 +30,5 @@
 *.exe
 *.out
 *.app
+/TetrisSFML/build/
+/TetrisSFML/dist/
