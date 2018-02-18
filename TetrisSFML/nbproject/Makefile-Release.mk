@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/Bloque.o \
 	${OBJECTDIR}/GenerarPiezas.o \
+	${OBJECTDIR}/Juego.o \
 	${OBJECTDIR}/Pieza.o \
 	${OBJECTDIR}/Tablero.o \
 	${OBJECTDIR}/TextoLineas.o \
@@ -76,6 +77,11 @@ ${OBJECTDIR}/GenerarPiezas.o: GenerarPiezas.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GenerarPiezas.o GenerarPiezas.cpp
+
+${OBJECTDIR}/Juego.o: Juego.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Juego.o Juego.cpp
 
 ${OBJECTDIR}/Pieza.o: Pieza.cpp
 	${MKDIR} -p ${OBJECTDIR}

@@ -163,7 +163,7 @@ int Tablero::Linea() {
                 
                 for(int j=0 ; j<10 ; j++){
                     if((this->bloques[j])[y] != NULL){
-                        std::cout << (this->bloques[j])[i]->getPuntuacion() << std::endl;
+                        //std::cout << (this->bloques[j])[i]->getPuntuacion() << std::endl;
                         this->puntuacion_total += (this->bloques[j])[i]->getPuntuacion();
                     }
                 }
