@@ -35,5 +35,18 @@ using namespace std;
  * DESPUES: 3 LINEAS
  */
 
-int main(int argc, char** argv) {Juego juego;juego.Bucle();return 0;}
+int main(int argc, char** argv) {
+    Juego juego;
+    
+    //VISTA DEL JUGADOR 1
+    sf::View view1(sf::FloatRect(0,0,640,480));
+    view1.setViewport(sf::FloatRect(0, 0, 1, 1));
+    
+    //VISTA DEL JUGADOR 2
+    sf::View view2(sf::FloatRect(-320,0,640,480));
+    view1.setViewport(sf::FloatRect(0, 0, 1, 1));
+
+    juego.Bucle();
+    return 0;
+}
 

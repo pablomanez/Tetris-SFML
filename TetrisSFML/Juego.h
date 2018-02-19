@@ -31,6 +31,12 @@ public:
     void GuardaPieza();
     void ColisionPieza();
     
+    //GETTER
+    bool abierto();
+    
+    //SETTER
+    void setVista(sf::View view);
+    
     Juego(const Juego& orig);
     virtual ~Juego();
 private:

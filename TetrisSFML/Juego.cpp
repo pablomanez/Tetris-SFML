@@ -48,20 +48,35 @@ Juego::Juego():
 
 //UN PERRO
 void Juego::Bucle() {
+    //VISTA DEL JUGADOR 1
+    sf::View view1(sf::FloatRect(0,0,640,480));
+    view1.setViewport(sf::FloatRect(0, 0, 1, 1));
+    
+    //VISTA DEL JUGADOR 2
+    sf::View view2(sf::FloatRect(-320,0,640,480));
+    view1.setViewport(sf::FloatRect(0, 0, 1, 1));
+    
     while(this->window.isOpen()){
+        //JUGADOR 1
         this->MovAbajo();
         
         sf::Event event;
         this->Eventos(event);
-        
         this->Update();
-        this->Render();
+        
+        this->window.clear(sf::Color::Black);
+            this->window.setView(view1);
+            this->Render();
+
+            this->window.setView(view2);
+            this->Render();
+        this->window.display();
     }
 }
 
 //EL RENDER
 void Juego::Render() {
-    this->window.clear(sf::Color::Black);
+    //this->window.clear(sf::Color::Black);
     this->tablero.Dibujar(this->window);
 
     this->lineas.Dibujar(this->window,this->tablero.getPuntuacionTotal());
@@ -77,7 +92,7 @@ void Juego::Render() {
 
     }
     
-    this->window.display();
+    //this->window.display();
 }
 
 //EL UPDEIT
@@ -280,6 +295,16 @@ void Juego::GeneraPiezas() {
     }
 }
 
+
+//GETTER
+bool Juego::abierto() {
+    return this->window.isOpen();
+}
+
+//SETTER
+void Juego::setVista(sf::View view) {
+    this->window.setView(view);
+}
 
 Juego::Juego(const Juego& orig) {
 }

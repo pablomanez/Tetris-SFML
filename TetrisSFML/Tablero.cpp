@@ -21,7 +21,7 @@
 Tablero::Tablero() {
     //INICIALIZAR EL TABLERO
     sf::ConvexShape tablero(9);
-    tablero.setFillColor(sf::Color::Black);
+    tablero.setFillColor(sf::Color::Transparent);
     tablero.setOutlineThickness(1);
     tablero.setOutlineColor(sf::Color::White);
     tablero.setPoint(0,sf::Vector2f(0,0));
