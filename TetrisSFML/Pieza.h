@@ -31,6 +31,7 @@ public:
     //GETTER
     Bloque * getBloques();
     int getTipo();
+    int getFase();
     
     virtual ~Pieza();
 private:

@@ -32,6 +32,7 @@ public:
     void GuardaPieza(int pos);
     void ColisionPieza(int pos);
     void GeneraPiezas(int pos);
+    void DibujaPiezaFin(int pos, Pieza &pieza);
     
     //GETTER
     bool abierto();

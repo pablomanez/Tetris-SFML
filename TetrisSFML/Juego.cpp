@@ -20,6 +20,7 @@
 #include <SFML/System.hpp>
 #include <queue>
 #include <set>
+#include <cstring>
 
 #include "Bloque.h"
 #include "Pieza.h"
@@ -35,7 +36,7 @@ Juego::Juego():
     this->window.setMouseCursorVisible(false);
     this->window.setFramerateLimit(30);
     
-    this->J = 2;
+    this->J = 1;
     if(this->J==1){
         //1 JUGADOR
         this->J1 = false;
@@ -98,7 +99,19 @@ void Juego::Render(int pos) {
     this->tablero[pos].Dibujar(this->window);
     this->lineas[pos].Dibujar(this->window,this->tablero[pos].getPuntuacionTotal());
     this->pieza1[pos]->Dibujar(this->window);
-
+    
+    Pieza *p_fin = new Pieza(this->pieza1[pos]->getTipo());
+    for(int i=0 ; i<4 ; i++){
+        p_fin->getBloques()[i].setPosicion(this->pieza1[pos]->getBloques()[i].getPosicion());
+    }
+    while(!(p_fin->getFase()==this->pieza1[pos]->getFase())){
+        p_fin->Rotar('l');
+    }
+    this->DibujaPiezaFin(pos,*p_fin);
+    
+    delete p_fin;
+    p_fin = NULL;
+    
     for(int i=0 ; i<4 ; i++){
         (this->piezas_sig[pos])[i]->Dibujar(this->window);
 
@@ -349,6 +362,14 @@ void Juego::GeneraPiezas(int pos) {
     }
 }
 
+//DIBUJA LA PIEZA FINAL
+void Juego::DibujaPiezaFin(int pos, Pieza &pieza) {
+    while(!this->tablero[pos].Colision(pieza)){
+        pieza.Mover('d');
+    }
+    
+    pieza.Dibujar(this->window);
+}
 
 //GETTER
 bool Juego::abierto() {

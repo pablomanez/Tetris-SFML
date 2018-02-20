@@ -172,9 +172,10 @@ Pieza::Pieza(int n) {
 }
 
 Pieza::Pieza(const Pieza& orig) {
+    
 }
 
-void Pieza::Dibujar(sf::RenderWindow& window) {
+void Pieza::Dibujar(sf::RenderWindow& window) {    
     this->bloques[0].Dibujar(window);
     this->bloques[1].Dibujar(window);
     this->bloques[2].Dibujar(window);
@@ -616,6 +617,11 @@ Bloque * Pieza::getBloques() {
 int Pieza::getTipo() {
     return this->tipo;
 }
+
+int Pieza::getFase() {
+    return this->fase_rotacion;
+}
+
 
 
 
