@@ -35,7 +35,15 @@ Juego::Juego():
     this->window.setMouseCursorVisible(false);
     this->window.setFramerateLimit(30);
     
-    this->int J = 2;
+    this->J = 2;
+    if(this->J==1){
+        //1 JUGADOR
+        this->J1 = false;
+    }
+    else{
+        //2 JUGADORES
+        this->J1 = true;
+    }
     
     //ARRAYS
     for(int i=0 ; i<this->J ; i++){
@@ -49,19 +57,6 @@ Juego::Juego():
         
         this->m_d[i] = false;
     }
-    
-    /*
-    //J1
-    this->pieza_auxiliar = NULL;
-    this->guardar_pieza = false;
-    
-    this->pieza1 = NULL;
-    this->n_p = 100;
-    this->piezas_sig = new Pieza*[n_p]();
-    this->GeneraPiezas();
-    
-    this->m_d = false;
-    */
 }
 
 //UN PERRO
@@ -75,45 +70,42 @@ void Juego::Bucle() {
     view1.setViewport(sf::FloatRect(0, 0, 1, 1));
     
     while(this->window.isOpen()){
-        for(int i=0 ; i<this->J ; i++){
+        for(int i=0 ; i<(this->J) ; i++){
             this->MovAbajo(i);
-            
             sf::Event event;
             this->Eventos(event);
             
+            this->Update(i);
         }
-        /*
-        
-        
-        this->Update();
-        
+                
         //RENDER
         this->window.clear(sf::Color::Black);
             this->window.setView(view1);
-            this->Render();
-
-            this->window.setView(view2);
-            this->Render_J2();
+            this->Render(0);
+            
+            if(this->J1){
+                this->window.setView(view2);
+                this->Render(1);
+            }
         this->window.display();
-        */
+        
     }
 }
 
 //EL RENDER
-void Juego::Render() {
+void Juego::Render(int pos) {
     //this->window.clear(sf::Color::Black);
-    this->tablero.Dibujar(this->window);
-
-    this->lineas.Dibujar(this->window,this->tablero.getPuntuacionTotal());
-    this->pieza1->Dibujar(this->window);
+    this->tablero[pos].Dibujar(this->window);
+    this->lineas[pos].Dibujar(this->window,this->tablero[pos].getPuntuacionTotal());
+    this->pieza1[pos]->Dibujar(this->window);
 
     for(int i=0 ; i<4 ; i++){
-        this->piezas_sig[i]->Dibujar(this->window);
+        (this->piezas_sig[pos])[i]->Dibujar(this->window);
 
     }
 
-    if(this->pieza_auxiliar){
-        this->pieza_auxiliar->Dibujar(this->window);
+    if(this->pieza_auxiliar[pos]){
+        this->pieza_auxiliar[pos]->Dibujar(this->window);
 
     }
     
@@ -121,121 +113,121 @@ void Juego::Render() {
 }
 
 //EL UPDEIT
-void Juego::Update() {
+void Juego::Update(int pos) {
     //ACTUALIZO OBJETOS
-    if(!this->colision){
-        this->colision = this->tablero.Colision(*(this->pieza1));
-        this->c_colision.restart();
+    if(!this->colision[pos]){
+        this->colision[pos] = this->tablero[pos].Colision(*(this->pieza1[pos]));
+        this->c_colision[pos].restart();
     }
 
-    if(this->m_d){
-        if(!this->tablero.Colision(*(this->pieza1))){
-            this->pieza1->Mover('d');
+    if(this->m_d[pos]){
+        if(!this->tablero[pos].Colision(*(this->pieza1[pos]))){
+            this->pieza1[pos]->Mover('d');
         }
     }
     
     //STRING QUE MARCA LAS LINEAS HECHAS QUE LLEVA EL JUGADOR
-    this->lineas.Actualizar(this->tablero);
+    this->lineas[pos].Actualizar(this->tablero[pos]);
 
-    this->GuardaPieza();
+    this->GuardaPieza(pos);
     
-    this->ColisionPieza();
+    this->ColisionPieza(pos);
     
 }
 
 //EN CASO QUE HAYA COLISIONADO CON UNA PIEZA O EL FONDO
-void Juego::ColisionPieza() {
-    if(this->colision){
+void Juego::ColisionPieza(int pos) {
+    if(this->colision[pos]){
 
-        if(!this->tablero.Colision(*(this->pieza1))){
-            this->colision = false;
+        if(!this->tablero[pos].Colision(*(this->pieza1[pos]))){
+            this->colision[pos] = false;
         }
-        else if(this->c_colision.getElapsedTime().asSeconds() >0.5){
+        else if(this->c_colision[pos].getElapsedTime().asSeconds() >0.5){
 
-            this->colision = false;
+            this->colision[pos] = false;
 
-            this->tablero.CopiarPiezas(*(this->pieza1));
+            this->tablero[pos].CopiarPiezas(*(this->pieza1[pos]));
 
-            this->pieza1 = NULL;
-            this->pieza1 = new Pieza(this->cola.front());
+            this->pieza1[pos] = NULL;
+            this->pieza1[pos] = new Pieza(this->cola[pos].front());
 
-            if(this->tablero.Colision2(*(this->pieza1))){
+            if(this->tablero[pos].Colision2(*(this->pieza1[pos]))){
                 //FIN DEL JUEGO
                 std::cout << "Dedicate al parchis" << std::endl;
                 this->window.close();
             }
 
-            int pieza_cola = this->gen.Generar();
-            this->cola.pop();
-            this->cola.push(pieza_cola);
+            int pieza_cola = this->gen[pos].Generar();
+            this->cola[pos].pop();
+            this->cola[pos].push(pieza_cola);
 
             //RECARGA LAS PIEZAS QUE VIENEN A CONTINUACION
-            for(int i=0 ; i<this->n_p ; i++){
-                if(i!=(n_p-1)){
-                    this->piezas_sig[i] = NULL;
-                    this->piezas_sig[i] = new Pieza(this->piezas_sig[i+1]->getTipo());
-                    this->piezas_sig[i]->ColocarPiezasSiguientes((i)*60);
+            for(int i=0 ; i<this->n_p[pos] ; i++){
+                if(i!=(n_p[pos]-1)){
+                    (this->piezas_sig[pos])[i] = NULL;
+                    (this->piezas_sig[pos])[i] = new Pieza((this->piezas_sig[pos])[i+1]->getTipo());
+                    (this->piezas_sig[pos])[i]->ColocarPiezasSiguientes((i)*60);
                 }
                 else{
-                    this->piezas_sig[i] = NULL;
-                    this->piezas_sig[i] = new Pieza(pieza_cola);
-                    this->piezas_sig[i]->ColocarPiezasSiguientes((i)*60);
+                    (this->piezas_sig[pos])[i] = NULL;
+                    (this->piezas_sig[pos])[i] = new Pieza(pieza_cola);
+                    (this->piezas_sig[pos])[i]->ColocarPiezasSiguientes((i)*60);
                 }
             }
 
-            this->reloj.restart();
+            this->reloj[pos].restart();
         }
     }
 }
 
 //EN CASO QUE QUIERA GUARDAR LA PIEZA
-void Juego::GuardaPieza() {
-    if(this->guardar_pieza){
-        if(!this->pieza_auxiliar){
+void Juego::GuardaPieza(int pos) {
+    if(this->guardar_pieza[pos]){
+        if(!this->pieza_auxiliar[pos]){
             //SI NO HAY NINGUNA PIEZA GUARDADA
 
-            this->pieza_auxiliar = new Pieza(this->pieza1->getTipo());
+            this->pieza_auxiliar[pos] = new Pieza(this->pieza1[pos]->getTipo());
 
-            delete this->pieza1;
-            this->pieza1 = NULL;
-            this->pieza1 = new Pieza(this->cola.front());
+            delete this->pieza1[pos];
+            this->pieza1[pos] = NULL;
+            this->pieza1[pos] = new Pieza(this->cola[pos].front());
 
-            int pieza_cola = this->gen.Generar();
-            this->cola.pop();
-            this->cola.push(pieza_cola);
+            int pieza_cola = this->gen[pos].Generar();
+            this->cola[pos].pop();
+            this->cola[pos].push(pieza_cola);
 
             //RECARGA LAS PIEZAS QUE VIENEN A CONTINUACION
-            for(int i=0 ; i<this->n_p ; i++){
-                if(i!=(n_p-1)){
-                    this->piezas_sig[i] = NULL;
-                    this->piezas_sig[i] = new Pieza(this->piezas_sig[i+1]->getTipo());
-                    this->piezas_sig[i]->ColocarPiezasSiguientes((i)*60);
+            for(int i=0 ; i<this->n_p[pos] ; i++){
+                if(i!=(n_p[pos]-1)){
+                    (this->piezas_sig[pos])[i] = NULL;
+                    (this->piezas_sig[pos])[i] = new Pieza((this->piezas_sig[pos])[i+1]->getTipo());
+                    (this->piezas_sig[pos])[i]->ColocarPiezasSiguientes((i)*60);
                 }
                 else{
-                    this->piezas_sig[i] = NULL;
-                    this->piezas_sig[i] = new Pieza(pieza_cola);
-                    this->piezas_sig[i]->ColocarPiezasSiguientes((i)*60);
+                    (this->piezas_sig[pos])[i] = NULL;
+                    (this->piezas_sig[pos])[i] = new Pieza(pieza_cola);
+                    (this->piezas_sig[pos])[i]->ColocarPiezasSiguientes((i)*60);
                 }
             }
 
         }
         else{
-            int tipo_aux = this->pieza_auxiliar->getTipo();
+            int tipo_aux = this->pieza_auxiliar[pos]->getTipo();
 
-            delete this->pieza_auxiliar;
-            this->pieza_auxiliar = NULL;
-            this->pieza_auxiliar = new Pieza(this->pieza1->getTipo());
+            delete this->pieza_auxiliar[pos];
+            this->pieza_auxiliar[pos] = NULL;
+            this->pieza_auxiliar[pos] = new Pieza(this->pieza1[pos]->getTipo());
 
-            delete this->pieza1;
-            this->pieza1 = NULL;
-            this->pieza1 = new Pieza(tipo_aux);
+            delete this->pieza1[pos];
+            this->pieza1[pos] = NULL;
+            this->pieza1[pos] = new Pieza(tipo_aux);
 
         }
 
-        this->pieza_auxiliar->ColocarFuera();
+        this->pieza_auxiliar[pos]->ColocarFuera();
 
-        this->guardar_pieza = false;
-        this->reloj.restart();
+        this->guardar_pieza[pos] = false;
+        this->reloj[pos].restart();
     }
 }
 
@@ -283,41 +275,41 @@ void Juego::Eventos(sf::Event event) {
                 }
                 
                 if(event.key.code == sf::Keyboard::Key::S){
-                    this->m_d = true;
+                    this->m_d[0] = true;
                 }
                 if(event.key.code == sf::Keyboard::Key::Down){
-                    this->m_d_J2 = true;
+                    this->m_d[1] = true;
                 }
                 
                 if(event.key.code == sf::Keyboard::Key::G){
                     //cout << "Guardo pieza" << endl;
-                    this->guardar_pieza = true;
+                    this->guardar_pieza[0] = true;
                 }
                 if(event.key.code == sf::Keyboard::Key::Numpad2){
                     //cout << "Guardo pieza" << endl;
-                    this->guardar_pieza_J2 = true;
+                    this->guardar_pieza[1] = true;
                 }
                 
                 if(event.key.code == sf::Keyboard::Key::F){
-                    this->pieza1->Rotacion('r');
-                    if(this->tablero.Colision2(*(this->pieza1))){
-                        this->pieza1->Rotacion('l');
+                    this->pieza1[0]->Rotacion('r');
+                    if(this->tablero[0].Colision2(*(this->pieza1[0]))){
+                        this->pieza1[0]->Rotacion('l');
                     }
                 }
                 if(event.key.code == sf::Keyboard::Key::Numpad1){
-                    this->pieza1_J2->Rotacion('r');
-                    if(this->tablero_J2.Colision2(*(this->pieza1_J2))){
-                        this->pieza1_J2->Rotacion('l');
+                    this->pieza1[1]->Rotacion('r');
+                    if(this->tablero[1].Colision2(*(this->pieza1[1]))){
+                        this->pieza1[1]->Rotacion('l');
                     }
                 }
                 break;
 
             case sf::Event::EventType::KeyReleased:
                 if(event.key.code == sf::Keyboard::Key::S){
-                    this->m_d = false;
+                    this->m_d[0] = false;
                 }
                 if(event.key.code == sf::Keyboard::Key::Down){
-                    this->m_d_J2 = false;
+                    this->m_d[1] = false;
                 }
                 break;
             default:

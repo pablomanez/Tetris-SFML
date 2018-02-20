@@ -25,12 +25,12 @@ public:
     Juego();
     void Bucle();
     void Eventos(sf::Event event);
-    void Update();
-    void Render();
+    void Update(int pos);
+    void Render(int pos);
     
     void MovAbajo(int pos);
-    void GuardaPieza();
-    void ColisionPieza();
+    void GuardaPieza(int pos);
+    void ColisionPieza(int pos);
     void GeneraPiezas(int pos);
     
     //GETTER
@@ -44,6 +44,7 @@ public:
 private:
     //NUMERO DE JUGADORES 1-2
     int J;
+    bool J1;
     
     //LA VENTANA
     sf::RenderWindow window;
@@ -58,7 +59,7 @@ private:
     TextoLineas lineas[2];
     
     //GUARDA LA PIEZA ACTUAL
-    Pieza ** pieza_auxiliar[2];
+    Pieza * pieza_auxiliar[2];
     bool guardar_pieza [2];
     //Pieza * pieza_auxiliar;
     //bool guardar_pieza;
@@ -69,13 +70,6 @@ private:
     Pieza ** piezas_sig[2];
     GenerarPiezas gen[2];
     std::queue<int> cola[2];
-    /*
-    Pieza * pieza1;
-    int n_p;
-    Pieza ** piezas_sig;
-    GenerarPiezas gen;
-    std::queue<int> cola;
-    */
     
     //RELOJES
     sf::Clock reloj[2];
