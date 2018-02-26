@@ -607,6 +607,14 @@ void Pieza::ColocarPiezasSiguientes(int y) {
     }
 }
 
+//CAMBIA EL COLOR DE LA PIEZA QUE QUIERAS
+void Pieza::CambiaColor(sf::Color color) {
+    for(int i=0 ; i<4 ; i++){
+        this->bloques[i].setColor(color);
+    }
+}
+
+
 
 //GETTER
 

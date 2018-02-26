@@ -32,7 +32,8 @@ public:
     void GuardaPieza(int pos);
     void ColisionPieza(int pos);
     void GeneraPiezas(int pos);
-    void DibujaPiezaFin(int pos, Pieza &pieza);
+    
+    void GeneraPiezaFin(int pos);
     
     //GETTER
     bool abierto();
@@ -78,6 +79,9 @@ private:
     
     //PARA CONTROLES
     bool m_d[2];
+    
+    //PIEZA QUE MUESTRA LA POSICION FINAL
+    Pieza * pieza_fin[2];
 };
 
 #endif /* JUEGO_H */

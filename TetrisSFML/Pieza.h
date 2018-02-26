@@ -28,6 +28,8 @@ public:
     void ColocarFuera();
     void ColocarPiezasSiguientes(int y);
     
+    void CambiaColor(sf::Color color);
+    
     //GETTER
     Bloque * getBloques();
     int getTipo();

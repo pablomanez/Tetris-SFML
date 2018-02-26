@@ -36,7 +36,7 @@ Juego::Juego():
     this->window.setMouseCursorVisible(false);
     this->window.setFramerateLimit(30);
     
-    this->J = 1;
+    this->J = 2;
     if(this->J==1){
         //1 JUGADOR
         this->J1 = false;
@@ -52,6 +52,8 @@ Juego::Juego():
         this->guardar_pieza[i] = false;
         
         this->pieza1[i] = NULL;
+        this->pieza_fin[i] = NULL;
+        
         this->n_p[i] = 100;
         this->piezas_sig[i] = new Pieza*[this->n_p[i]];
         this->GeneraPiezas(i);
@@ -77,6 +79,7 @@ void Juego::Bucle() {
             this->Eventos(event);
             
             this->Update(i);
+            this->GeneraPiezaFin(i);
         }
                 
         //RENDER
@@ -98,19 +101,9 @@ void Juego::Render(int pos) {
     //this->window.clear(sf::Color::Black);
     this->tablero[pos].Dibujar(this->window);
     this->lineas[pos].Dibujar(this->window,this->tablero[pos].getPuntuacionTotal());
+    this->pieza_fin[pos]->Dibujar(this->window);
     this->pieza1[pos]->Dibujar(this->window);
     
-    Pieza *p_fin = new Pieza(this->pieza1[pos]->getTipo());
-    for(int i=0 ; i<4 ; i++){
-        p_fin->getBloques()[i].setPosicion(this->pieza1[pos]->getBloques()[i].getPosicion());
-    }
-    while(!(p_fin->getFase()==this->pieza1[pos]->getFase())){
-        p_fin->Rotar('l');
-    }
-    this->DibujaPiezaFin(pos,*p_fin);
-    
-    delete p_fin;
-    p_fin = NULL;
     
     for(int i=0 ; i<4 ; i++){
         (this->piezas_sig[pos])[i]->Dibujar(this->window);
@@ -255,7 +248,7 @@ void Juego::Eventos(sf::Event event) {
                 
                 if(event.key.code == sf::Keyboard::Key::D){
                     this->pieza1[0]->Mover('r');
-
+                    
                     if(this->tablero[0].Colision2(*(this->pieza1[0]))){
                         this->pieza1[0]->Mover('l');
                     }
@@ -334,21 +327,25 @@ void Juego::Eventos(sf::Event event) {
 
 //MUEVE LA PIEZA HACIA ABAJO
 void Juego::MovAbajo(int pos) {
-    if(this->reloj[pos].getElapsedTime().asSeconds() > 0.3){
-            //MOVER LA PIEZA HACIA ABAJO
-            
-            if(!this->tablero[pos].Colision( *(this->pieza1[pos]) )){
-                this->pieza1[pos]->Mover('d');
-            }
-            this->reloj[pos].restart();
+    if(this->reloj[pos].getElapsedTime().asSeconds() > 0.3){        
+        //MOVER LA PIEZA HACIA ABAJO
+        if(!this->tablero[pos].Colision( *(this->pieza1[pos]) )){
+            this->pieza1[pos]->Mover('d');
         }
+        this->reloj[pos].restart();
+    }
 }
 
 //GENERA LAS PIEZAS NECESARIAS
 void Juego::GeneraPiezas(int pos) {
     for(int i=0 ; i<(this->n_p[pos]+1) ; i++){
         if(i==0){
-            this->pieza1[pos] = new Pieza(this->gen[pos].Generar());
+            int gen_aux = this->gen[pos].Generar();
+            this->pieza1[pos] = new Pieza(gen_aux);
+            
+            this->pieza_fin[pos] = new Pieza(gen_aux);
+            this->pieza_fin[pos]->CambiaColor(sf::Color (187,187,187));
+            
         }
         else{
             int aux_g = this->gen[pos].Generar();
@@ -362,13 +359,21 @@ void Juego::GeneraPiezas(int pos) {
     }
 }
 
-//DIBUJA LA PIEZA FINAL
-void Juego::DibujaPiezaFin(int pos, Pieza &pieza) {
-    while(!this->tablero[pos].Colision(pieza)){
-        pieza.Mover('d');
+//CALCULA LA POSICION FINAL Y LA ROTACION DE LA PIEZA FIN
+void Juego::GeneraPiezaFin(int pos) {
+    //GIRO LA PIEZA
+    if(this->pieza_fin[pos]->getFase()!=this->pieza1[pos]->getFase()){
+        this->pieza_fin[pos]->Rotacion('r');
     }
     
-    pieza.Dibujar(this->window);
+    //MUEVO LA PIEZA FIN HACIA ABAJO DEL TODO
+    for(int i=0 ; i<4 ; i++){
+        this->pieza_fin[pos]->getBloques()[i].setPosicion(this->pieza1[pos]->getBloques()[i].getPosicion());
+    }
+    
+    while(!this->tablero[pos].Colision( *(this->pieza_fin[pos]) )){
+        this->pieza_fin[pos]->Mover('d');
+    }
 }
 
 //GETTER
