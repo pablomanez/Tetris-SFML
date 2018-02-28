@@ -31,6 +31,7 @@ public:
     virtual ~TextoLineas();
 private:
     int n_lineas;
+    sf::Font font;
     //sf::Text texto;
 };
 

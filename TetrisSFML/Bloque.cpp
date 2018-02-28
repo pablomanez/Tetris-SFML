@@ -18,12 +18,12 @@
 
 Bloque::Bloque() {
     
-    this->shape.setSize(sf::Vector2f(1,1));
-    this->shape.scale(sf::Vector2f(20,20));
-    this->shape.setFillColor(sf::Color::Black);
-    //this->shape.setPosition(10,0);
+    shape.setSize(sf::Vector2f(1,1));
+    shape.scale(sf::Vector2f(20,20));
+    shape.setFillColor(sf::Color::Black);
+    //shape.setPosition(10,0);
     
-    this->puntuacion = 0;
+    puntuacion = 0;
     
 }
 
@@ -31,49 +31,49 @@ Bloque::Bloque(const Bloque& orig) {
 }
 
 void Bloque::Dibujar(sf::RenderWindow& window) {
-    window.draw(this->shape);
+    window.draw(shape);
 }
 
 void Bloque::Mover(char d) {
     switch(d){
         case 'u':
-            this->shape.move(0,-20);
-            this->coordenadas = this->shape.getPosition();
+            shape.move(0,-20);
+            coordenadas = shape.getPosition();
             /*
-            if(this->shape.getPosition().y<0){
+            if(shape.getPosition().y<0){
                 //std::cout << shape.getPosition().x << std::endl;
-                this->shape.move(0,20);
+                shape.move(0,20);
             }            
             */
             break;
         case 'd':
-            this->shape.move(0,20);
-            this->coordenadas = this->shape.getPosition();
+            shape.move(0,20);
+            coordenadas = shape.getPosition();
             /*
-            if(this->shape.getPosition().y+20>400){
+            if(shape.getPosition().y+20>400){
                 //std::cout << shape.getPosition().x << std::endl;
-                this->shape.move(0,-20);
+                shape.move(0,-20);
             }
             */
             
             break;
         case 'l':
-            this->shape.move(-20,0);
-            this->coordenadas = this->shape.getPosition();
+            shape.move(-20,0);
+            coordenadas = shape.getPosition();
             /*
-            if(this->shape.getPosition().x<10){
+            if(shape.getPosition().x<10){
                 //std::cout << shape.getPosition().x << std::endl;
-                this->shape.move(20,0);
+                shape.move(20,0);
             }
             */
             break;
         case 'r':
-            this->shape.move(20,0);
-            this->coordenadas = this->shape.getPosition();
+            shape.move(20,0);
+            coordenadas = shape.getPosition();
             /*
-            if(this->shape.getPosition().x+20>210){
+            if(shape.getPosition().x+20>210){
                 //std::cout << shape.getPosition().x << std::endl;
-                this->shape.move(-20,0);
+                shape.move(-20,0);
             }
             */
             break;
@@ -83,11 +83,11 @@ void Bloque::Mover(char d) {
 }
 
 void Bloque::Mover(sf::Vector2f d){
-    this->shape.move(d);
+    shape.move(d);
 }
 
 bool Bloque::Colisiona(Bloque b1) {
-    if(this->shape.getGlobalBounds().intersects(b1.shape.getGlobalBounds())){
+    if(shape.getGlobalBounds().intersects(b1.shape.getGlobalBounds())){
         return true;
     }
     else{
@@ -98,16 +98,16 @@ bool Bloque::Colisiona(Bloque b1) {
 
 //SETTER
 void Bloque::setPosicion(sf::Vector2f pos) {
-    this->shape.setPosition(pos.x,pos.y);
+    shape.setPosition(pos.x,pos.y);
 }
 
 void Bloque::setColor(sf::Color color) {
-    this->shape.setFillColor(color);
+    shape.setFillColor(color);
 }
 
 void Bloque::setBorde(sf::Color color) {
-    this->shape.setOutlineThickness(-0.1);
-    this->shape.setOutlineColor(color);
+    shape.setOutlineThickness(-0.1);
+    shape.setOutlineColor(color);
 }
 
 void Bloque::setPuntuacion() {
@@ -121,26 +121,26 @@ void Bloque::setPuntuacion() {
     sf::Color amarillo(240,232,0);
     
     
-    if(this->shape.getFillColor() == morado){
-        this->puntuacion = 50;
+    if(shape.getFillColor() == morado){
+        puntuacion = 50;
     }
-    else if(this->shape.getFillColor() == verde){
-        this->puntuacion = 30;
+    else if(shape.getFillColor() == verde){
+        puntuacion = 30;
     }
-    else if(this->shape.getFillColor() == rojo){
-        this->puntuacion = 30;
+    else if(shape.getFillColor() == rojo){
+        puntuacion = 30;
     }
-    else if(this->shape.getFillColor() == azul_claro){
-        this->puntuacion = 10;
+    else if(shape.getFillColor() == azul_claro){
+        puntuacion = 10;
     }
-    else if(this->shape.getFillColor() == azul){
-        this->puntuacion = 20;
+    else if(shape.getFillColor() == azul){
+        puntuacion = 20;
     }
-    else if(this->shape.getFillColor() == naranja){
-        this->puntuacion = 20;
+    else if(shape.getFillColor() == naranja){
+        puntuacion = 20;
     }
-    else if(this->shape.getFillColor() == amarillo){
-        this->puntuacion = 40;
+    else if(shape.getFillColor() == amarillo){
+        puntuacion = 40;
     }
     
         
@@ -150,15 +150,15 @@ void Bloque::setPuntuacion() {
 
 //GETTER
 sf::Vector2f Bloque::getPosicion() {
-    return this->shape.getPosition();
+    return shape.getPosition();
 }
 
 sf::Color Bloque::getColor(){
-    return this->shape.getFillColor();
+    return shape.getFillColor();
 }
 
 int Bloque::getPuntuacion() {
-    return this->puntuacion;
+    return puntuacion;
 }
 
 

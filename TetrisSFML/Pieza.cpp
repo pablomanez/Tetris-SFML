@@ -16,7 +16,7 @@
 #include "Pieza.h"
 
 Pieza::Pieza(int n) {
-    this->bloques = new Bloque[4]();
+    bloques = new Bloque[4]();
     /*
     //GENERA UN NUMERO ALEATORIO ENTRE 0 Y 10, LAS COORDENADAS DE X
     srand(time(NULL));
@@ -24,8 +24,8 @@ Pieza::Pieza(int n) {
     x *= 20;
     x += 10;
     */
-    this->tipo = n;
-    this->fase_rotacion = 1;
+    tipo = n;
+    fase_rotacion = 1;
     
     if(n==1){
         /*
@@ -38,14 +38,14 @@ Pieza::Pieza(int n) {
         
         sf::Color morado(128,0,128);
         
-        this->bloques[0].setPosicion(sf::Vector2f(x,0));
-        this->bloques[0].setColor(morado);
-        this->bloques[1].setPosicion(sf::Vector2f(x+20,0));
-        this->bloques[1].setColor(morado);
-        this->bloques[2].setPosicion(sf::Vector2f(x+40,0));
-        this->bloques[2].setColor(morado);
-        this->bloques[3].setPosicion(sf::Vector2f(x+20,20));
-        this->bloques[3].setColor(morado);
+        bloques[0].setPosicion(sf::Vector2f(x,0));
+        bloques[0].setColor(morado);
+        bloques[1].setPosicion(sf::Vector2f(x+20,0));
+        bloques[1].setColor(morado);
+        bloques[2].setPosicion(sf::Vector2f(x+40,0));
+        bloques[2].setColor(morado);
+        bloques[3].setPosicion(sf::Vector2f(x+20,20));
+        bloques[3].setColor(morado);
         
     }
     else if(n==2){
@@ -59,14 +59,14 @@ Pieza::Pieza(int n) {
         
         sf::Color verde(1,135,5);
         
-        this->bloques[0].setPosicion(sf::Vector2f(x,20));
-        this->bloques[0].setColor(verde);
-        this->bloques[1].setPosicion(sf::Vector2f(x+20,0));
-        this->bloques[1].setColor(verde);
-        this->bloques[2].setPosicion(sf::Vector2f(x+40,0));
-        this->bloques[2].setColor(verde);
-        this->bloques[3].setPosicion(sf::Vector2f(x+20,20));
-        this->bloques[3].setColor(verde);
+        bloques[0].setPosicion(sf::Vector2f(x,20));
+        bloques[0].setColor(verde);
+        bloques[1].setPosicion(sf::Vector2f(x+20,0));
+        bloques[1].setColor(verde);
+        bloques[2].setPosicion(sf::Vector2f(x+40,0));
+        bloques[2].setColor(verde);
+        bloques[3].setPosicion(sf::Vector2f(x+20,20));
+        bloques[3].setColor(verde);
         
     }
     else if(n==3){
@@ -80,14 +80,14 @@ Pieza::Pieza(int n) {
         
         sf::Color rojo(214,0,0);
         
-        this->bloques[0].setPosicion(sf::Vector2f(x,0));
-        this->bloques[0].setColor(rojo);
-        this->bloques[1].setPosicion(sf::Vector2f(x+20,0));
-        this->bloques[1].setColor(rojo);
-        this->bloques[2].setPosicion(sf::Vector2f(x+40,20));
-        this->bloques[2].setColor(rojo);
-        this->bloques[3].setPosicion(sf::Vector2f(x+20,20));
-        this->bloques[3].setColor(rojo);
+        bloques[0].setPosicion(sf::Vector2f(x,0));
+        bloques[0].setColor(rojo);
+        bloques[1].setPosicion(sf::Vector2f(x+20,0));
+        bloques[1].setColor(rojo);
+        bloques[2].setPosicion(sf::Vector2f(x+40,20));
+        bloques[2].setColor(rojo);
+        bloques[3].setPosicion(sf::Vector2f(x+20,20));
+        bloques[3].setColor(rojo);
     }
     else if(n==4){
         /*
@@ -99,14 +99,14 @@ Pieza::Pieza(int n) {
         
         sf::Color azul_claro(25,170,207);
         
-        this->bloques[0].setPosicion(sf::Vector2f(x,0));
-        this->bloques[0].setColor(azul_claro);
-        this->bloques[1].setPosicion(sf::Vector2f(x+20,0));
-        this->bloques[1].setColor(azul_claro);
-        this->bloques[2].setPosicion(sf::Vector2f(x+40,0));
-        this->bloques[2].setColor(azul_claro);
-        this->bloques[3].setPosicion(sf::Vector2f(x+60,0));
-        this->bloques[3].setColor(azul_claro);
+        bloques[0].setPosicion(sf::Vector2f(x,0));
+        bloques[0].setColor(azul_claro);
+        bloques[1].setPosicion(sf::Vector2f(x+20,0));
+        bloques[1].setColor(azul_claro);
+        bloques[2].setPosicion(sf::Vector2f(x+40,0));
+        bloques[2].setColor(azul_claro);
+        bloques[3].setPosicion(sf::Vector2f(x+60,0));
+        bloques[3].setColor(azul_claro);
     }
     else if(n==5){
         /*
@@ -119,14 +119,14 @@ Pieza::Pieza(int n) {
         
         sf::Color azul(0,88,166);
         
-        this->bloques[0].setPosicion(sf::Vector2f(x,0));
-        this->bloques[0].setColor(azul);
-        this->bloques[1].setPosicion(sf::Vector2f(x+20,0));
-        this->bloques[1].setColor(azul);
-        this->bloques[2].setPosicion(sf::Vector2f(x+40,0));
-        this->bloques[2].setColor(azul);
-        this->bloques[3].setPosicion(sf::Vector2f(x+40,20));
-        this->bloques[3].setColor(azul);
+        bloques[0].setPosicion(sf::Vector2f(x,0));
+        bloques[0].setColor(azul);
+        bloques[1].setPosicion(sf::Vector2f(x+20,0));
+        bloques[1].setColor(azul);
+        bloques[2].setPosicion(sf::Vector2f(x+40,0));
+        bloques[2].setColor(azul);
+        bloques[3].setPosicion(sf::Vector2f(x+40,20));
+        bloques[3].setColor(azul);
     }
     else if(n==6){
         /*
@@ -139,14 +139,14 @@ Pieza::Pieza(int n) {
         
         sf::Color naranja(232,140,2);
         
-        this->bloques[0].setPosicion(sf::Vector2f(x,0));
-        this->bloques[0].setColor(naranja);
-        this->bloques[1].setPosicion(sf::Vector2f(x+20,0));
-        this->bloques[1].setColor(naranja);
-        this->bloques[2].setPosicion(sf::Vector2f(x+40,0));
-        this->bloques[2].setColor(naranja);
-        this->bloques[3].setPosicion(sf::Vector2f(x,20));
-        this->bloques[3].setColor(naranja);
+        bloques[0].setPosicion(sf::Vector2f(x,0));
+        bloques[0].setColor(naranja);
+        bloques[1].setPosicion(sf::Vector2f(x+20,0));
+        bloques[1].setColor(naranja);
+        bloques[2].setPosicion(sf::Vector2f(x+40,0));
+        bloques[2].setColor(naranja);
+        bloques[3].setPosicion(sf::Vector2f(x,20));
+        bloques[3].setColor(naranja);
     }
     else if(n==7){
         /*
@@ -159,14 +159,14 @@ Pieza::Pieza(int n) {
         
         sf::Color amarillo(240,232,0);
         
-        this->bloques[0].setPosicion(sf::Vector2f(x,0));
-        this->bloques[0].setColor(amarillo);
-        this->bloques[1].setPosicion(sf::Vector2f(x+20,0));
-        this->bloques[1].setColor(amarillo);
-        this->bloques[2].setPosicion(sf::Vector2f(x,20));
-        this->bloques[2].setColor(amarillo);
-        this->bloques[3].setPosicion(sf::Vector2f(x+20,20));
-        this->bloques[3].setColor(amarillo);
+        bloques[0].setPosicion(sf::Vector2f(x,0));
+        bloques[0].setColor(amarillo);
+        bloques[1].setPosicion(sf::Vector2f(x+20,0));
+        bloques[1].setColor(amarillo);
+        bloques[2].setPosicion(sf::Vector2f(x,20));
+        bloques[2].setColor(amarillo);
+        bloques[3].setPosicion(sf::Vector2f(x+20,20));
+        bloques[3].setColor(amarillo);
     }
     
 }
@@ -176,22 +176,22 @@ Pieza::Pieza(const Pieza& orig) {
 }
 
 void Pieza::Dibujar(sf::RenderWindow& window) {    
-    this->bloques[0].Dibujar(window);
-    this->bloques[1].Dibujar(window);
-    this->bloques[2].Dibujar(window);
-    this->bloques[3].Dibujar(window);
+    bloques[0].Dibujar(window);
+    bloques[1].Dibujar(window);
+    bloques[2].Dibujar(window);
+    bloques[3].Dibujar(window);
 }
 
 void Pieza::Mover(char d) {
-    Bloque * b_aux = this->bloques;
+    Bloque * b_aux = bloques;
     bool col = false;
     
     switch(d){
         case 'r':
             for(int i=0 ; i<4; i++){
-                this->bloques[i].Mover(d);
+                bloques[i].Mover(d);
                 if(bloques[i].getPosicion().x+20>210){
-                    //this->bloques = b_aux
+                    //bloques = b_aux
                     
                     col = true;
                 }
@@ -199,9 +199,9 @@ void Pieza::Mover(char d) {
             break;
         case 'l':
             for(int i=0 ; i<4 ; i++){
-                this->bloques[i].Mover(d);
+                bloques[i].Mover(d);
                 if(bloques[i].getPosicion().x<10){
-                    //this->bloques = b_aux
+                    //bloques = b_aux
                     
                     col = true;
                 }
@@ -210,9 +210,9 @@ void Pieza::Mover(char d) {
             break;
         case 'u':
             for(int i=0 ; i<4 ; i++){
-                this->bloques[i].Mover(d);
+                bloques[i].Mover(d);
                 if(bloques[i].getPosicion().y<0){
-                    //this->bloques = b_aux
+                    //bloques = b_aux
                     
                     col = true;
                 }
@@ -220,9 +220,9 @@ void Pieza::Mover(char d) {
             break;
         case 'd':
             for(int i=0 ; i<4 ; i++){
-                this->bloques[i].Mover(d);
+                bloques[i].Mover(d);
                 if(bloques[i].getPosicion().y+20>400){
-                    //this->bloques = b_aux
+                    //bloques = b_aux
                     
                     col = true;
                 }
@@ -236,22 +236,22 @@ void Pieza::Mover(char d) {
         switch(d){
             case 'l':
                 for(int i=0 ; i<4; i++){
-                    this->bloques[i].Mover('r');
+                    bloques[i].Mover('r');
                 }
                 break;
             case 'r':
                 for(int i=0 ; i<4 ; i++){
-                    this->bloques[i].Mover('l');
+                    bloques[i].Mover('l');
                 }
                 break;
             case 'd':
                 for(int i=0 ; i<4 ; i++){
-                    this->bloques[i].Mover('u');
+                    bloques[i].Mover('u');
                 }
                 break;
             case 'u':
                 for(int i=0 ; i<4 ; i++){
-                    this->bloques[i].Mover('d');
+                    bloques[i].Mover('d');
                 }
                 break;
             default:
@@ -264,143 +264,143 @@ void Pieza::Mover(char d) {
 void Pieza::Rotar(char d) {
     int m = 20;
     
-    switch(this->tipo){
+    switch(tipo){
         case 1:
 
-            if(this->fase_rotacion == 1){
+            if(fase_rotacion == 1){
                 if(d=='r'){
-                    this->bloques[2].Mover(sf::Vector2f(-m,+m));
-                    this->bloques[3].Mover(sf::Vector2f(-m,-m));
-                    this->bloques[0].Mover(sf::Vector2f(+m,-m));
+                    bloques[2].Mover(sf::Vector2f(-m,+m));
+                    bloques[3].Mover(sf::Vector2f(-m,-m));
+                    bloques[0].Mover(sf::Vector2f(+m,-m));
                     
-                    this->fase_rotacion++;
+                    fase_rotacion++;
                 }
                 else{
-                    this->bloques[2].Mover(sf::Vector2f(-m,-m));
-                    this->bloques[3].Mover(sf::Vector2f(+m,-m));
-                    this->bloques[0].Mover(sf::Vector2f(+m,+m));
+                    bloques[2].Mover(sf::Vector2f(-m,-m));
+                    bloques[3].Mover(sf::Vector2f(+m,-m));
+                    bloques[0].Mover(sf::Vector2f(+m,+m));
                     
-                    this->fase_rotacion = 4;
+                    fase_rotacion = 4;
                 }
 
             }
-            else if(this->fase_rotacion == 2){
+            else if(fase_rotacion == 2){
                 if(d=='r'){
-                    this->bloques[2].Mover(sf::Vector2f(-m,-m));
-                    this->bloques[3].Mover(sf::Vector2f(+m,-m));
-                    this->bloques[0].Mover(sf::Vector2f(+m,+m));
+                    bloques[2].Mover(sf::Vector2f(-m,-m));
+                    bloques[3].Mover(sf::Vector2f(+m,-m));
+                    bloques[0].Mover(sf::Vector2f(+m,+m));
                     
-                    this->fase_rotacion++;
+                    fase_rotacion++;
                 }
                 else{
-                    this->bloques[2].Mover(sf::Vector2f(+m,-m));
-                    this->bloques[3].Mover(sf::Vector2f(+m,+m));
-                    this->bloques[0].Mover(sf::Vector2f(-m,+m));
+                    bloques[2].Mover(sf::Vector2f(+m,-m));
+                    bloques[3].Mover(sf::Vector2f(+m,+m));
+                    bloques[0].Mover(sf::Vector2f(-m,+m));
                     
-                    this->fase_rotacion--;
+                    fase_rotacion--;
                 }
 
             }
-            else if(this->fase_rotacion == 3){
+            else if(fase_rotacion == 3){
                 if(d=='r'){
-                    this->bloques[2].Mover(sf::Vector2f(+m,-m));
-                    this->bloques[3].Mover(sf::Vector2f(+m,+m));
-                    this->bloques[0].Mover(sf::Vector2f(-m,+m));
+                    bloques[2].Mover(sf::Vector2f(+m,-m));
+                    bloques[3].Mover(sf::Vector2f(+m,+m));
+                    bloques[0].Mover(sf::Vector2f(-m,+m));
                     
-                    this->fase_rotacion++;
+                    fase_rotacion++;
                 }
                 else{
-                    this->bloques[2].Mover(sf::Vector2f(+m,+m));
-                    this->bloques[3].Mover(sf::Vector2f(-m,+m));
-                    this->bloques[0].Mover(sf::Vector2f(-m,-m));
+                    bloques[2].Mover(sf::Vector2f(+m,+m));
+                    bloques[3].Mover(sf::Vector2f(-m,+m));
+                    bloques[0].Mover(sf::Vector2f(-m,-m));
                     
-                    this->fase_rotacion--;
+                    fase_rotacion--;
                 }
 
             }
-            else if(this->fase_rotacion == 4){
+            else if(fase_rotacion == 4){
                 if(d=='r'){
-                    this->bloques[2].Mover(sf::Vector2f(+m,+m));
-                    this->bloques[3].Mover(sf::Vector2f(-m,+m));
-                    this->bloques[0].Mover(sf::Vector2f(-m,-m));
+                    bloques[2].Mover(sf::Vector2f(+m,+m));
+                    bloques[3].Mover(sf::Vector2f(-m,+m));
+                    bloques[0].Mover(sf::Vector2f(-m,-m));
 
-                    this->fase_rotacion = 1;
+                    fase_rotacion = 1;
                 }
                 else{
-                    this->bloques[2].Mover(sf::Vector2f(-m,+m));
-                    this->bloques[3].Mover(sf::Vector2f(-m,-m));
-                    this->bloques[0].Mover(sf::Vector2f(+m,-m));
+                    bloques[2].Mover(sf::Vector2f(-m,+m));
+                    bloques[3].Mover(sf::Vector2f(-m,-m));
+                    bloques[0].Mover(sf::Vector2f(+m,-m));
                     
-                    this->fase_rotacion--;
+                    fase_rotacion--;
                 }
 
             }
             break;
             
         case 2:
-            if(this->fase_rotacion == 1){
+            if(fase_rotacion == 1){
                 if(d=='r' || d=='l'){
-                    this->bloques[2].Mover(sf::Vector2f(-m,-m));
-                    this->bloques[3].Mover(sf::Vector2f(+m,-m));
-                    this->bloques[0].Mover(sf::Vector2f((+m)*2,0));
+                    bloques[2].Mover(sf::Vector2f(-m,-m));
+                    bloques[3].Mover(sf::Vector2f(+m,-m));
+                    bloques[0].Mover(sf::Vector2f((+m)*2,0));
                     
-                    this->fase_rotacion++;
+                    fase_rotacion++;
                 }
 
             }
-            else if(this->fase_rotacion == 2){
+            else if(fase_rotacion == 2){
                 if(d=='r' || d=='l'){
-                    this->bloques[2].Mover(sf::Vector2f(+m,+m));
-                    this->bloques[3].Mover(sf::Vector2f(-m,+m));
-                    this->bloques[0].Mover(sf::Vector2f((-m)*2,0));
+                    bloques[2].Mover(sf::Vector2f(+m,+m));
+                    bloques[3].Mover(sf::Vector2f(-m,+m));
+                    bloques[0].Mover(sf::Vector2f((-m)*2,0));
                     
-                    this->fase_rotacion = 1;
+                    fase_rotacion = 1;
                 }
 
             }
 
             break;
         case 3:
-            if(this->fase_rotacion == 1){
+            if(fase_rotacion == 1){
                 if(d=='r' || d=='l'){
-                    this->bloques[2].Mover(sf::Vector2f(0,(-m)*2));
-                    this->bloques[3].Mover(sf::Vector2f(+m,-m));
-                    this->bloques[0].Mover(sf::Vector2f(+m,+m));
+                    bloques[2].Mover(sf::Vector2f(0,(-m)*2));
+                    bloques[3].Mover(sf::Vector2f(+m,-m));
+                    bloques[0].Mover(sf::Vector2f(+m,+m));
                     
-                    this->fase_rotacion++;
+                    fase_rotacion++;
                 }
 
             }
-            else if(this->fase_rotacion == 2){
+            else if(fase_rotacion == 2){
                 if(d=='r' || d=='l'){
-                    this->bloques[2].Mover(sf::Vector2f(0,(+m)*2));
-                    this->bloques[3].Mover(sf::Vector2f(-m,+m));
-                    this->bloques[0].Mover(sf::Vector2f(-m,-m));
+                    bloques[2].Mover(sf::Vector2f(0,(+m)*2));
+                    bloques[3].Mover(sf::Vector2f(-m,+m));
+                    bloques[0].Mover(sf::Vector2f(-m,-m));
                     
-                    this->fase_rotacion = 1;
+                    fase_rotacion = 1;
                 }
 
             }
 
             break;
         case 4:
-            if(this->fase_rotacion == 1){
+            if(fase_rotacion == 1){
                 if(d=='r' || d=='l'){
-                    this->bloques[0].Mover(sf::Vector2f((+m)*2,-m));
-                    this->bloques[1].Mover(sf::Vector2f(+m,+m));
-                    this->bloques[3].Mover(sf::Vector2f(-m,(+m)*2));
+                    bloques[0].Mover(sf::Vector2f((+m)*2,-m));
+                    bloques[1].Mover(sf::Vector2f(+m,+m));
+                    bloques[3].Mover(sf::Vector2f(-m,(+m)*2));
                     
-                    this->fase_rotacion++;
+                    fase_rotacion++;
                 }
 
             }
-            else if(this->fase_rotacion == 2){
+            else if(fase_rotacion == 2){
                 if(d=='r' || d=='l'){
-                    this->bloques[0].Mover(sf::Vector2f((-m)*2,+m));
-                    this->bloques[1].Mover(sf::Vector2f(-m,-m));
-                    this->bloques[3].Mover(sf::Vector2f(+m,(-m)*2));
+                    bloques[0].Mover(sf::Vector2f((-m)*2,+m));
+                    bloques[1].Mover(sf::Vector2f(-m,-m));
+                    bloques[3].Mover(sf::Vector2f(+m,(-m)*2));
                     
-                    this->fase_rotacion = 1;
+                    fase_rotacion = 1;
                 }
 
             }
@@ -408,143 +408,143 @@ void Pieza::Rotar(char d) {
             break;
         case 5:
 
-            if(this->fase_rotacion == 1){
+            if(fase_rotacion == 1){
                 if(d=='r'){
-                    this->bloques[0].Mover(sf::Vector2f(+m,-m));
-                    this->bloques[2].Mover(sf::Vector2f(-m,+m));
-                    this->bloques[3].Mover(sf::Vector2f((-m)*2,0));
+                    bloques[0].Mover(sf::Vector2f(+m,-m));
+                    bloques[2].Mover(sf::Vector2f(-m,+m));
+                    bloques[3].Mover(sf::Vector2f((-m)*2,0));
                     
-                    this->fase_rotacion++;
+                    fase_rotacion++;
                 }
                 else{
-                    this->bloques[0].Mover(sf::Vector2f(+m,+m));
-                    this->bloques[2].Mover(sf::Vector2f(-m,-m));
-                    this->bloques[3].Mover(sf::Vector2f(0,(-m)*2));
+                    bloques[0].Mover(sf::Vector2f(+m,+m));
+                    bloques[2].Mover(sf::Vector2f(-m,-m));
+                    bloques[3].Mover(sf::Vector2f(0,(-m)*2));
 
-                    this->fase_rotacion = 4;
-                }
-
-            }
-            else if(this->fase_rotacion == 2){
-                if(d=='r'){
-                    this->bloques[0].Mover(sf::Vector2f(+m,+m));
-                    this->bloques[2].Mover(sf::Vector2f(-m,-m));
-                    this->bloques[3].Mover(sf::Vector2f(0,(-m)*2));
-                    
-                    this->fase_rotacion++;
-                }
-                else{
-                    this->bloques[0].Mover(sf::Vector2f(-m,+m));
-                    this->bloques[2].Mover(sf::Vector2f(+m,-m));
-                    this->bloques[3].Mover(sf::Vector2f((+m)*2,0));
-                    
-                    this->fase_rotacion--;
+                    fase_rotacion = 4;
                 }
 
             }
-            else if(this->fase_rotacion == 3){
+            else if(fase_rotacion == 2){
                 if(d=='r'){
-                    this->bloques[0].Mover(sf::Vector2f(-m,+m));
-                    this->bloques[2].Mover(sf::Vector2f(+m,-m));
-                    this->bloques[3].Mover(sf::Vector2f((+m)*2,0));
+                    bloques[0].Mover(sf::Vector2f(+m,+m));
+                    bloques[2].Mover(sf::Vector2f(-m,-m));
+                    bloques[3].Mover(sf::Vector2f(0,(-m)*2));
                     
-                    this->fase_rotacion++;
+                    fase_rotacion++;
                 }
                 else{
-                    this->bloques[0].Mover(sf::Vector2f(-m,-m));
-                    this->bloques[2].Mover(sf::Vector2f(+m,+m));
-                    this->bloques[3].Mover(sf::Vector2f(0,(+m)*2));
+                    bloques[0].Mover(sf::Vector2f(-m,+m));
+                    bloques[2].Mover(sf::Vector2f(+m,-m));
+                    bloques[3].Mover(sf::Vector2f((+m)*2,0));
                     
-                    this->fase_rotacion--;
+                    fase_rotacion--;
+                }
+
+            }
+            else if(fase_rotacion == 3){
+                if(d=='r'){
+                    bloques[0].Mover(sf::Vector2f(-m,+m));
+                    bloques[2].Mover(sf::Vector2f(+m,-m));
+                    bloques[3].Mover(sf::Vector2f((+m)*2,0));
+                    
+                    fase_rotacion++;
+                }
+                else{
+                    bloques[0].Mover(sf::Vector2f(-m,-m));
+                    bloques[2].Mover(sf::Vector2f(+m,+m));
+                    bloques[3].Mover(sf::Vector2f(0,(+m)*2));
+                    
+                    fase_rotacion--;
                 }
                 //std::cout << "Ha rotado desde la fase 3" << std::endl;
 
             }
-            else if(this->fase_rotacion == 4){
+            else if(fase_rotacion == 4){
                 if(d=='r'){
-                    this->bloques[0].Mover(sf::Vector2f(-m,-m));
-                    this->bloques[2].Mover(sf::Vector2f(+m,+m));
-                    this->bloques[3].Mover(sf::Vector2f(0,(+m)*2));
+                    bloques[0].Mover(sf::Vector2f(-m,-m));
+                    bloques[2].Mover(sf::Vector2f(+m,+m));
+                    bloques[3].Mover(sf::Vector2f(0,(+m)*2));
 
-                    this->fase_rotacion = 1;
+                    fase_rotacion = 1;
                 }
                 else{
-                    this->bloques[0].Mover(sf::Vector2f(+m,-m));
-                    this->bloques[2].Mover(sf::Vector2f(-m,+m));
-                    this->bloques[3].Mover(sf::Vector2f((-m)*2,0));
+                    bloques[0].Mover(sf::Vector2f(+m,-m));
+                    bloques[2].Mover(sf::Vector2f(-m,+m));
+                    bloques[3].Mover(sf::Vector2f((-m)*2,0));
                     
-                    this->fase_rotacion--;
+                    fase_rotacion--;
                 }
 
             }
             break;
         case 6:
 
-            if(this->fase_rotacion == 1){
+            if(fase_rotacion == 1){
                 if(d=='r'){
-                    this->bloques[0].Mover(sf::Vector2f(+m,-m));
-                    this->bloques[2].Mover(sf::Vector2f(-m,+m));
-                    this->bloques[3].Mover(sf::Vector2f(0,(-m)*2));
+                    bloques[0].Mover(sf::Vector2f(+m,-m));
+                    bloques[2].Mover(sf::Vector2f(-m,+m));
+                    bloques[3].Mover(sf::Vector2f(0,(-m)*2));
                     
-                    this->fase_rotacion++;
+                    fase_rotacion++;
                 }
                 else{
-                    this->bloques[0].Mover(sf::Vector2f(+m,+m));
-                    this->bloques[2].Mover(sf::Vector2f(-m,-m));
-                    this->bloques[3].Mover(sf::Vector2f((+m)*2,0));
+                    bloques[0].Mover(sf::Vector2f(+m,+m));
+                    bloques[2].Mover(sf::Vector2f(-m,-m));
+                    bloques[3].Mover(sf::Vector2f((+m)*2,0));
 
-                    this->fase_rotacion = 4;
+                    fase_rotacion = 4;
                 }
 
             }
-            else if(this->fase_rotacion == 2){
+            else if(fase_rotacion == 2){
                 if(d=='r'){
-                    this->bloques[0].Mover(sf::Vector2f(+m,+m));
-                    this->bloques[2].Mover(sf::Vector2f(-m,-m));
-                    this->bloques[3].Mover(sf::Vector2f((+m)*2,0));
+                    bloques[0].Mover(sf::Vector2f(+m,+m));
+                    bloques[2].Mover(sf::Vector2f(-m,-m));
+                    bloques[3].Mover(sf::Vector2f((+m)*2,0));
                     
-                    this->fase_rotacion++;
+                    fase_rotacion++;
                 }
                 else{
-                    this->bloques[0].Mover(sf::Vector2f(-m,+m));
-                    this->bloques[2].Mover(sf::Vector2f(+m,-m));
-                    this->bloques[3].Mover(sf::Vector2f(0,(+m)*2));
+                    bloques[0].Mover(sf::Vector2f(-m,+m));
+                    bloques[2].Mover(sf::Vector2f(+m,-m));
+                    bloques[3].Mover(sf::Vector2f(0,(+m)*2));
                     
-                    this->fase_rotacion--;
+                    fase_rotacion--;
                 }
 
             }
-            else if(this->fase_rotacion == 3){
+            else if(fase_rotacion == 3){
                 if(d=='r'){
-                    this->bloques[0].Mover(sf::Vector2f(-m,+m));
-                    this->bloques[2].Mover(sf::Vector2f(+m,-m));
-                    this->bloques[3].Mover(sf::Vector2f(0,(+m)*2));
+                    bloques[0].Mover(sf::Vector2f(-m,+m));
+                    bloques[2].Mover(sf::Vector2f(+m,-m));
+                    bloques[3].Mover(sf::Vector2f(0,(+m)*2));
                     
-                    this->fase_rotacion++;
+                    fase_rotacion++;
                 }
                 else{
-                    this->bloques[0].Mover(sf::Vector2f(-m,-m));
-                    this->bloques[2].Mover(sf::Vector2f(+m,+m));
-                    this->bloques[3].Mover(sf::Vector2f((-m)*2,0));
+                    bloques[0].Mover(sf::Vector2f(-m,-m));
+                    bloques[2].Mover(sf::Vector2f(+m,+m));
+                    bloques[3].Mover(sf::Vector2f((-m)*2,0));
                     
-                    this->fase_rotacion--;
+                    fase_rotacion--;
                 }
 
             }
-            else if(this->fase_rotacion == 4){
+            else if(fase_rotacion == 4){
                 if(d=='r'){
-                    this->bloques[0].Mover(sf::Vector2f(-m,-m));
-                    this->bloques[2].Mover(sf::Vector2f(+m,+m));
-                    this->bloques[3].Mover(sf::Vector2f((-m)*2,0));
+                    bloques[0].Mover(sf::Vector2f(-m,-m));
+                    bloques[2].Mover(sf::Vector2f(+m,+m));
+                    bloques[3].Mover(sf::Vector2f((-m)*2,0));
 
-                    this->fase_rotacion = 1;
+                    fase_rotacion = 1;
                 }
                 else{
-                    this->bloques[0].Mover(sf::Vector2f(+m,-m));
-                    this->bloques[2].Mover(sf::Vector2f(-m,+m));
-                    this->bloques[3].Mover(sf::Vector2f(0,(-m)*2));
+                    bloques[0].Mover(sf::Vector2f(+m,-m));
+                    bloques[2].Mover(sf::Vector2f(-m,+m));
+                    bloques[3].Mover(sf::Vector2f(0,(-m)*2));
                     
-                    this->fase_rotacion--;
+                    fase_rotacion--;
                 }
 
             }
@@ -557,34 +557,34 @@ void Pieza::Rotar(char d) {
 
 void Pieza::Rotacion(char d) {
     
-    this->Rotar(d);
+    Rotar(d);
     //CONTROLA LA SUPERPOSICION
     bool sup = false;
     
     for(int i=0 ; i<4 ; i++){
         //std::cout << i << ": x=" << bloques[i].getPosicion().x << ", y=" << bloques[i].getPosicion().y << std::endl;
         
-        if(this->bloques[i].getPosicion().x+20>210){
+        if(bloques[i].getPosicion().x+20>210){
             //std::cout << "Choca por la derecha" << std::endl;
             sup = true;
         }
-        else if(this->bloques[i].getPosicion().x<10){
+        else if(bloques[i].getPosicion().x<10){
             sup = true;
         }
-        else if(this->bloques[i].getPosicion().y+20>400){
+        else if(bloques[i].getPosicion().y+20>400){
             sup = true;
         }
-        else if(this->bloques[i].getPosicion().y<0){
+        else if(bloques[i].getPosicion().y<0){
             sup = true;
         }
     }
     
     if(sup){
         if(d == 'r'){
-            this->Rotar('l');
+            Rotar('l');
         }
         else{
-            this->Rotar('r');
+            Rotar('r');
         }
     }
     
@@ -594,23 +594,23 @@ void Pieza::Rotacion(char d) {
 //COLOCA LA PIEZA GUARDADA FUERA
 void Pieza::ColocarFuera() {
     int y = 340;
-    this->bloques[0].Mover(sf::Vector2f(150,y));
-    this->bloques[1].Mover(sf::Vector2f(150,y));
-    this->bloques[2].Mover(sf::Vector2f(150,y));
-    this->bloques[3].Mover(sf::Vector2f(150,y));
+    bloques[0].Mover(sf::Vector2f(150,y));
+    bloques[1].Mover(sf::Vector2f(150,y));
+    bloques[2].Mover(sf::Vector2f(150,y));
+    bloques[3].Mover(sf::Vector2f(150,y));
 }
 
 //COLOCA EN FILA VERTICAL TODAS LAS PIEZAS SIGUIENTES
 void Pieza::ColocarPiezasSiguientes(int y) {
     for(int i=0 ; i<4 ; i++){
-        this->bloques[i].Mover(sf::Vector2f(150,y+40));
+        bloques[i].Mover(sf::Vector2f(150,y+40));
     }
 }
 
 //CAMBIA EL COLOR DE LA PIEZA QUE QUIERAS
 void Pieza::CambiaColor(sf::Color color) {
     for(int i=0 ; i<4 ; i++){
-        this->bloques[i].setColor(color);
+        bloques[i].setColor(color);
     }
 }
 
@@ -619,15 +619,15 @@ void Pieza::CambiaColor(sf::Color color) {
 //GETTER
 
 Bloque * Pieza::getBloques() {
-    return this->bloques;
+    return bloques;
 }
 
 int Pieza::getTipo() {
-    return this->tipo;
+    return tipo;
 }
 
 int Pieza::getFase() {
-    return this->fase_rotacion;
+    return fase_rotacion;
 }
 
 

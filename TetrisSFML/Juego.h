@@ -19,6 +19,7 @@
 
 #include "TextoLineas.h"
 #include "GenerarPiezas.h"
+#include "St.h"
 
 
 class Juego {
@@ -85,7 +86,8 @@ private:
     //Pieza * pieza_fin[2];
     
     //LUCHA
-    St st;
+    //St st;
+    
     
 };
 

@@ -106,13 +106,14 @@ void Juego::Render(int pos) {
     //pieza_fin[pos]->Dibujar(window);
     pieza1[pos]->Dibujar(window);
     
-    
     for(int i=0 ; i<4 ; i++){
+        //std::cout << "Aqui no peta" << std::endl;
         (piezas_sig[pos])[i]->Dibujar(window);
 
     }
 
     if(pieza_auxiliar[pos]){
+        
         pieza_auxiliar[pos]->Dibujar(window);
 
     }

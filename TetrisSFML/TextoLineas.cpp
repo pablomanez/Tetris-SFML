@@ -25,6 +25,7 @@ TextoLineas::TextoLineas() {
     this->texto.setCharacterSize(10);
     this->texto.setFillColor(sf::Color::White);
     */
+    font.loadFromFile("../assets/fuentes/PressStart2P.ttf");
     
     this->n_lineas = 0;
     
@@ -39,10 +40,13 @@ void TextoLineas::Actualizar(Tablero& tablero) {
 }
 
 void TextoLineas::Dibujar(sf::RenderWindow& window, int puntos) {
+    /*
     sf::Font font;
     font.loadFromFile("../assets/fuentes/PressStart2P.ttf");
-        //std::cout << "Aqui no peta" << std::endl;
+    */
+    
         
+    
     sf::Text texto;
     sf::Text texto2;
     sf::Text texto3;
