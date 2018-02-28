@@ -20,7 +20,11 @@ public:
     St(const St& orig);
     
     void BajaVidaEnemigo();
+    void BajaVidaAliado();
     void Dibuja(sf::RenderWindow &window);
+    
+    bool getDeadEnemigo();
+    bool getDeadAliado();
     
     virtual ~St();
 private:

@@ -51,6 +51,23 @@ void St::BajaVidaEnemigo() {
     }
 }
 
+void St::BajaVidaAliado() {
+    int x = V_a.getSize().x;
+    
+    if(x>0){
+        V_a.setSize(sf::Vector2f(x-10,20));
+    }
+
+}
+
+bool St::getDeadAliado() {
+    V_a.getSize().x == 0 ? true : false;
+}
+
+bool St::getDeadEnemigo() {    
+    V_e.getSize().x == 0 ? false : true;
+}
+
 St::St(const St& orig) {
 }
 

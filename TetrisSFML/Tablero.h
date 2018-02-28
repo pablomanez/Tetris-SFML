@@ -32,9 +32,11 @@ public:
     
     //GETTER
     int getPuntuacionTotal();
+    int getLineas();
     
     virtual ~Tablero();
 private:
+    int num_lineas;
     Bloque *** bloques; 
     sf::ConvexShape shape;
     int puntuacion_total;

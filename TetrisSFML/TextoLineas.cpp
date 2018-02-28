@@ -36,6 +36,7 @@ TextoLineas::TextoLineas(const TextoLineas& orig) {
 
 void TextoLineas::Actualizar(Tablero& tablero) {
     this->n_lineas += tablero.Linea();
+    //std::cout << n_lineas << std::endl;
     
 }
 

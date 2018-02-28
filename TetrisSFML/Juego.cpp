@@ -41,6 +41,7 @@ Juego::Juego():
     if(J==1){
         //1 JUGADOR
         J1 = false;
+        st = new St;
     }
     else{
         //2 JUGADORES
@@ -53,7 +54,7 @@ Juego::Juego():
         guardar_pieza[i] = false;
         
         pieza1[i] = NULL;
-        //pieza_fin[i] = NULL;
+        pieza_fin[i] = NULL;
         
         n_p[i] = 100;
         piezas_sig[i] = new Pieza*[n_p[i]];
@@ -76,11 +77,12 @@ void Juego::Bucle() {
     while(window.isOpen()){
         for(int i=0 ; i<J ; i++){
             MovAbajo(i);
+
             sf::Event event;
             Eventos(event);
-            
+
             Update(i);
-            GeneraPiezaFin(i);
+            
         }
                 
         //RENDER
@@ -103,7 +105,7 @@ void Juego::Render(int pos) {
     
     tablero[pos].Dibujar(window);
     lineas[pos].Dibujar(window,tablero[pos].getPuntuacionTotal());
-    //pieza_fin[pos]->Dibujar(window);
+    pieza_fin[pos]->Dibujar(window);
     pieza1[pos]->Dibujar(window);
     
     for(int i=0 ; i<4 ; i++){
@@ -119,7 +121,7 @@ void Juego::Render(int pos) {
     }
     
     if(J==1){
-        //st.Dibuja(window);
+        st->Dibuja(window);
     }
     
     //window.display();
@@ -139,12 +141,26 @@ void Juego::Update(int pos) {
         }
     }
     
+    
+    int l_aux1 = lineas[pos].getLineas();
     //STRING QUE MARCA LAS LINEAS HECHAS QUE LLEVA EL JUGADOR
     lineas[pos].Actualizar(tablero[pos]);
-
+    int l_aux2 = lineas[pos].getLineas();
+    
+    if(l_aux1 != l_aux2){
+        st->BajaVidaEnemigo();
+        
+    }
+    
+    if(st->getDeadEnemigo()){
+        std::cout << "Has ganado la ronda" << std::endl;
+    }
+    
     GuardaPieza(pos);
     
     ColisionPieza(pos);
+    
+    GeneraPiezaFin(pos);
     
 }
 
@@ -251,7 +267,7 @@ void Juego::Eventos(sf::Event event) {
             case sf::Event::EventType::KeyPressed:
                 
                 if(event.key.code == sf::Keyboard::Key::T && J==1){
-                    //st.BajaVidaEnemigo();
+                    st->BajaVidaEnemigo();
                 }
                 
                 
@@ -363,8 +379,8 @@ void Juego::GeneraPiezas(int pos) {
             int gen_aux = gen[pos].Generar();
             pieza1[pos] = new Pieza(gen_aux);
             
-            //pieza_fin[pos] = new Pieza(gen_aux);
-            //pieza_fin[pos]->CambiaColor(sf::Color (187,187,187));
+            pieza_fin[pos] = new Pieza(gen_aux);
+            pieza_fin[pos]->CambiaColor(sf::Color (187,187,187));
             
         }
         else{
@@ -382,7 +398,7 @@ void Juego::GeneraPiezas(int pos) {
 //CALCULA LA POSICION FINAL Y LA ROTACION DE LA PIEZA FIN
 void Juego::GeneraPiezaFin(int pos) {
     //GIRO LA PIEZA
-    /*
+    
     if(pieza_fin[pos]->getFase()!=pieza1[pos]->getFase()){
         pieza_fin[pos]->Rotacion('r');
     }
@@ -395,7 +411,7 @@ void Juego::GeneraPiezaFin(int pos) {
     while(!tablero[pos].Colision( *(pieza_fin[pos]) )){
         pieza_fin[pos]->Mover('d');
     }
-    */
+    
 }
 
 //GETTER

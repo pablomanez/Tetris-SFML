@@ -83,12 +83,10 @@ private:
     bool m_d[2];
     
     //PIEZA QUE MUESTRA LA POSICION FINAL
-    //Pieza * pieza_fin[2];
+    Pieza * pieza_fin[2];
     
     //LUCHA
-    //St st;
-    
-    
+    St *st;
 };
 
 #endif /* JUEGO_H */
