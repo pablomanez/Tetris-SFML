@@ -220,7 +220,7 @@ int Tablero::Linea() {
 //GETTER
 
 int Tablero::getPuntuacionTotal() {
-    return this->puntuacion_total;
+    return puntuacion_total;
 }
 
 

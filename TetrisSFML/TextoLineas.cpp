@@ -41,7 +41,8 @@ void TextoLineas::Actualizar(Tablero& tablero) {
 void TextoLineas::Dibujar(sf::RenderWindow& window, int puntos) {
     sf::Font font;
     font.loadFromFile("../assets/fuentes/PressStart2P.ttf");
-    
+        //std::cout << "Aqui no peta" << std::endl;
+        
     sf::Text texto;
     sf::Text texto2;
     sf::Text texto3;

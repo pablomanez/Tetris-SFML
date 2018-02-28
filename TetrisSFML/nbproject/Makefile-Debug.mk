@@ -39,6 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/GenerarPiezas.o \
 	${OBJECTDIR}/Juego.o \
 	${OBJECTDIR}/Pieza.o \
+	${OBJECTDIR}/St.o \
 	${OBJECTDIR}/Tablero.o \
 	${OBJECTDIR}/TextoLineas.o \
 	${OBJECTDIR}/main.o
@@ -87,6 +88,11 @@ ${OBJECTDIR}/Pieza.o: Pieza.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/include/SFML -I../build/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Pieza.o Pieza.cpp
+
+${OBJECTDIR}/St.o: St.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/include/SFML -I../build/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/St.o St.cpp
 
 ${OBJECTDIR}/Tablero.o: Tablero.cpp
 	${MKDIR} -p ${OBJECTDIR}

@@ -18,6 +18,7 @@
 #include <SFML/Window/Event.hpp>
 
 #include "TextoLineas.h"
+#include "GenerarPiezas.h"
 
 
 class Juego {
@@ -81,7 +82,11 @@ private:
     bool m_d[2];
     
     //PIEZA QUE MUESTRA LA POSICION FINAL
-    Pieza * pieza_fin[2];
+    //Pieza * pieza_fin[2];
+    
+    //LUCHA
+    St st;
+    
 };
 
 #endif /* JUEGO_H */

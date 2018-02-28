@@ -8,6 +8,7 @@
       <itemPath>GenerarPiezas.h</itemPath>
       <itemPath>Juego.h</itemPath>
       <itemPath>Pieza.h</itemPath>
+      <itemPath>St.h</itemPath>
       <itemPath>Tablero.h</itemPath>
       <itemPath>TextoLineas.h</itemPath>
     </logicalFolder>
@@ -22,6 +23,7 @@
       <itemPath>GenerarPiezas.cpp</itemPath>
       <itemPath>Juego.cpp</itemPath>
       <itemPath>Pieza.cpp</itemPath>
+      <itemPath>St.cpp</itemPath>
       <itemPath>Tablero.cpp</itemPath>
       <itemPath>TextoLineas.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -80,6 +82,10 @@
       </item>
       <item path="Pieza.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="St.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="St.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Tablero.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Tablero.h" ex="false" tool="3" flavor2="0">
@@ -126,6 +132,10 @@
       <item path="Pieza.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Pieza.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="St.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="St.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tablero.cpp" ex="false" tool="1" flavor2="0">
       </item>
