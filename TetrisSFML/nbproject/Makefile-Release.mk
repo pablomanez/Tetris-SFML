@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/AssetManager.o \
 	${OBJECTDIR}/Bloque.o \
 	${OBJECTDIR}/GenerarPiezas.o \
 	${OBJECTDIR}/Juego.o \
@@ -68,6 +69,11 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tetrissfml: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tetrissfml ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/AssetManager.o: AssetManager.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AssetManager.o AssetManager.cpp
 
 ${OBJECTDIR}/Bloque.o: Bloque.cpp
 	${MKDIR} -p ${OBJECTDIR}

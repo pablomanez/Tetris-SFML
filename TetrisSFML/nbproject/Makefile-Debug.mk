@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/AssetManager.o \
 	${OBJECTDIR}/Bloque.o \
 	${OBJECTDIR}/GenerarPiezas.o \
 	${OBJECTDIR}/Juego.o \
@@ -59,7 +60,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-L/usr/lib -lsfml-graphics -lsfml-system -lsfml-window
+LDLIBSOPTIONS=-L/usr/lib -lsfml-graphics -lsfml-system -lsfml-window -lsfml-audio -lsfml-graphics
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -68,6 +69,11 @@ LDLIBSOPTIONS=-L/usr/lib -lsfml-graphics -lsfml-system -lsfml-window
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tetrissfml: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tetrissfml ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/AssetManager.o: AssetManager.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/include/SFML -I../build/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AssetManager.o AssetManager.cpp
 
 ${OBJECTDIR}/Bloque.o: Bloque.cpp
 	${MKDIR} -p ${OBJECTDIR}

@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>AssetManager.h</itemPath>
       <itemPath>Bloque.h</itemPath>
       <itemPath>GenerarPiezas.h</itemPath>
       <itemPath>Juego.h</itemPath>
@@ -19,6 +20,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>AssetManager.cpp</itemPath>
       <itemPath>Bloque.cpp</itemPath>
       <itemPath>GenerarPiezas.cpp</itemPath>
       <itemPath>Juego.cpp</itemPath>
@@ -63,9 +65,15 @@
             <linkerLibLibItem>sfml-graphics</linkerLibLibItem>
             <linkerLibLibItem>sfml-system</linkerLibLibItem>
             <linkerLibLibItem>sfml-window</linkerLibLibItem>
+            <linkerLibLibItem>sfml-audio</linkerLibLibItem>
+            <linkerLibLibItem>sfml-graphics</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="AssetManager.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AssetManager.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Bloque.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Bloque.h" ex="false" tool="3" flavor2="0">
@@ -117,6 +125,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="AssetManager.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AssetManager.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Bloque.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Bloque.h" ex="false" tool="3" flavor2="0">

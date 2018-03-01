@@ -41,6 +41,7 @@ Juego::Juego():
     if(J==1){
         //1 JUGADOR
         J1 = false;
+        
         st = new St;
     }
     else{
@@ -76,6 +77,9 @@ void Juego::Bucle() {
     
     while(window.isOpen()){
         for(int i=0 ; i<J ; i++){
+            sf::Time deltaTime = dt.restart();
+            et += deltaTime;
+            
             MovAbajo(i);
 
             sf::Event event;
@@ -121,7 +125,7 @@ void Juego::Render(int pos) {
     }
     
     if(J==1){
-        st->Dibuja(window);
+        st->Dibuja(window,et);
     }
     
     //window.display();
@@ -147,14 +151,40 @@ void Juego::Update(int pos) {
     lineas[pos].Actualizar(tablero[pos]);
     int l_aux2 = lineas[pos].getLineas();
     
-    if(l_aux1 != l_aux2){
-        st->BajaVidaEnemigo();
+    //UPDATE DE LUCHA
+    if(!J1){
+        if(l_aux1 != l_aux2){
+            st->BajaVidaEnemigo();
+        }
+
+        if(st->getDeadAliado()){
+            window.close();
+        }
+        
+        if(st->getDeadEnemigo()){
+            //std::cout << "Ronda pasada" << std::endl;
+            st->SubeRonda();
+        }
+        
+        if(r_lucha.getElapsedTime().asSeconds()>1.5){
+                
+            std::random_device rd;
+            std::default_random_engine gen(rd());
+            std::uniform_int_distribution<int> distribution(0,100);
+
+            int r = distribution(gen);
+                std::cout << r << std::endl;
+            if(r<30){
+                st->BajaVidaAliado();
+                
+            }
+                
+            r_lucha.restart();
+        }
         
     }
     
-    if(st->getDeadEnemigo()){
-        std::cout << "Has ganado la ronda" << std::endl;
-    }
+    
     
     GuardaPieza(pos);
     
@@ -269,6 +299,9 @@ void Juego::Eventos(sf::Event event) {
                 if(event.key.code == sf::Keyboard::Key::T && J==1){
                     st->BajaVidaEnemigo();
                 }
+                if(event.key.code == sf::Keyboard::Key::Y && J==1){
+                    st->BajaVidaAliado();
+                }
                 
                 
                 if(event.key.code == sf::Keyboard::Key::Q || event.key.code == sf::Keyboard::Key::Escape){
@@ -298,12 +331,12 @@ void Juego::Eventos(sf::Event event) {
                     m_d[0] = true;
                 }
                 
-                if(event.key.code == sf::Keyboard::Key::G){
+                if(event.key.code == sf::Keyboard::Key::J){
                     //cout << "Guardo pieza" << endl;
                     guardar_pieza[0] = true;
                 }
                 
-                if(event.key.code == sf::Keyboard::Key::F){
+                if(event.key.code == sf::Keyboard::Key::H){
                     pieza1[0]->Rotacion('r');
                     if(tablero[0].Colision2(*(pieza1[0]))){
                         pieza1[0]->Rotacion('l');

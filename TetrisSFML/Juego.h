@@ -79,6 +79,10 @@ private:
     sf::Clock reloj[2];
     sf::Clock c_colision[2];
     
+    sf::Clock dt; //DELTA TIME
+    sf::Time et; //ELAPSED TIME
+    
+    
     //PARA CONTROLES
     bool m_d[2];
     
@@ -87,6 +91,7 @@ private:
     
     //LUCHA
     St *st;
+    sf::Clock r_lucha;
 };
 
 #endif /* JUEGO_H */

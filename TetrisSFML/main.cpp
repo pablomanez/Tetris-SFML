@@ -18,6 +18,7 @@
 #include <valarray>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
 #include <queue>
 #include <set>
 
