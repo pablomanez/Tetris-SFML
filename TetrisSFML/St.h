@@ -24,21 +24,33 @@ public:
     
     void BajaVidaEnemigo();
     void BajaVidaAliado();
-    void Dibuja(sf::RenderWindow &window, sf::Time et);
+    void Dibuja(sf::RenderWindow &window);
     void SubeRonda();
+    
+    void updateR(sf::Time et);
+    void updateK(sf::Time et);
     
     bool getDeadEnemigo();
     bool getDeadAliado();
     
     virtual ~St();
 private:
+    bool cambia_r;
+    bool cambia_k;
+    
     struct anim{
         sf::Sprite sprite;
         sf::Vector2i size;
         int frames;
         float animDuration;
+        std::string name;
     };
     anim ryu_i;
+    anim ryu_p;
+    anim ryu;
+    
+    anim ken_i;
+    anim ken;
     
     
     //ALIADO

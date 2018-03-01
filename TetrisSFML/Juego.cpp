@@ -125,7 +125,7 @@ void Juego::Render(int pos) {
     }
     
     if(J==1){
-        st->Dibuja(window,et);
+        st->Dibuja(window);
     }
     
     //window.display();
@@ -155,6 +155,8 @@ void Juego::Update(int pos) {
     if(!J1){
         if(l_aux1 != l_aux2){
             st->BajaVidaEnemigo();
+            et = sf::Time::Zero;
+            //std::cout << et.asSeconds() << std::endl;
         }
 
         if(st->getDeadAliado()){
@@ -167,20 +169,23 @@ void Juego::Update(int pos) {
         }
         
         if(r_lucha.getElapsedTime().asSeconds()>1.5){
-                
+            
             std::random_device rd;
             std::default_random_engine gen(rd());
             std::uniform_int_distribution<int> distribution(0,100);
 
             int r = distribution(gen);
-                std::cout << r << std::endl;
-            if(r<30){
+                //std::cout << r << std::endl;
+            if(r<15){
                 st->BajaVidaAliado();
                 
             }
                 
             r_lucha.restart();
         }
+        
+        st->updateR(et);
+        st->updateK(et);
         
     }
     
@@ -298,6 +303,7 @@ void Juego::Eventos(sf::Event event) {
                 
                 if(event.key.code == sf::Keyboard::Key::T && J==1){
                     st->BajaVidaEnemigo();
+                    et = sf::Time::Zero;
                 }
                 if(event.key.code == sf::Keyboard::Key::Y && J==1){
                     st->BajaVidaAliado();

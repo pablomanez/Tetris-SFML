@@ -17,16 +17,44 @@
 #include "St.h"
 
 St::St(){
-    //SPRITES
+    float scale = 1.5;
+    //RYU IDLE
     ryu_i.frames=4;
-    ryu_i.animDuration = 1;
-    ryu_i.size = sf::Vector2i(46,82);
+    ryu_i.animDuration = 0.5;
+    ryu_i.size = sf::Vector2i(49,82);
     
     AssetManager *instance = AssetManager::instance();
     ryu_i.sprite.setTexture(*instance->getTexture("../assets/sprites/ryu_idle.png"));
     ryu_i.sprite.setTextureRect(sf::IntRect(0,0,ryu_i.size.x,ryu_i.size.y));
     ryu_i.sprite.setPosition(400,200);
-    //ryu_i.sprite.setScale(sf::Vector2f(1.5,1.5));
+    ryu_i.sprite.setOrigin(0,0);
+    ryu_i.sprite.setScale(scale,scale);
+    ryu_i.name = "idle";
+    
+    //RYU PUNCH
+    ryu_p.frames=3;
+    ryu_p.animDuration = 0.3;
+    ryu_p.size = sf::Vector2i(65,82);
+    
+    ryu_p.sprite.setTexture(*instance->getTexture("../assets/sprites/ryu_punch.png"));
+    ryu_p.sprite.setTextureRect(sf::IntRect(0,0,ryu_p.size.x,ryu_p.size.y));
+    ryu_p.sprite.setPosition(400,200);
+    ryu_p.sprite.setOrigin(0,0);
+    ryu_p.sprite.setScale(scale,scale);
+    ryu_p.name = "punch";
+    
+    //KEN IDLE
+    ken_i.frames=4;
+    ken_i.animDuration = 0.5;
+    ken_i.size = sf::Vector2i(49,82);
+    
+    ken_i.sprite.setTexture(*instance->getTexture("../assets/sprites/ken_idle.png"));
+    ken_i.sprite.setTextureRect(sf::IntRect(0,0,ken_i.size.x,ken_i.size.y));
+    ken_i.sprite.setPosition(470,200);
+    ken_i.sprite.setOrigin(0,0);
+    ken_i.sprite.setScale(scale,scale);
+    ken_i.name = "idle";
+    
     
     
     //ALIADO 
@@ -49,26 +77,52 @@ St::St(){
     F_e.setPosition(340,20);
     
     ronda = 1;
+    cambia_r = false;
+    cambia_k = false;
     
+    ryu = ryu_i;
+    ken = ken_i;
     
 }
 
-void St::Dibuja(sf::RenderWindow& window, sf::Time et) {
+void St::Dibuja(sf::RenderWindow& window) {
     window.draw(V_a);
     window.draw(F_a);
     
     window.draw(V_e);
     window.draw(F_e);
     
-    
-    
-    int animFrame = static_cast<int>(( (float)et.asSeconds() / ryu_i.animDuration ) * ryu_i.frames ) %  ryu_i.frames;
-    ryu_i.sprite.setTextureRect(sf::IntRect( animFrame*ryu_i.size.x, 0, ryu_i.size.x, ryu_i.size.y ));
-    window.draw(ryu_i.sprite);
+    window.draw(ryu.sprite);
+    window.draw(ken.sprite);
 }
+
+void St::updateK(sf::Time et) {
+    //KEN
+    int animFrame = static_cast<int>(( (float)et.asSeconds() / ken.animDuration ) * ken.frames ) %  ken.frames;
+    ken.sprite.setTextureRect(sf::IntRect( animFrame*ken.size.x, 0, ken.size.x, ken.size.y ));
+}
+
+void St::updateR(sf::Time et) {
+    if(cambia_r){
+        ryu = ryu_i;
+        cambia_r = false;
+    }
+    
+    int animFrame = static_cast<int>(( (float)et.asSeconds() / ryu.animDuration ) * ryu.frames ) %  ryu.frames;
+    ryu.sprite.setTextureRect(sf::IntRect( animFrame*ryu.size.x, 0, ryu.size.x, ryu.size.y ));
+    
+    if(animFrame == 2 && ryu.name == "punch"){
+            //std::cout << animFrame<< std::endl;
+        cambia_r = true;
+            //std::cout << et.asSeconds() << std::endl;
+    }
+}
+
 
 void St::BajaVidaEnemigo() {
     int x = V_e.getSize().x;
+    
+    ryu = ryu_p;
     
     if(x>0){
         V_e.setSize(sf::Vector2f(x-(10/ronda),20));
