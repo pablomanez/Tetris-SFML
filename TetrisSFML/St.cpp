@@ -80,6 +80,7 @@ St::St(){
     //ALIADO 
     V_a.setSize(sf::Vector2f(200,20));
     V_a.setFillColor(sf::Color::Green);
+    //V_a.setTexture(instance->getTexture("../assets/sprites/barravida_100.png"));
     V_a.rotate(180);
     V_a.setPosition(540,460);
     
@@ -90,6 +91,7 @@ St::St(){
     //ENEMIGO
     V_e.setSize(sf::Vector2f(200,20));
     V_e.setFillColor(sf::Color::Red);
+    V_e.setTexture(instance->getTexture("../assets/sprites/barravida_100.png"));
     V_e.setPosition(420,80);
     
     F_e.setSize(sf::Vector2f(80,80));
@@ -166,6 +168,7 @@ void St::BajaVidaEnemigo() {
     
     if(x>0){
         V_e.setSize(sf::Vector2f(x-(20/ronda),20));
+        V_e.setTextureRect(sf::IntRect(0,0,(int)V_e.getSize().x,20));
     }
 }
 
@@ -177,14 +180,17 @@ void St::BajaVidaAliado() {
     
     if(x>0){
         V_a.setSize(sf::Vector2f(x-10,20));
+        V_a.setTextureRect(sf::IntRect(0,0,(int)V_a.getSize().x,20));
     }
 
 }
 
 void St::SubeRonda() {
     ronda++;
+    AssetManager *instance = AssetManager::instance();
     
     V_e.setSize(sf::Vector2f(200,20));
+    V_e.setTextureRect(sf::IntRect(0,0,(int)V_e.getSize().x,20));
     
     //CADA VEZ QUE SE SUBE UNA RONDA
     //EL ALIADO RECUPERA LA MITAD DE LA VIDA QUE HA PERDIDO
@@ -193,7 +199,10 @@ void St::SubeRonda() {
             //std::cout << "No tiene toda la vida" << std::endl;
         
         int x = V_a.getSize().x + (200-V_a.getSize().x)/2;
-        
+        /*
+        V_a.setTexture(instance->getTexture("../assets/sprites/barravida_100.png"));
+        V_a.setTextureRect(sf::IntRect(0,0,(int)V_a.getSize().x,20));
+        */
         V_a.setSize(sf::Vector2f(x,20));
         
         

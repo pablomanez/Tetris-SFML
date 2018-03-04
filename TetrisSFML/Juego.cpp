@@ -33,9 +33,19 @@
 
 Juego::Juego():
     window(sf::VideoMode(640,480), "Tetris", sf::Style::Default)
+
 {
     window.setMouseCursorVisible(false);
     window.setFramerateLimit(60);
+    
+    //VISTA DEL JUGADOR 1
+    view1.setCenter(320,240);
+    view1.setSize(640,480);
+    view1.setViewport(sf::FloatRect(0, 0, 1, 1));
+    //VISTA DEL JUGADOR 2
+    view2.setCenter(0,240);
+    view2.setSize(640,480);
+    view2.setViewport(sf::FloatRect(0, 0, 1, 1));
     
     J = 1;
     if(J==1){
@@ -62,11 +72,16 @@ Juego::Juego():
         GeneraPiezas(i);
         
         m_d[i] = false;
+        
+        tetris[i] = false;
+        n_lineas[i] = 0;
+        count_t[i] = 0;
     }
 }
 
 //UN PERRO
 void Juego::Bucle() {
+    /*
     //VISTA DEL JUGADOR 1
     sf::View view1(sf::FloatRect(0,0,640,480));
     view1.setViewport(sf::FloatRect(0, 0, 1, 1));
@@ -74,6 +89,7 @@ void Juego::Bucle() {
     //VISTA DEL JUGADOR 2
     sf::View view2(sf::FloatRect(-320,0,640,480));
     view1.setViewport(sf::FloatRect(0, 0, 1, 1));
+    */
     
     timeStartUpdate[0] = dt[0].getElapsedTime();
     timeStartUpdate[1] = dt[1].getElapsedTime();
@@ -148,11 +164,20 @@ void Juego::Update(int pos) {
         }
     }
     
+    //CONTROL DE LAS LINEAS
     int l_aux1 = lineas[pos].getLineas();
-    //STRING QUE MARCA LAS LINEAS HECHAS QUE LLEVA EL JUGADOR
     lineas[pos].Actualizar(tablero[pos]);
     int l_aux2 = lineas[pos].getLineas();
     
+    if(n_lineas[pos]==4){
+        tetris[pos] = true;
+        count_t[pos] = 4;
+    }
+    if(tetris[pos]){
+        HazTetris(pos);
+    }
+    
+    l_aux1 != l_aux2 ? n_lineas[pos] += l_aux2-l_aux1 : n_lineas[pos] = 0;
         
     //UPDATE DE LUCHA
     if(!J1){
@@ -167,13 +192,64 @@ void Juego::Update(int pos) {
     
 }
 
-void Juego::UpdateLucha(int a, int b) {
-    if(a != b){
-        st->BajaVidaEnemigo();
+//EFECTO MOLON
+void Juego::HazTetris(int pos) {
+    int var = 10;
+    if(pos==0){
+        //std::cout << "EL JUGADOR 1 HA HECHO TETRIS!!!" << std::endl;
+        switch(count_t[pos]){
+            case 4:
+                view1.move(var,0);
+                count_t[pos]--;
+                break;
+            case 3:
+                view1.move(-var*2,0);
+                count_t[pos]--;
+                break;
+            case 2:
+                view1.move(var*2,0);
+                count_t[pos]--;
+                break;
+            case 1:
+                view1.move(-var,0);
+                count_t[pos]--;
+                break;
+            default:
+                tetris[pos] = false;
+                break;
+        }
         
-        //et = sf::Time::Zero;
-            //std::cout << et.asSeconds() << std::endl;
+        
     }
+    else if(pos==1){
+        //std::cout << "EL JUGADOR 2 HA HECHO TETRIS!!!" << std::endl;
+        switch(count_t[pos]){
+            case 4:
+                view2.move(var,0);
+                count_t[pos]--;
+                break;
+            case 3:
+                view2.move(-var*2,0);
+                count_t[pos]--;
+                break;
+            case 2:
+                view2.move(var*2,0);
+                count_t[pos]--;
+                break;
+            case 1:
+                view2.move(-var,0);
+                count_t[pos]--;
+                break;
+            default:
+                tetris[pos] = false;
+                break;
+        }
+        
+    }
+}
+
+void Juego::UpdateLucha(int a, int b) {
+    for(int i=0 ; i<(b-a) ; i++) st->BajaVidaEnemigo();
 
     if(st->getDeadAliado()){
         window.close();
@@ -307,6 +383,12 @@ void Juego::Eventos(sf::Event event) {
         
         switch(event.type){
             case sf::Event::EventType::KeyPressed:
+                if(event.key.code == sf::Keyboard::Key::T){
+                    st->BajaVidaEnemigo();
+                }
+                if(event.key.code == sf::Keyboard::Key::Y){
+                    st->BajaVidaAliado();
+                }
                 if(event.key.code == sf::Keyboard::Key::Q || event.key.code == sf::Keyboard::Key::Escape){
                     window.close();
                 }

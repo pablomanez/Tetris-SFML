@@ -167,10 +167,10 @@ int Tablero::Linea() {
 
         }
         if(linea == 10){
-            //std::cout << "LINEA!" << std::endl;
+                //std::cout << "LINEA!" << std::endl;
 
             n_lineas++;
-
+                
             for(int j=0 ; j<10 ; j++){
                 if((this->bloques[j])[y] != NULL){
                     //std::cout << (this->bloques[j])[i]->getPuntuacion() << std::endl;
@@ -213,9 +213,11 @@ int Tablero::Linea() {
 
             linea = 0;
             y = -1;
+            //i = 19;
 
         }
         else{
+            //NO HA HECHO LINEA
             linea = 0;
             y = -1;
         }

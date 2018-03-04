@@ -35,7 +35,7 @@ public:
     void ColisionPieza(int pos);
     void GeneraPiezas(int pos);
     void UpdateLucha(int a, int b);
-    
+    void HazTetris(int pos);
     void GeneraPiezaFin(int pos);
     
     //GETTER
@@ -53,6 +53,9 @@ private:
     
     //LA VENTANA
     sf::RenderWindow window;
+    sf::View view1;
+    sf::View view2;
+    
     
     //MATRIZ 10x20 DE BLOQUES INICIALIZADOS A NULL
     Tablero tablero[2];
@@ -93,6 +96,12 @@ private:
     //LUCHA
     St *st;
     sf::Clock r_lucha;
+    
+    //PARA CUANDO SE HAGA TETRIS
+    bool tetris[2]; //true: se ha hecho tetris
+    int n_lineas[2];  //1-2-3-4
+    int count_t[2];
+    
     
 };
 
