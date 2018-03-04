@@ -35,7 +35,7 @@ Juego::Juego():
     window(sf::VideoMode(640,480), "Tetris", sf::Style::Default)
 {
     window.setMouseCursorVisible(false);
-    window.setFramerateLimit(30);
+    window.setFramerateLimit(60);
     
     J = 1;
     if(J==1){
@@ -57,7 +57,7 @@ Juego::Juego():
         pieza1[i] = NULL;
         pieza_fin[i] = NULL;
         
-        n_p[i] = 100;
+        n_p[i] = 20;
         piezas_sig[i] = new Pieza*[n_p[i]];
         GeneraPiezas(i);
         
@@ -75,20 +75,23 @@ void Juego::Bucle() {
     sf::View view2(sf::FloatRect(-320,0,640,480));
     view1.setViewport(sf::FloatRect(0, 0, 1, 1));
     
+    timeStartUpdate[0] = dt[0].getElapsedTime();
+    timeStartUpdate[1] = dt[1].getElapsedTime();
+        
     while(window.isOpen()){
         for(int i=0 ; i<J ; i++){
-            sf::Time deltaTime = dt.restart();
-            et += deltaTime;
-            
             MovAbajo(i);
 
             sf::Event event;
             Eventos(event);
-
-            Update(i);
             
+            if(dt[i].getElapsedTime().asMilliseconds() - timeStartUpdate[i].asMilliseconds() > 1000/15){
+                Update(i);
+                    //std::cout << dt.getElapsedTime().asSeconds() << std::endl;
+                timeStartUpdate[i] = dt[i].getElapsedTime();
+            }
         }
-                
+
         //RENDER
         window.clear(sf::Color::Black);
             window.setView(view1);
@@ -145,64 +148,65 @@ void Juego::Update(int pos) {
         }
     }
     
-    
     int l_aux1 = lineas[pos].getLineas();
     //STRING QUE MARCA LAS LINEAS HECHAS QUE LLEVA EL JUGADOR
     lineas[pos].Actualizar(tablero[pos]);
     int l_aux2 = lineas[pos].getLineas();
     
+        
     //UPDATE DE LUCHA
     if(!J1){
-        if(l_aux1 != l_aux2){
-            st->BajaVidaEnemigo();
-            et = sf::Time::Zero;
-            //std::cout << et.asSeconds() << std::endl;
-        }
-
-        if(st->getDeadAliado()){
-            window.close();
-        }
-        
-        if(st->getDeadEnemigo()){
-            //std::cout << "Ronda pasada" << std::endl;
-            st->SubeRonda();
-        }
-        
-        if(r_lucha.getElapsedTime().asSeconds()>1.5){
-            
-            std::random_device rd;
-            std::default_random_engine gen(rd());
-            std::uniform_int_distribution<int> distribution(0,100);
-
-            int r = distribution(gen);
-                //std::cout << r << std::endl;
-            if(r<15){
-                st->BajaVidaAliado();
-                
-            }
-                
-            r_lucha.restart();
-        }
-        
-        st->updateR(et);
-        st->updateK(et);
-        
-    }
-    
-    
+        UpdateLucha(l_aux1,l_aux2);
+    }    
     
     GuardaPieza(pos);
     
     ColisionPieza(pos);
-    
+        
     GeneraPiezaFin(pos);
     
+}
+
+void Juego::UpdateLucha(int a, int b) {
+    if(a != b){
+        st->BajaVidaEnemigo();
+        
+        //et = sf::Time::Zero;
+            //std::cout << et.asSeconds() << std::endl;
+    }
+
+    if(st->getDeadAliado()){
+        window.close();
+    }
+
+    if(st->getDeadEnemigo()){
+        //std::cout << "Ronda pasada" << std::endl;
+        st->SubeRonda();
+    }
+
+    if(r_lucha.getElapsedTime().asSeconds()>1.5){
+
+        std::random_device rd;
+        std::default_random_engine gen(rd());
+        std::uniform_int_distribution<int> distribution(0,100);
+
+        int r = distribution(gen);
+            //std::cout << r << std::endl;
+        if(r<15){
+            st->BajaVidaAliado();
+
+        }
+
+        r_lucha.restart();
+    }
+
+    st->updateR();
+    st->updateK();
 }
 
 //EN CASO QUE HAYA COLISIONADO CON UNA PIEZA O EL FONDO
 void Juego::ColisionPieza(int pos) {
     if(colision[pos]){
-
         if(!tablero[pos].Colision(*(pieza1[pos]))){
             colision[pos] = false;
         }
@@ -217,7 +221,7 @@ void Juego::ColisionPieza(int pos) {
 
             if(tablero[pos].Colision2(*(pieza1[pos]))){
                 //FIN DEL JUEGO
-                std::cout << "Dedicate al parchis" << std::endl;
+                //std::cout << "Dedicate al parchis" << std::endl;
                 window.close();
             }
 
@@ -228,11 +232,13 @@ void Juego::ColisionPieza(int pos) {
             //RECARGA LAS PIEZAS QUE VIENEN A CONTINUACION
             for(int i=0 ; i<n_p[pos] ; i++){
                 if(i!=(n_p[pos]-1)){
+                    //delete (piezas_sig[pos])[i];
                     (piezas_sig[pos])[i] = NULL;
                     (piezas_sig[pos])[i] = new Pieza((piezas_sig[pos])[i+1]->getTipo());
                     (piezas_sig[pos])[i]->ColocarPiezasSiguientes((i)*60);
                 }
                 else{
+                    //delete (piezas_sig[pos])[i];
                     (piezas_sig[pos])[i] = NULL;
                     (piezas_sig[pos])[i] = new Pieza(pieza_cola);
                     (piezas_sig[pos])[i]->ColocarPiezasSiguientes((i)*60);
@@ -298,18 +304,9 @@ void Juego::GuardaPieza(int pos) {
 //CHECKEA LOS EVENTOS DE LAS TECLAS
 void Juego::Eventos(sf::Event event) {
     if(window.pollEvent(event)){
+        
         switch(event.type){
             case sf::Event::EventType::KeyPressed:
-                
-                if(event.key.code == sf::Keyboard::Key::T && J==1){
-                    st->BajaVidaEnemigo();
-                    et = sf::Time::Zero;
-                }
-                if(event.key.code == sf::Keyboard::Key::Y && J==1){
-                    st->BajaVidaAliado();
-                }
-                
-                
                 if(event.key.code == sf::Keyboard::Key::Q || event.key.code == sf::Keyboard::Key::Escape){
                     window.close();
                 }

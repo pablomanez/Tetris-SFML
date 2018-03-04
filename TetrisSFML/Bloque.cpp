@@ -14,14 +14,17 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <iostream>
 
+#include "AssetManager.h"
 #include "Bloque.h"
 
 Bloque::Bloque() {
+    AssetManager *instance = AssetManager::instance();
     
     shape.setSize(sf::Vector2f(1,1));
     shape.scale(sf::Vector2f(20,20));
     shape.setFillColor(sf::Color::Black);
     //shape.setPosition(10,0);
+    shape.setTexture(instance->getTexture("../assets/sprites/bloqueFV.png"));
     
     puntuacion = 0;
     

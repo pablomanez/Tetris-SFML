@@ -27,8 +27,8 @@ public:
     void Dibuja(sf::RenderWindow &window);
     void SubeRonda();
     
-    void updateR(sf::Time et);
-    void updateK(sf::Time et);
+    void updateR();
+    void updateK();
     
     bool getDeadEnemigo();
     bool getDeadAliado();
@@ -48,9 +48,14 @@ private:
     anim ryu_i;
     anim ryu_p;
     anim ryu;
+    sf::Clock r;
+    sf::Time r_et;
     
     anim ken_i;
+    anim ken_p;
     anim ken;
+    sf::Clock k;
+    sf::Time k_et;
     
     
     //ALIADO

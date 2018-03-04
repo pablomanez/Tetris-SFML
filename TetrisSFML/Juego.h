@@ -34,6 +34,7 @@ public:
     void GuardaPieza(int pos);
     void ColisionPieza(int pos);
     void GeneraPiezas(int pos);
+    void UpdateLucha(int a, int b);
     
     void GeneraPiezaFin(int pos);
     
@@ -79,8 +80,8 @@ private:
     sf::Clock reloj[2];
     sf::Clock c_colision[2];
     
-    sf::Clock dt; //DELTA TIME
-    sf::Time et; //ELAPSED TIME
+    sf::Clock dt[2]; //DELTA TIME
+    sf::Time timeStartUpdate[2]; //ELAPSED TIME
     
     
     //PARA CONTROLES
@@ -92,6 +93,7 @@ private:
     //LUCHA
     St *st;
     sf::Clock r_lucha;
+    
 };
 
 #endif /* JUEGO_H */

@@ -14,12 +14,16 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#include "AssetManager.h"
 #include "Pieza.h"
 #include "Bloque.h"
 #include "Tablero.h"
 
 Tablero::Tablero() {
+    AssetManager *instance = AssetManager::instance();
+    
     //INICIALIZAR EL TABLERO
+    /*
     sf::ConvexShape tablero(9);
     tablero.setFillColor(sf::Color::Transparent);
     tablero.setOutlineThickness(1);
@@ -33,6 +37,10 @@ Tablero::Tablero() {
     tablero.setPoint(6,sf::Vector2f(10,400));
     tablero.setPoint(7,sf::Vector2f(10,0));
     tablero.setPoint(8,sf::Vector2f(0,0));
+    */
+    
+    sf::RectangleShape tablero(sf::Vector2f(640,480));
+    tablero.setTexture(instance->getTexture("../assets/sprites/FV.png"));
     
     this->shape = tablero;
     
@@ -98,15 +106,16 @@ bool Tablero::Colision(Pieza& pieza) {
 }
 
 bool Tablero::Colision2(Pieza& pieza) {
-    Bloque * bloques = pieza.getBloques();
+    Bloque * bloquesp = pieza.getBloques();
     
-    for(int i=0 ; i<10 ; i++){
+    for(int i=0 ; i<4 ; i++){
         for(int j=0 ; j<10 ; j++){
             for(int k=0 ; k<20 ; k++){
 
-                if((this->bloques[j])[k] != NULL 
-                        && bloques[i].getPosicion().y == (this->bloques[j])[k]->getPosicion().y
-                        && bloques[i].getPosicion().x == (this->bloques[j])[k]->getPosicion().x){
+                    //std::cout << "bloquesp[" << i << "].pos == bloques[" << j << "][" << k << "].pos" << std::endl;
+                if((bloques[j])[k] != NULL 
+                        && bloquesp[i].getPosicion().y == (bloques[j])[k]->getPosicion().y
+                        && bloquesp[i].getPosicion().x == (bloques[j])[k]->getPosicion().x){
 
                     //SI COLISIONA CON LA PIEZA EN LA MISMA POSICION
 

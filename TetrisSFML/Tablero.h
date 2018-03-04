@@ -38,7 +38,8 @@ public:
 private:
     int num_lineas;
     Bloque *** bloques; 
-    sf::ConvexShape shape;
+    //sf::ConvexShape shape;
+    sf::RectangleShape shape;
     int puntuacion_total;
 };
 

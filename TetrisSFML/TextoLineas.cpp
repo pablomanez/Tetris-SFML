@@ -55,40 +55,40 @@ void TextoLineas::Dibujar(sf::RenderWindow& window, int puntos) {
     
     //NUMERO DE LINEAS
     texto.setFont(font);
-    texto.setCharacterSize(20);
+    texto.setCharacterSize(16);
     texto.setFillColor(sf::Color::White);
-    texto.setPosition(sf::Vector2f(9,410));
+    texto.setPosition(sf::Vector2f(20,422));
     
-    std::string aux = "LINES: ";
+    std::string aux = "LINES:";
     
     std::string s_lineas = aux.operator +=(std::to_string(this->n_lineas));
     texto.setString(s_lineas);
     
     //HOLD    
     texto2.setFont(font);
-    texto2.setCharacterSize(20);
+    texto2.setCharacterSize(16);
     texto2.setFillColor(sf::Color::White);
-    texto2.setPosition(sf::Vector2f(220,300));
+    texto2.setPosition(sf::Vector2f(234,302));
     
     std::string aux2 = "HODL:";
     texto2.setString(aux2);
     
     //NEXT
     texto3.setFont(font);
-    texto3.setCharacterSize(20);
+    texto3.setCharacterSize(16);
     texto3.setFillColor(sf::Color::White);
-    texto3.setPosition(sf::Vector2f(220,0));
+    texto3.setPosition(sf::Vector2f(234,0));
     
     std::string aux3 = "NEXT:";
     texto3.setString(aux3);
     
     //PUNTUACION
     texto4.setFont(font);
-    texto4.setCharacterSize(15);
+    texto4.setCharacterSize(16);
     texto4.setFillColor(sf::Color::White);
-    texto4.setPosition(sf::Vector2f(9,440));
+    texto4.setPosition(sf::Vector2f(20,442));
     
-    std::string aux4 = "SCORE: ";
+    std::string aux4 = "SCORE:";
     
     std::string s_lineas2 = aux4.operator +=(std::to_string(puntos));
     texto4.setString(s_lineas2);
