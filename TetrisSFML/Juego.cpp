@@ -498,7 +498,7 @@ void Juego::GeneraPiezas(int pos) {
             pieza1[pos] = new Pieza(gen_aux);
             
             pieza_fin[pos] = new Pieza(gen_aux);
-            pieza_fin[pos]->CambiaColor(sf::Color (187,187,187));
+            pieza_fin[pos]->CambiaColor(sf::Color (187,187,187,120));
             
         }
         else{

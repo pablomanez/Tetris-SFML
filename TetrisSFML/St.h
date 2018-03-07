@@ -29,6 +29,7 @@ public:
     
     void updateR();
     void updateK();
+    void DibujaShader(sf::RenderWindow& window, sf::Sprite sprite);
     
     bool getDeadEnemigo();
     bool getDeadAliado();

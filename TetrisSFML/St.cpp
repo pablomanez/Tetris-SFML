@@ -80,7 +80,7 @@ St::St(){
     //ALIADO 
     V_a.setSize(sf::Vector2f(200,20));
     V_a.setFillColor(sf::Color::Green);
-    //V_a.setTexture(instance->getTexture("../assets/sprites/barravida_100.png"));
+    V_a.setTexture(instance->getTexture("../assets/sprites/barravida_100_r.png"));
     V_a.rotate(180);
     V_a.setPosition(540,460);
     
@@ -117,6 +117,8 @@ void St::Dibuja(sf::RenderWindow& window) {
     
     window.draw(ryu.sprite);
     window.draw(ken.sprite);
+    
+    if(cambia_r) DibujaShader(window,ryu.sprite);
 }
 
 void St::updateK() {
@@ -199,11 +201,12 @@ void St::SubeRonda() {
             //std::cout << "No tiene toda la vida" << std::endl;
         
         int x = V_a.getSize().x + (200-V_a.getSize().x)/2;
-        /*
-        V_a.setTexture(instance->getTexture("../assets/sprites/barravida_100.png"));
-        V_a.setTextureRect(sf::IntRect(0,0,(int)V_a.getSize().x,20));
-        */
+        
         V_a.setSize(sf::Vector2f(x,20));
+        
+        V_a.setTexture(instance->getTexture("../assets/sprites/barravida_100_r.png"));
+        V_a.setTextureRect(sf::IntRect(0,0,(int)V_a.getSize().x,20));
+        
         
         
     }
@@ -226,6 +229,17 @@ bool St::getDeadEnemigo() {
     else{
         return false;
     }
+}
+
+void St::DibujaShader(sf::RenderWindow& window, sf::Sprite sprite) {
+    sf::Shader shader;
+    AssetManager *instance = AssetManager::instance();
+    
+    shader.setUniform("overlay", instance->getTexture("../assets/sprites/bloqueFV.png"));
+    
+    
+    window.draw(sprite, &shader);
+    
 }
 
 St::St(const St& orig) {
