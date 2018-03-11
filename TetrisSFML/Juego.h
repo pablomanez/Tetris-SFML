@@ -37,6 +37,7 @@ public:
     void UpdateLucha(int a, int b);
     void HazTetris(int pos);
     void GeneraPiezaFin(int pos);
+    void ManejarEventos(int pos);
     
     //GETTER
     bool abierto();
@@ -88,7 +89,11 @@ private:
     
     
     //PARA CONTROLES
-    bool m_d[2];
+    bool m_d[2]; //ABAJO
+    bool m_r[2]; //DERECHA
+    bool m_l[2]; //IZQUIERDA
+    bool g_p[2]; //GUARDAR LA PIEZA
+    bool r_p[2]; //ROTAR LA PIEZA
     
     //PIEZA QUE MUESTRA LA POSICION FINAL
     Pieza * pieza_fin[2];

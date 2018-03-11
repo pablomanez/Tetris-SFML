@@ -72,6 +72,10 @@ Juego::Juego():
         GeneraPiezas(i);
         
         m_d[i] = false;
+        m_r[i] = false;
+        m_l[i] = false;
+        g_p[i] = false;
+        r_p[i] = false;
         
         tetris[i] = false;
         n_lineas[i] = 0;
@@ -80,17 +84,7 @@ Juego::Juego():
 }
 
 //UN PERRO
-void Juego::Bucle() {
-    /*
-    //VISTA DEL JUGADOR 1
-    sf::View view1(sf::FloatRect(0,0,640,480));
-    view1.setViewport(sf::FloatRect(0, 0, 1, 1));
-    
-    //VISTA DEL JUGADOR 2
-    sf::View view2(sf::FloatRect(-320,0,640,480));
-    view1.setViewport(sf::FloatRect(0, 0, 1, 1));
-    */
-    
+void Juego::Bucle() {    
     timeStartUpdate[0] = dt[0].getElapsedTime();
     timeStartUpdate[1] = dt[1].getElapsedTime();
         
@@ -98,10 +92,11 @@ void Juego::Bucle() {
         for(int i=0 ; i<J ; i++){
             MovAbajo(i);
 
-            sf::Event event;
-            Eventos(event);
             
             if(dt[i].getElapsedTime().asMilliseconds() - timeStartUpdate[i].asMilliseconds() > 1000/15){
+                sf::Event event;
+                Eventos(event);
+                
                 Update(i);
                     //std::cout << dt.getElapsedTime().asSeconds() << std::endl;
                 timeStartUpdate[i] = dt[i].getElapsedTime();
@@ -157,12 +152,8 @@ void Juego::Update(int pos) {
         colision[pos] = tablero[pos].Colision(*(pieza1[pos]));
         c_colision[pos].restart();
     }
-
-    if(m_d[pos]){
-        if(!tablero[pos].Colision(*(pieza1[pos]))){
-            pieza1[pos]->Mover('d');
-        }
-    }
+    ManejarEventos(pos);
+    
     
     //CONTROL DE LAS LINEAS
     int l_aux1 = lineas[pos].getLineas();
@@ -190,6 +181,41 @@ void Juego::Update(int pos) {
         
     GeneraPiezaFin(pos);
     
+}
+
+//CONTROLA TODOS LOS BOOL QUE SE ACTIVAN EN Eventos()
+void Juego::ManejarEventos(int pos) {
+    if(m_d[pos]){
+        if(!tablero[pos].Colision(*(pieza1[pos]))){
+            pieza1[pos]->Mover('d');
+        }
+    }
+    
+    if(m_r[pos]){
+        pieza1[pos]->Mover('r');
+                    
+        if(tablero[pos].Colision2(*(pieza1[pos]))){
+            pieza1[pos]->Mover('l');
+        }
+    }
+    
+    if(m_l[pos]){
+        pieza1[pos]->Mover('l');
+
+        if(tablero[pos].Colision2(*(pieza1[pos]))){
+            pieza1[pos]->Mover('r');
+        }
+    }
+    if(g_p[pos]){
+        guardar_pieza[pos] = true;
+    }
+    if(r_p[pos]){
+        pieza1[pos]->Rotacion('r');
+        
+        if(tablero[pos].Colision2(*(pieza1[pos]))){
+            pieza1[pos]->Rotacion('l');
+        }
+    }
 }
 
 //EFECTO MOLON
@@ -382,93 +408,65 @@ void Juego::Eventos(sf::Event event) {
     if(window.pollEvent(event)){
         
         switch(event.type){
+            //MANDO (Configurado para mando SNES): Y=3, B=2, START=9
+            case sf::Event::EventType::JoystickMoved:
+                if(sf::Joystick::isConnected(0)){
+                    (event.joystickMove.axis == 0 && event.joystickMove.position == 100)    ? m_r[0] = true : m_r[0] = false; //DERECHA
+                    (event.joystickMove.axis == 0 && event.joystickMove.position == -100)   ? m_l[0] = true : m_l[0] = false; //IZQUIEDA
+                    (event.joystickMove.axis == 1 && event.joystickMove.position == 100)    ? m_d[0] = true : m_d[0] = false; //ABAJO
+                }
+                break;
+            case sf::Event::EventType::JoystickButtonPressed:
+                if(sf::Joystick::isConnected(0)){
+                    if(event.joystickButton.button == 9)                    window.close();
+                    if(event.joystickButton.button == 3)                    r_p[0] = true;
+                    if(event.joystickButton.button == 2)                    g_p[0] = true;
+                }
+                break;
+            case sf::Event::EventType::JoystickButtonReleased:
+                if(sf::Joystick::isConnected(0)){
+                    if(event.joystickButton.button == 3)                    r_p[0] = false;
+                    if(event.joystickButton.button == 2)                    g_p[0] = false;
+                }
+                break;
+            
+            //TECLADO
             case sf::Event::EventType::KeyPressed:
-                if(event.key.code == sf::Keyboard::Key::T){
-                    st->BajaVidaEnemigo();
-                }
-                if(event.key.code == sf::Keyboard::Key::Y){
-                    st->BajaVidaAliado();
-                }
-                if(event.key.code == sf::Keyboard::Key::Q || event.key.code == sf::Keyboard::Key::Escape){
-                    window.close();
-                }
-                
-                if(event.key.code == sf::Keyboard::Key::D){
-                    pieza1[0]->Mover('r');
-                    
-                    if(tablero[0].Colision2(*(pieza1[0]))){
-                        pieza1[0]->Mover('l');
-                    }
+                if(!sf::Joystick::isConnected(0)){
+                    //if(event.key.code == sf::Keyboard::Key::T)              st->BajaVidaEnemigo();
+                    //if(event.key.code == sf::Keyboard::Key::Y)              st->BajaVidaAliado();
+                    if(event.key.code == sf::Keyboard::Key::Q || 
+                            event.key.code == sf::Keyboard::Key::Escape)    window.close();
 
+                    if(event.key.code == sf::Keyboard::Key::D)              m_r[0] = true;
+                    if(event.key.code == sf::Keyboard::Key::A)              m_l[0] = true;
+                    if(event.key.code == sf::Keyboard::Key::S)              m_d[0] = true;
+                    if(event.key.code == sf::Keyboard::Key::J)              g_p[0] = true;
+                    if(event.key.code == sf::Keyboard::Key::H)              r_p[0] = true;
                 }
-                
-                if(event.key.code == sf::Keyboard::Key::A){
-                    pieza1[0]->Mover('l');
-
-                    if(tablero[0].Colision2(*(pieza1[0]))){
-                        pieza1[0]->Mover('r');
-                    }
-
-                }
-                
-                
-                if(event.key.code == sf::Keyboard::Key::S){
-                    m_d[0] = true;
-                }
-                
-                if(event.key.code == sf::Keyboard::Key::J){
-                    //cout << "Guardo pieza" << endl;
-                    guardar_pieza[0] = true;
-                }
-                
-                if(event.key.code == sf::Keyboard::Key::H){
-                    pieza1[0]->Rotacion('r');
-                    if(tablero[0].Colision2(*(pieza1[0]))){
-                        pieza1[0]->Rotacion('l');
-                    }
-                }
-                if(J==2){
-                    if(event.key.code == sf::Keyboard::Key::Right){
-                        pieza1[1]->Mover('r');
-
-                        if(tablero[1].Colision2(*(pieza1[1]))){
-                            pieza1[1]->Mover('l');
-                        }
-
-                    }
-                    if(event.key.code == sf::Keyboard::Key::Left){
-                        pieza1[1]->Mover('l');
-
-                        if(tablero[1].Colision2(*(pieza1[1]))){
-                            pieza1[1]->Mover('r');
-                        }
-
-                    }
-                    if(event.key.code == sf::Keyboard::Key::Down){
-                        m_d[1] = true;
-                    }
-                    if(event.key.code == sf::Keyboard::Key::Numpad2){
-                        //cout << "Guardo pieza" << endl;
-                        guardar_pieza[1] = true;
-                    }
-                    if(event.key.code == sf::Keyboard::Key::Numpad1){
-                        pieza1[1]->Rotacion('r');
-                        if(tablero[1].Colision2(*(pieza1[1]))){
-                            pieza1[1]->Rotacion('l');
-                        }
-                    }
+                if(J==2 && !sf::Joystick::isConnected(1)){
+                    if(event.key.code == sf::Keyboard::Key::Right)      m_r[1] = true;
+                    if(event.key.code == sf::Keyboard::Key::Left)       m_l[1] = true;
+                    if(event.key.code == sf::Keyboard::Key::Down)       m_d[1] = true;
+                    if(event.key.code == sf::Keyboard::Key::Numpad2)    g_p[1] = true;
+                    if(event.key.code == sf::Keyboard::Key::Numpad1)    r_p[1] = true;
                 }
                 break;
 
             case sf::Event::EventType::KeyReleased:
-                if(event.key.code == sf::Keyboard::Key::S){
-                    m_d[0] = false;
+                if(!sf::Joystick::isConnected(0)){
+                    if(event.key.code == sf::Keyboard::Key::S)              m_d[0] = false;
+                    if(event.key.code == sf::Keyboard::Key::D)              m_r[0] = false;
+                    if(event.key.code == sf::Keyboard::Key::A)              m_l[0] = false;
+                    if(event.key.code == sf::Keyboard::Key::J)              g_p[0] = false;
+                    if(event.key.code == sf::Keyboard::Key::H)              r_p[0] = false;
                 }
-                
-                if(J==2){
-                    if(event.key.code == sf::Keyboard::Key::Down){
-                        m_d[1] = false;
-                    }
+                if(J==2 && !sf::Joystick::isConnected(1)){
+                    if(event.key.code == sf::Keyboard::Key::Down)       m_d[1] = false;
+                    if(event.key.code == sf::Keyboard::Key::Right)      m_r[1] = false;
+                    if(event.key.code == sf::Keyboard::Key::Left)       m_l[1] = false;
+                    if(event.key.code == sf::Keyboard::Key::Numpad2)    g_p[1] = false;
+                    if(event.key.code == sf::Keyboard::Key::Numpad1)    r_p[1] = false;
                 }
                 
                 break;
