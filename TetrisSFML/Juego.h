@@ -16,6 +16,8 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Audio/Music.hpp>
+#include <SFML/Audio/Sound.hpp>
 
 #include "TextoLineas.h"
 #include "GenerarPiezas.h"
@@ -107,7 +109,8 @@ private:
     int n_lineas[2];  //1-2-3-4
     int count_t[2];
     
-    
+    //MUSICA
+    sf::Sound musica;
 };
 
 #endif /* JUEGO_H */

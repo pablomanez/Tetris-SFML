@@ -14,6 +14,9 @@
 #ifndef ST_H
 #define ST_H
 
+#include <SFML/Audio/Music.hpp>
+#include <SFML/Audio/Sound.hpp>
+
 #include "AssetManager.h"
 
 
@@ -30,6 +33,7 @@ public:
     void updateR();
     void updateK();
     void DibujaShader(sf::RenderWindow& window, sf::Sprite sprite);
+    void SonidoPunch();
     
     bool getDeadEnemigo();
     bool getDeadAliado();
@@ -57,6 +61,8 @@ private:
     anim ken;
     sf::Clock k;
     sf::Time k_et;
+    
+    sf::Sound punch;
     
     
     //ALIADO

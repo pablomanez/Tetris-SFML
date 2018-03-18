@@ -55,6 +55,27 @@ sf::Texture *AssetManager::getTexture(const std::string &filename) {
     }
 }
 
+sf::SoundBuffer *AssetManager::getSoundBuffer(const std::string &filename) {
+    //reference to our map
+    std::map<std::string, sf::SoundBuffer> &soundMap = sInstance->sounds;
+
+    //search for entry
+    auto pairFound = soundMap.find(filename);
+    if (pairFound != soundMap.end())
+            //return existing texture pointer
+            return &(pairFound->second);
+    else {
+            //create texture
+            sf::SoundBuffer &sound = soundMap[filename];
+
+            if (!sound.loadFromFile(filename)) {
+                    system("pause");
+            }
+            return &sound;
+    }
+}
+
+
 /*
 sf::Texture& AssetManager::GetTexture(std::string const& filename) {
     auto& texMap = sInstance->m_Textures;

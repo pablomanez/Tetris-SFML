@@ -16,6 +16,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <map>
+#include <SFML/Audio/SoundBuffer.hpp>
 
 class AssetManager {
 public:
@@ -24,6 +25,7 @@ public:
 
     //resource getters
     sf::Texture *getTexture(const std::string &filename);
+    sf::SoundBuffer *getSoundBuffer(const std::string &filename);
 
 private:
     //constructor should be private
@@ -34,6 +36,7 @@ private:
 
     //map
     std::map<std::string, sf::Texture> textures;
+    std::map<std::string, sf::SoundBuffer> sounds;
 
 };
 

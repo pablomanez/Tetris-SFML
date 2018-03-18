@@ -28,6 +28,7 @@
 #include "GenerarPiezas.h"
 #include "TextoLineas.h"
 #include "St.h"
+#include "AssetManager.h"
 
 #include "Juego.h"
 
@@ -46,6 +47,11 @@ Juego::Juego():
     view2.setCenter(0,240);
     view2.setSize(640,480);
     view2.setViewport(sf::FloatRect(0, 0, 1, 1));
+    
+    //MUSICA
+    AssetManager *soundInstance = AssetManager::instance();
+    musica.setBuffer(*soundInstance->getSoundBuffer("../assets/sonidos/Tetris.ogg.ogx"));
+    musica.play();
     
     J = 1;
     if(J==1){
@@ -92,10 +98,10 @@ void Juego::Bucle() {
         for(int i=0 ; i<J ; i++){
             MovAbajo(i);
 
+            sf::Event event;
+            Eventos(event);
             
-            if(dt[i].getElapsedTime().asMilliseconds() - timeStartUpdate[i].asMilliseconds() > 1000/15){
-                sf::Event event;
-                Eventos(event);
+            if(dt[i].getElapsedTime().asMilliseconds() - timeStartUpdate[i].asMilliseconds() > 1000/20){
                 
                 Update(i);
                     //std::cout << dt.getElapsedTime().asSeconds() << std::endl;
@@ -433,8 +439,9 @@ void Juego::Eventos(sf::Event event) {
             //TECLADO
             case sf::Event::EventType::KeyPressed:
                 if(!sf::Joystick::isConnected(0)){
-                    //if(event.key.code == sf::Keyboard::Key::T)              st->BajaVidaEnemigo();
-                    //if(event.key.code == sf::Keyboard::Key::Y)              st->BajaVidaAliado();
+                    if(event.key.code == sf::Keyboard::Key::T)              st->BajaVidaEnemigo();
+                    if(event.key.code == sf::Keyboard::Key::Y)              st->BajaVidaAliado();
+                    
                     if(event.key.code == sf::Keyboard::Key::Q || 
                             event.key.code == sf::Keyboard::Key::Escape)    window.close();
 
