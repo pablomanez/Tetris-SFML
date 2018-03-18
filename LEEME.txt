@@ -1,0 +1,44 @@
+
+||==============================================================||
+||========  T E T R I S  x  S T R E E T  F I G H T E R  ========||
+||==============================================================||
+||======  Un juego desarrollado por Pablo Máñez Fernández ======||
+||=========         utilizando la librería SFML        =========||
+||==============================================================||
+
+El juego está desarrollado en Manjaro, basado en Arch Linux, por lo que hay que cambiar unas cuantas cosas de la configuración:
+
+CONFIGURACIÓN PARA MANJARO:
+	Project Properties > Build > C++ Compiler 	> Include Directiores : /usr/include/SFML
+	Project Properties > Build > Linker 		> Additional Library Directories: /usr/lib
+	Project Properties > Build > Linker 		> Libraries: Se deben buscar en "/usr/lib": libsfml-graphics.so, libsfml-system.so, libsfml-window.so, libsfml-audio.so
+
+CONFIGURACIÓN PARA UBUNTU:
+	Project Properties > Build > C++ Compiler 	> Include Directiores : /usr/include/SFML
+	Project Properties > Build > Linker 		> Additional Library Directories: /usr/lib/x86_64-linux-gnu
+	Project Properties > Build > Linker 		> Libraries: Se deben buscar en "/usr/lib": libsfml-graphics.so, libsfml-system.so, libsfml-window.so, libsfml-audio.so
+
+1-2 JUGADORES: Cambiar la línea 56 de Juego.cpp
+
+CONTROLES:
+	1J:
+		A -> Izquierda
+		S -> Abajo
+		D -> Derecha
+		J -> Guardar pieza
+		H -> Rotar pieza
+
+	2J:
+		Flecha izquierda -> Izquierda
+		Flecha abajo -> Abajo
+		Flecha derecha -> Derecha
+		Numpad 2 -> Guardar pieza
+		Numpad 1 -> Rotar pieza
+
+MEJORAS REALIZADAS:
+	- 	Posición final de la pieza.
+	-	Poder guardar la pieza, para su uso posterior.
+	-	Combinación con juego de lucha.
+
+NOTA:
+	También está implementado el uso del mando para el J1

@@ -17,7 +17,7 @@
 #include <array>
 #include <valarray>
 #include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
+#include <SFML/System.hpp>  
 #include <queue>
 #include <set>
 #include <cstring>
@@ -439,8 +439,8 @@ void Juego::Eventos(sf::Event event) {
             //TECLADO
             case sf::Event::EventType::KeyPressed:
                 if(!sf::Joystick::isConnected(0)){
-                    if(event.key.code == sf::Keyboard::Key::T)              st->BajaVidaEnemigo();
-                    if(event.key.code == sf::Keyboard::Key::Y)              st->BajaVidaAliado();
+                    //if(event.key.code == sf::Keyboard::Key::T)              st->BajaVidaEnemigo();
+                    //if(event.key.code == sf::Keyboard::Key::Y)              st->BajaVidaAliado();
                     
                     if(event.key.code == sf::Keyboard::Key::Q || 
                             event.key.code == sf::Keyboard::Key::Escape)    window.close();
