@@ -49,9 +49,11 @@ Juego::Juego():
     view2.setViewport(sf::FloatRect(0, 0, 1, 1));
     
     //MUSICA
-    AssetManager *soundInstance = AssetManager::instance();
-    musica.setBuffer(*soundInstance->getSoundBuffer("../assets/sonidos/Tetris.ogg.ogx"));
+    musica.openFromFile("../assets/sonidos/Tetris.ogg.ogx");
+    musica.setLoop(true);
     musica.play();
+    
+    punch.openFromFile("../assets/sonidos/punch.wav");
     
     J = 1;
     if(J==1){
@@ -281,7 +283,7 @@ void Juego::HazTetris(int pos) {
 }
 
 void Juego::UpdateLucha(int a, int b) {
-    for(int i=0 ; i<(b-a) ; i++) st->BajaVidaEnemigo();
+    for(int i=0 ; i<(b-a) ; i++){ st->BajaVidaEnemigo(); punch.play();}
 
     if(st->getDeadAliado()){
         window.close();
@@ -302,7 +304,7 @@ void Juego::UpdateLucha(int a, int b) {
             //std::cout << r << std::endl;
         if(r<15){
             st->BajaVidaAliado();
-
+            punch.play();
         }
 
         r_lucha.restart();

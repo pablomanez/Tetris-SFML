@@ -110,7 +110,8 @@ private:
     int count_t[2];
     
     //MUSICA
-    sf::Sound musica;
+    sf::Music musica;
+    sf::Music punch;
 };
 
 #endif /* JUEGO_H */

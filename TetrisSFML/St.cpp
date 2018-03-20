@@ -106,9 +106,6 @@ St::St(){
     ryu = ryu_i;
     ken = ken_i;
     
-    punch.setBuffer(*instance->getSoundBuffer("../assets/sonidos/punch.wav"));
-    punch.setVolume(100);
-    
 }
 
 void St::Dibuja(sf::RenderWindow& window) {
@@ -167,7 +164,6 @@ void St::updateR() {
 
 
 void St::BajaVidaEnemigo() {
-    punch.play();
     
     int x = V_e.getSize().x;
     
@@ -181,7 +177,6 @@ void St::BajaVidaEnemigo() {
 }
 
 void St::BajaVidaAliado() {
-    punch.play();
     
     int x = V_a.getSize().x;
     

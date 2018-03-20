@@ -62,9 +62,6 @@ private:
     sf::Clock k;
     sf::Time k_et;
     
-    sf::Sound punch;
-    
-    
     //ALIADO
     sf::RectangleShape F_a;
     sf::RectangleShape V_a;
